@@ -1,4 +1,26 @@
-.main{
+.background{
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.title{
+  font-family: 'TT Firs Neue', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 72px;
+
+  text-align: center;
+
+  color: #363636;
+}
+
+.main{
+  margin-top: 120px;
+   display: flex;
+  justify-content: center;
+}
+
