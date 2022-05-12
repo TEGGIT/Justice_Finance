@@ -4,10 +4,10 @@ import Header from "../Header/Header";
 import background from '../../assets/image/background.png'
 const MainPage = () => {
   return (
-      <div className={classes.main} style={{backgroundImage: `url(${background})`}}>
+      <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
       <Header/>
-        <main>
-
+        <main className={classes.main}>
+         <h1 className={classes.title}>Обменивайте валюту по выгодному курсу</h1>
         </main>
       </div>
   );

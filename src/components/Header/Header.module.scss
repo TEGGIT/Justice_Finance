@@ -20,11 +20,10 @@
     }
 
     &__button{
-      padding: 1.25rem 0 1.25rem 0;
+      padding: 1.25rem 0 1.25rem 5.75rem;
+      border-left: 1px solid #E0E0E0;
       align-items: center;
       display: flex;
-
-
 
    &_customize{
      border: none;
@@ -43,15 +42,6 @@
 
 
 }
-
-
-
-
-
-
-
-
-
 
 .text_bold{
   font-family: 'TT Firs Neue', sans-serif;
