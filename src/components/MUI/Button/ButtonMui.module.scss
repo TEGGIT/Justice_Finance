@@ -1,7 +1,8 @@
-.backgroundButton {
-  background: rgba(255, 255, 255, 0.1);
+.buttonBackground{
   width: 66px;
   height: 66px;
-  position: fixed;
+  position: absolute;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
 }

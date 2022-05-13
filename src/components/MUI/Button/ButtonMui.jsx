@@ -11,6 +11,7 @@ const BootstrapButton = styled(Button)({
     borderRadius: '0',
     textTransform: 'none',
     fontSize: 12,
+    zIndex:'2',
     padding: '12px 24px',
     fontStyle: 'normal',
     fontWeight: '600',
@@ -19,14 +20,13 @@ const BootstrapButton = styled(Button)({
         'Inter, sans-serif',
     ].join(','),
     '&:hover': {
-        backgroundColor: 'rgb(189,13,13)',
         boxShadow: 'none',
+
     },
     '&:active': {
         boxShadow: 'none',
     },
     '&:focus': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
 });
 const ButtonMui = ({text}) => {
@@ -35,7 +35,7 @@ const ButtonMui = ({text}) => {
             <Stack spacing={0} direction="row">
                 <BootstrapButton variant="contained" disableRipple>
                     <p>{text}</p>
-                    <div className={classes.backgroundButton}/>
+                    <div className={classes.buttonBackground}/>
                 </BootstrapButton>
             </Stack>
         </>

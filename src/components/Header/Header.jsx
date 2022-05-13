@@ -3,10 +3,6 @@ import classes from "./Header.module.scss";
 import ButtonMui from "../MUI/Button/ButtonMui";
 
 
-
-
-
-
 const Header = () => {
 
 

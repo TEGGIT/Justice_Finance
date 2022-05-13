@@ -54,12 +54,23 @@
   left: 35.625rem;
   top: 12.188rem;
   z-index: 1;
-  width: 122px;
-  height: 122px;
+  width: 7.625rem;
+  height: 7.625rem;
   background: rgba(132, 165, 0, 0.7);
   filter: blur(60px);
 }
+.test{
+  box-sizing: border-box;
+  position: fixed;
+  width: 14rem;
+  height: 4rem;
+  left: 82.813rem;
+  top: 51.25rem;
 
+  background: #FFFFFF;
+  border: 1px solid #F3F3F3;
+  box-shadow: 0 24px 17px -17px rgba(0, 0, 0, 0.25);
+}
 
 .ellipseTwo{
   position: fixed;

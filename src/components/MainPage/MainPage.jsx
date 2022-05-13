@@ -8,6 +8,7 @@ import background from '../../assets/image/background.png'
 import starOne from '../../assets/image/StarOne.svg'
 import interfaceFinance from '../../assets/image/interface.png'
 import starTwo from '../../assets/image/StarTwo.svg'
+import positive from '../../assets/image/Positive.png'
 
 const MainPage = () => {
   return (
@@ -24,6 +25,7 @@ const MainPage = () => {
                   </div>
                   <div className={classes.main__section__content}>
                       <img src={interfaceFinance} alt='interface'/>
+                      <div className={classes.test} style={{backgroundImage:`url(${positive})`}}/>
                   </div>
 
               </section>
