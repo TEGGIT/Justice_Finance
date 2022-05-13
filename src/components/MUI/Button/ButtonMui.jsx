@@ -4,9 +4,11 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-
+import classes from "./ButtonMui.module.scss";
 const BootstrapButton = styled(Button)({
     boxShadow: 'none',
+    display:'flex',
+    borderRadius: '0',
     textTransform: 'none',
     fontSize: 12,
     padding: '12px 24px',
@@ -17,14 +19,11 @@ const BootstrapButton = styled(Button)({
         'Inter, sans-serif',
     ].join(','),
     '&:hover': {
-        backgroundColor: 'rgb(211,145,145)',
-        borderColor: '#0062cc',
+        backgroundColor: 'rgb(189,13,13)',
         boxShadow: 'none',
     },
     '&:active': {
         boxShadow: 'none',
-        backgroundColor: '#0062cc',
-        borderColor: '#005cbf',
     },
     '&:focus': {
         boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
@@ -35,7 +34,8 @@ const ButtonMui = ({text}) => {
         <>
             <Stack spacing={0} direction="row">
                 <BootstrapButton variant="contained" disableRipple>
-                    {text}
+                    <p>{text}</p>
+                    <div className={classes.backgroundButton}/>
                 </BootstrapButton>
             </Stack>
         </>

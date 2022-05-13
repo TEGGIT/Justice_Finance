@@ -1,3 +1,4 @@
+
 .background{
   width: 100vw;
   height: 100vh;
@@ -10,17 +11,45 @@
   font-family: 'TT Firs Neue', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 64px;
-  line-height: 72px;
-
+  font-size: 4rem;
+  line-height: 4.5rem;
+  z-index: 2;
   text-align: center;
-
+  width: 41.25rem;
   color: #363636;
 }
 
 .main{
-  margin-top: 120px;
+  margin-top: 7.5rem;
    display: flex;
   justify-content: center;
+
+
+  &__section{
+  z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.ellipseOne{
+  position: fixed;
+  left: 35.625rem;
+  top: 12.188rem;
+  z-index: 1;
+  width: 122px;
+  height: 122px;
+  background: rgba(132, 165, 0, 0.7);
+  filter: blur(60px);
+}
+
+.starOne{
+  z-index: 1;
+  position: fixed;
+  left: 96.313rem;
+  top: 13.375rem;
+  width: 10.25rem;
+  height: 10.25rem;
+
 }
 
