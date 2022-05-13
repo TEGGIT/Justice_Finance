@@ -13,7 +13,7 @@ import positive from '../../assets/image/Positive.png'
 const MainPage = () => {
   return (
       <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
-      <Header/>
+      <Header bold='Justice' regular='Finance'/>
           <main className={classes.main}>
               <div className={classes.ellipseOne}/>
               <div className={classes.starOne} style={{backgroundImage:`url(${starOne})`}}/>

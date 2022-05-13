@@ -10,6 +10,7 @@ const BootstrapButton = styled(Button)({
     display:'flex',
     borderRadius: '0',
     textTransform: 'none',
+    overflow:'hidden',
     fontSize: 12,
     zIndex:'2',
     padding: '12px 24px',
