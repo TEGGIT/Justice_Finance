@@ -1,7 +1,11 @@
 import React from 'react';
+
+import Header from "../Header";
+
 import classes from './MainPage.module.scss'
-import Header from "../Header/Header";
+
 import background from '../../assets/image/background.png'
+
 const MainPage = () => {
   return (
       <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
