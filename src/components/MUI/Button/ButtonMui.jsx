@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -22,6 +22,9 @@ const BootstrapButton = styled(Button)({
     ].join(','),
     '&:hover': {
         boxShadow: 'none',
+        backgroundColor: '#363636',
+
+
     },
     '&:active': {
         boxShadow: 'none',
@@ -30,12 +33,20 @@ const BootstrapButton = styled(Button)({
     },
 });
 const ButtonMui = ({text}) => {
+    const [hover, setHover] = useState(false)
     return (
         <>
             <Stack spacing={0} direction="row">
-                <BootstrapButton variant="contained" disableRipple>
+                <BootstrapButton
+                  onMouseEnter={() => setHover(true)}
+                  onMouseLeave={() => setHover(false)}
+                  variant="contained"
+                  disableRipple>
                     <p>{text}</p>
-                    <div className={classes.buttonBackground}/>
+
+                    {hover && (
+                      <div className={classes.buttonBackground}/>
+                    )}
                 </BootstrapButton>
             </Stack>
         </>
