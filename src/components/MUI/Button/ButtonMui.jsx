@@ -22,7 +22,6 @@ const BootstrapButton = styled(Button)({
     ].join(','),
     '&:hover': {
         boxShadow: 'none',
-
     },
     '&:active': {
         boxShadow: 'none',
