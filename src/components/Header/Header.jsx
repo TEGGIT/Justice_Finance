@@ -1,7 +1,12 @@
 import React from 'react';
 import classes from "./Header.module.scss";
-import Button from "../UI/Button";
+import ButtonMui from "../MUI/Button/ButtonMui";
+
+
 const Header = () => {
+
+
+
   return (
       <header className={classes.header}>
         <nav className={classes.header__nav}>
@@ -10,10 +15,7 @@ const Header = () => {
           <p className={classes.text_regular}>Finance</p>
         </div>
           <div className={classes.header__nav__button}>
-          <Button
-              text='Войти'
-              style={classes.header__nav__button_customize}
-          />
+             <ButtonMui text='Войти'/>
         </div>
         </nav>
 
