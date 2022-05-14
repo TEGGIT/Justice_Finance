@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './LoginPage.module.scss'
+import classes from '../LoginPage /LoginPage.module.scss'
 import Header from "../Header";
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
