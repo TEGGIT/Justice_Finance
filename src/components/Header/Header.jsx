@@ -17,7 +17,7 @@ const Header = ({bold, regular}) => {
         </div>
           <div className={classes.header__nav__button}>
               <NavLink to='/login-page' style={{textDecoration:'none'}}>
-             <ButtonMui text='Войти' padding='12px 24px'/>
+             <ButtonMui text='Войти' padding='12px 24px' background='#363636'/>
           </NavLink>
         </div>
         </nav>

@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 
 import classes from "./ButtonMui.module.scss";
 
-const ButtonMui = ({text, padding}) => {
+const ButtonMui = ({text, padding, background}) => {
     const [hover, setHover] = useState(false)
 
     const BootstrapButton = styled(Button)({
@@ -20,7 +20,7 @@ const ButtonMui = ({text, padding}) => {
         padding: `${padding}`,
         fontStyle: 'normal',
         fontWeight: '600',
-        backgroundColor: '#363636',
+        backgroundColor: `${background}`,
         fontFamily: [
             'Inter, sans-serif',
         ].join(','),

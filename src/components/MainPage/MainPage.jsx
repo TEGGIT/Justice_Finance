@@ -18,7 +18,7 @@ const MainPage = () => {
               <div className={classes.ellipseOne}/>
               <div className={classes.starOne} style={{backgroundImage:`url(${starOne})`}}/>
               <div className={classes.ellipseTwo}/>
-              <div className={classes.starTwo} style={{backgroundImage:`url(${starTwo})`}}></div>
+              <div className={classes.starTwo} style={{backgroundImage:`url(${starTwo})`}}/>
               <section className={classes.main__section}>
                   <div className={classes.main__section__title}>
                       <h1 className={classes.title}>Обменивайте валюту по выгодному курсу</h1>

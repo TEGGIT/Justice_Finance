@@ -41,7 +41,7 @@ const LogPage = () => {
                                 <CheckBox/><p>Запомнить меня</p>
                             </div>
                         </div>
-                        <ButtonMui text='Войти' padding="12px 190px" />
+                        <ButtonMui text='Войти' padding="12px 190px" background='#EDEDED' />
                         <div className={classes.newperson}>
                             <p>Нет аккаунта?  <span className={classes.signup}>Создать аккаунт</span></p>
                         </div>
