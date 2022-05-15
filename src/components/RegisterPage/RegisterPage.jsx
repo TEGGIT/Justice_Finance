@@ -1,27 +1,26 @@
 import React from 'react';
-import classes from './LogPage.module.scss'
-import image from '../../assets/image/IllustrationOne.svg'
-import google from '../../assets/image/google.svg'
-import github from '../../assets/image/github.svg'
-import {NavLink} from "react-router-dom";
+import classes from "./RegisterPage.module.scss";
+import google from "../../assets/image/google.svg";
+import github from "../../assets/image/github.svg";
 import Input from "../UI/Input/Input";
 import CheckBox from "../UI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
+import {NavLink} from "react-router-dom";
+import image from "../../assets/image/IllustrationTwo.svg";
 
-
-const LogPage = () => {
+const RegisterPage = () => {
     return (
         <main className={classes.main}>
-            <div className={classes.main__login}>
-                <div className={classes.main__login_wrapper}>
-                    <form className={classes.main__login_wrapper__form}>
-                        <p className={classes.main__login_wrapper__form_text}>Вход</p>
-                        <div className={classes.main__login_wrapper__form__buttons}>
-                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
+            <div className={classes.main__register}>
+                <div className={classes.main__register_wrapper}>
+                    <form className={classes.main__register_wrapper__form}>
+                        <p className={classes.main__register_wrapper__form_text}>Регистрация</p>
+                        <div className={classes.main__register_wrapper__form__buttons}>
+                            <button className={classes.main__register_wrapper__form__buttons_sign} disabled={true}><img
                                 src={google}
                                 alt='google'/>
                                 <p>Sing up with Google</p></button>
-                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
+                            <button className={classes.main__register_wrapper__form__buttons_sign} disabled={true}><img
                                 src={github}
                                 alt='github'/>
                                 <p>Sing up with GitHub</p>
@@ -36,16 +35,21 @@ const LogPage = () => {
                             <div className={classes.line}/>
                         </div>
                         <div className={classes.input_wrapper}>
+                            <Input placeholder="Имя" styles={classes.input} type='text'/>
                             <Input placeholder='E-mail' styles={classes.input} type="email"/>
+                            <div className={classes.input_wrapper_password}>
                             <Input placeholder='Пароль' styles={classes.input} type="password"/>
+                                <Input placeholder="Подтвердите пароль" styles={classes.input} type='password'/>
+                        </div>
+
                             <div className={classes.checkbox}>
-                                <CheckBox/><p>Запомнить меня</p>
+                                <CheckBox/><p>i accept the Terms of Service and have read Privacy Policy</p>
                             </div>
                         </div>
-                        <ButtonMui text='Войти' padding="12px 190px" background='#EDEDED'/>
+                        <ButtonMui text='Зарегистрироваться' padding="12px 190px" background='#EDEDED'/>
                         <div className={classes.newperson}>
-                            <p>Нет аккаунта? <NavLink to='/register-page' className={classes.signup}>Создать
-                                аккаунт</NavLink></p>
+                            <p> У вас уже есть учетная запись? <NavLink to='/login-page' className={classes.signup}>Авторизоваться
+                                </NavLink></p>
                         </div>
                     </form>
                 </div>
@@ -65,4 +69,4 @@ const LogPage = () => {
     );
 };
 
-export default LogPage;
+export default RegisterPage;
