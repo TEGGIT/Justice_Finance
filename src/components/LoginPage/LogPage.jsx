@@ -5,7 +5,7 @@ import google from '../../assets/image/google.svg'
 import github from '../../assets/image/github.svg'
 import {NavLink} from "react-router-dom";
 import Input from "../UI/Input/Input";
-import CheckBox from "../UI/CheckBox/CheckBox";
+import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
 
 
@@ -17,15 +17,29 @@ const LogPage = () => {
           <form className={classes.main__login_wrapper__form}>
             <p className={classes.main__login_wrapper__form_text}>Вход</p>
             <div className={classes.main__login_wrapper__form__buttons}>
-              <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
-                src={google}
-                alt='google'/>
-                <p>Sing up with Google</p></button>
-              <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
-                src={github}
-                alt='github'/>
-                <p>Sing up with GitHub</p>
-              </button>
+              <ButtonMui fontSize='12px'
+                         img={google}
+                         text='Sing up with Google'
+                         gap="8px"
+                         color='#363636'
+                         border='1px solid #ECECEC'
+                         padding="16px 25px 16px 30px"
+                         fontWeight='500'
+
+
+              />
+
+              <ButtonMui fontSize='12px'
+                         img={github}
+                         text='Sing up with GitHub'
+                         gap="8px"
+                         color='#363636'
+                         border='1px solid #ECECEC'
+                         padding="16px 25px 16px 30px"
+                         fontWeight='500'
+
+
+              />
             </div>
             <div>
 
@@ -42,7 +56,13 @@ const LogPage = () => {
                 <CheckBox/><p>Запомнить меня</p>
               </div>
             </div>
-            <ButtonMui text='Войти' padding="12px 190px" background='#EDEDED' color='#8C8C8C'/>
+            <ButtonMui text='Войти'
+                       padding="12px 190px"
+                       background='#EDEDED'
+                       color='#8C8C8C'
+                       hoverBackground="#EDEDED"
+                       fontWeight='600'
+            />
             <div className={classes.newperson}>
               <p>Нет аккаунта? <NavLink to='/register-page' className={classes.signup}>Создать
                 аккаунт</NavLink></p>
