@@ -1,0 +1,77 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100vh;
+
+
+  &_wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+
+
+
+    &__avatar {
+      background: #F1F1F1;;
+      display: flex;
+      flex-direction: column;
+      padding: 64px 86px 64px;
+      gap: 24px;
+      Font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #363636;
+
+    }
+    &__balance{
+      margin-top: 48px;
+      Font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #363636;
+
+      &__purse{
+        margin-top: 1rem;
+        border: 1px dashed #ECECEC;
+        color: #848484;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        font-size: 14px;
+        padding: 32px;
+
+      }
+    }
+    &__transactions{
+      margin-top: 48px;
+      Font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: #363636;
+
+
+
+      &__history{
+        margin-top: 24px;
+        border: 1px solid #F1F1F1;
+        color: #848484;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 49px 48px 49px 49px;
+        gap: 1.25rem;
+        font-size: 14px;
+      }
+    }
+  }
+
+
+}

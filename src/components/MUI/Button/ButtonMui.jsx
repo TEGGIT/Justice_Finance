@@ -6,17 +6,21 @@ import Stack from '@mui/material/Stack';
 
 import classes from "./ButtonMui.module.scss";
 
-const ButtonMui = ({text, padding, background}) => {
+const ButtonMui = ({text, padding, background,img,gap, color, fontSize, hoverBackground, marginTop, borderRadius, height}) => {
     const [hover, setHover] = useState(false)
 
     const BootstrapButton = styled(Button)({
         boxShadow: 'none',
         display:'flex',
-        borderRadius: '0',
+        color:`${color}`,
+        borderRadius: `${borderRadius}`,
         textTransform: 'none',
         overflow:'hidden',
-        fontSize: 12,
+        marginTop:`${marginTop}`,
+        fontSize: `${fontSize}`,
         zIndex:'2',
+        gap:`${gap}`,
+        height:`${height}`,
         padding: `${padding}`,
         fontStyle: 'normal',
         fontWeight: '600',
@@ -26,14 +30,12 @@ const ButtonMui = ({text, padding, background}) => {
         ].join(','),
         '&:hover': {
             boxShadow: 'none',
-            backgroundColor: '#363636',
+            backgroundColor: `${hoverBackground}`,
 
 
         },
         '&:active': {
             boxShadow: 'none',
-        },
-        '&:focus': {
         },
     });
 
@@ -47,8 +49,8 @@ const ButtonMui = ({text, padding, background}) => {
                 <BootstrapButton
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
-                  variant="contained"
                   disableRipple>
+                    <img src={img}/>
                     <p>{text}</p>
 
                     {hover && (
