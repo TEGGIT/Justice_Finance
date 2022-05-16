@@ -9,7 +9,6 @@ import CheckBox from "../UI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
 
 
-
 const LogPage = () => {
     return (
         <main className={classes.main}>
@@ -18,11 +17,13 @@ const LogPage = () => {
                     <form className={classes.main__login_wrapper__form}>
                         <p className={classes.main__login_wrapper__form_text}>Вход</p>
                         <div className={classes.main__login_wrapper__form__buttons}>
-                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img src={google}
-                                                                                                                     alt='google'/>
+                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
+                                src={google}
+                                alt='google'/>
                                 <p>Sing up with Google</p></button>
-                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img src={github}
-                                                                                                                     alt='github'/>
+                            <button className={classes.main__login_wrapper__form__buttons_sign} disabled={true}><img
+                                src={github}
+                                alt='github'/>
                                 <p>Sing up with GitHub</p>
                             </button>
                         </div>
@@ -41,9 +42,10 @@ const LogPage = () => {
                                 <CheckBox/><p>Запомнить меня</p>
                             </div>
                         </div>
-                        <ButtonMui text='Войти' padding="12px 190px" background='#EDEDED' />
+                        <ButtonMui text='Войти' padding="12px 190px" background='#EDEDED'/>
                         <div className={classes.newperson}>
-                            <p>Нет аккаунта?  <span className={classes.signup}>Создать аккаунт</span></p>
+                            <p>Нет аккаунта? <NavLink to='/register-page' className={classes.signup}>Создать
+                                аккаунт</NavLink></p>
                         </div>
                     </form>
                 </div>
