@@ -46,7 +46,7 @@ const RegisterPage = () => {
                 <CheckBox/><p>i accept the Terms of Service and have read Privacy Policy</p>
               </div>
             </div>
-            <ButtonMui text='Зарегистрироваться' padding="12px 190px" background='#EDEDED'/>
+            <ButtonMui text='Зарегистрироваться' padding="12px 190px" background='#EDEDED' color='#8C8C8C'/>
             <div className={classes.newperson}>
               <p> У вас уже есть учетная запись? <NavLink to='/login-page' className={classes.signup}>Авторизоваться
               </NavLink></p>

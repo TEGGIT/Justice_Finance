@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  padding-right: 3rem;
+  border-right: 1px solid #F3F3F3;
+  width: 59%;
+  height: 100vh;
+
+
+
+
+  &_title{
+    display: flex;
+    align-items: center;
+    gap: 200px;
+
+    &_text{
+      padding: 48px;
+      font-family: 'TT Firs Neue', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 48px;
+    }
+    &_input{
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      color: #363636;
+      line-height: 24px;
+      border: 1px solid #ECECEC;
+      padding: 16px 271px 12px 20px;
+    }
+  }
+}
