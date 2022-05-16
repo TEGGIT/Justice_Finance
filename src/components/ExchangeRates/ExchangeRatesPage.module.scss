@@ -36,7 +36,14 @@
       color: #363636;
       line-height: 24px;
       border: 1px solid #ECECEC;
-      padding: 16px 271px 12px 20px;
+      padding: 16px 271px 16px 20px;
+    }
+    &_input::placeholder{
+      background-image: url("../../assets/image/Lupa.svg");
+      background-repeat: no-repeat;
+      padding-left: 30px;
+      background-position: 4px;
+
     }
   }
 }

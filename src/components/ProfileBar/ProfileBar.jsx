@@ -5,12 +5,17 @@ import plus from '../../assets/image/Plus.svg'
 import transactions from '../../assets/image/transaction.svg'
 import ButtonMui from "../MUI/Button/ButtonMui";
 const ProfileBar = () => {
+
+
+
+  const user = JSON.parse(localStorage.getItem('USERS_DATA'));
+
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
      <div className={classes.profile_wrapper__avatar}>
      <img src={avatar} alt='аватар'/>
-       <p>Алексей Иванов</p>
+         <p>{user.name}</p>
      </div>
         <div className={classes.profile_wrapper__balance}>
         <p>Мой баланс</p>

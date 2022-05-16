@@ -15,7 +15,7 @@ const Header = ({bold, regular, text}) => {
             <p className={classes.text_regular}>{regular}</p>
           </div>
           <div className={classes.header__nav__button}>
-            <NavLink to='/login-page' style={{textDecoration: 'none'}}>
+            <NavLink to='/login-page'>
               <ButtonMui text='Войти'
                          padding='12px 24px'
                          background='#363636'
@@ -23,6 +23,7 @@ const Header = ({bold, regular, text}) => {
                          fontSize="12px"
                          hoverBackground='#363636'
                          borderRadius="none"
+                         fontWeight='600'
               />
             </NavLink>
           </div>
