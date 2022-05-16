@@ -34,12 +34,12 @@
           margin-top: 3.5rem;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 36px;
 
           &_sign {
             align-items: center;
             display: flex;
-            padding: 1rem 1.5rem;
+            padding: 16px 25px 16px 30px;
             gap: 10px;
             background: #FFFFFF;
             border: 1px solid #ECECEC;
@@ -136,7 +136,7 @@
   font-size: 14px;
   line-height: 24px;
   border: 1px solid #ECECEC;
-  padding: 16px 16px;
+  padding: 16px 0 16px 16px;
 
 
   color: #8C8C8C;
@@ -148,9 +148,11 @@
   gap: 40px;
   margin-bottom: 48px;
 
-  &_password{
-  display: flex;
-    justify-content: space-between;
+  &_password {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+
   }
 }
 
@@ -166,7 +168,7 @@
   color: #363636;
 }
 
-.newperson{
+.newperson {
   margin-top: 32px;
   display: flex;
   justify-content: center;
@@ -176,7 +178,7 @@
   font-size: 14px;
 }
 
-.signup{
+.signup {
   color: #84A500;
   font-family: 'Inter', sans-serif;
   font-style: normal;
