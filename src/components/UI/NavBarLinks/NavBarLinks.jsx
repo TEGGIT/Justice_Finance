@@ -12,7 +12,7 @@ import {NavLink} from "react-router-dom";
 const NavBarLinks = () => {
 
   const clear = () =>{
-      localStorage.clear()
+      localStorage.removeItem('LOGIN_USER')
   }
   const item = [
     {

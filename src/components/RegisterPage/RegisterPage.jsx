@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "./RegisterPage.module.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -9,20 +9,31 @@ import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 import image from "../../assets/image/IllustrationTwo.svg";
+import { Patterns } from '../../appConstans';
 
 const RegisterPage = () => {
 
   const [checked, setChecked] = React.useState(false);
   const [name, setName] = useState('')
+  const [error, setError] = useState({
+    nameError: 'Введите имя!',
+    emailError:'Введите Email',
+  })
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [storageUser, setStorageUser] = useState([])
   const navigate = useNavigate();
-
-
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+  const test = (e) => {
+    if (!Patterns.name.test(name)){
+      alert("Нет")
+    }else{
+      alert("Работает")
+
+    }
+  }
   const newUser = {
     name: name,
     email: email,
@@ -32,14 +43,17 @@ const RegisterPage = () => {
 
     if (newUser){
       storageUser.push(newUser)
-      localStorage.setItem('USERS_DATA', JSON.stringify(newUser));
-      localStorage.setItem('LOGIN_DATA', JSON.stringify(storageUser))
+      localStorage.setItem('USERS_DATA', JSON.stringify(storageUser));
+      localStorage.setItem('LOGIN_DATA', JSON.stringify(newUser))
       navigate("/exchange-rates-page", { replace: true });
     }else{
       alert("no")
     }
   }
-
+  useEffect(() => {
+    if (localStorage.getItem('USERS_DATA'))
+      setStorageUser(JSON.parse(localStorage.getItem("USERS_DATA")));
+  },[]);
 
   return (
     <main className={classes.main}>
@@ -77,7 +91,7 @@ const RegisterPage = () => {
             </div>
             <div className={classes.input_wrapper}>
                     <Input placeholder="Имя, Фамилия" styles={classes.input} type= 'text' value={name}
-                           onChange={(e) => setName(e.target.value)}/>
+                           onChange={(e) => setName(e.target.value)} onBlur={() => test()}/>
               <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
                      onChange={(e) => setEmail(e.target.value)}/>
               <div className={classes.input_wrapper_password}>

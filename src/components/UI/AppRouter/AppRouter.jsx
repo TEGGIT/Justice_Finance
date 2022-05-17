@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {privateRoutes , publicRoutes} from "../../../router/routes";
 
 const AppRouter = () => {
   const aut = JSON.parse(localStorage.getItem('USERS_DATA'))
-  const [user, setUser] = useState(aut)
-
   return (
       <Routes>
-        {user ? (
+        {aut ? (
             <>
             {privateRoutes.map((route) =>
                   <Route
@@ -17,6 +15,7 @@ const AppRouter = () => {
                       exact={route.exact}
                   />
               )}
+
           </>
 
 
@@ -28,15 +27,15 @@ const AppRouter = () => {
                       path={route.path}
                       exact={route.exact}
                   />
+
               )}
+             <Route
+                 path="*"
+                 element={<Navigate to="/" replace />}
+             />
           </>
         )}
 
-
-        <Route
-            path="*"
-            element={<Navigate to="/" replace />}
-        />
       </Routes>
   );
 };
