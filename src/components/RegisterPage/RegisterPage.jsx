@@ -16,6 +16,7 @@ const RegisterPage = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [storageUser, setStorageUser] = useState([])
   const navigate = useNavigate();
 
 
@@ -30,7 +31,9 @@ const RegisterPage = () => {
   const registration = () => {
 
     if (newUser){
+      storageUser.push(newUser)
       localStorage.setItem('USERS_DATA', JSON.stringify(newUser));
+      localStorage.setItem('LOGIN_DATA', JSON.stringify(storageUser))
       navigate("/exchange-rates-page", { replace: true });
     }else{
       alert("no")

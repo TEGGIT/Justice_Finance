@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './NavBarLinks.module.scss'
 import echangeRates from "../../../assets/image/echangeRates.svg";
 import userIcon from '../../../assets/image/userIcon.svg'
@@ -11,6 +11,9 @@ import {NavLink} from "react-router-dom";
 
 const NavBarLinks = () => {
 
+  const clear = () =>{
+      localStorage.clear()
+  }
   const item = [
     {
       img: echangeRates,
@@ -61,6 +64,7 @@ const NavBarLinks = () => {
         })}
         <NavLink to='/'>
           <ButtonMui
+            onClick={clear}
             text="Выход"
             img={logOut}
             padding='12px 61px 12px 8px'
