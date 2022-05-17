@@ -15,11 +15,12 @@ const NavBarLinks = () => {
     {
       img: echangeRates,
       text: 'Курсы валют',
-      pass: ""
+      pass: "/exchange-rates-page"
     },
     {
       img: userIcon,
       text: 'Мой профиль',
+      pass: '/profile-page'
     },
     {
       img: arrow,
@@ -43,7 +44,9 @@ const NavBarLinks = () => {
 
 
         {item.map((items) => {
-          return <ButtonMui text={items.text}
+
+          return <NavLink to={`${items.pass}`}>
+          <ButtonMui text={items.text}
                             img={items.img}
                             padding="12px 61px 12px 8px"
                             gap='8px'
@@ -52,6 +55,7 @@ const NavBarLinks = () => {
                             fontSize='0.875rem'
                             hoverBackground='transparent'
           />
+            </NavLink>
         })}
         <NavLink to='/'>
           <ButtonMui

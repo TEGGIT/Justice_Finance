@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import classes from './LogPage.module.scss'
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
@@ -12,7 +12,7 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 const LogPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
 
   const user = JSON.parse(localStorage.getItem('USERS_DATA'))
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ const LogPage = () => {
   const checkUser = () => {
     if (email === user.email && password === user.password) {
       navigate("/exchange-rates-page", {replace: true});
+    }else{
+      console.log('error')
     }
   }
 

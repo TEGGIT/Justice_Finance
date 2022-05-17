@@ -1,0 +1,31 @@
+.main{
+  display: flex;
+
+
+  &_wrapper{
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F3F3F3;
+    width: 59%;
+    height: 100vh;
+
+
+    &__title{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 430px;
+      padding: 48px;
+
+
+
+      &_text{
+        font-family: 'TT Firs Neue', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+      }
+    }
+}
+}
