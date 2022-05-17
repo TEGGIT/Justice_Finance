@@ -2,32 +2,51 @@
   display: flex;
 }
 
-.main{
+.main {
   display: flex;
   flex-direction: column;
   border-right: 1px solid #F3F3F3;
   width: 60%;
   height: 100vh;
+  padding: 48px;
+
+  &_wrapper__slider {
+    display: flex;
+    padding-top: 48px;
+    align-items: center;
+
+    &__rate {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      border: 1px solid #F3F3F3;
+      gap: 16px;
 
 
+      &__count{
+     }
+      &_img{
+        padding: 8px;
+        background: #84A5001A;
+      }
+    }
+  }
 
-
-  &_title{
+  &_title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 200px;
-    padding: 48px;
 
 
-    &_text{
+    &_text {
       font-family: 'TT Firs Neue', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 32px;
       line-height: 48px;
     }
-    &_input{
+
+    &_input {
       font-family: 'Inter', sans-serif;
       font-style: normal;
       font-weight: 400;
@@ -37,7 +56,8 @@
       border: 1px solid #ECECEC;
       padding: 16px 271px 16px 20px;
     }
-    &_input::placeholder{
+
+    &_input::placeholder {
       background-image: url("../../assets/image/Lupa.svg");
       background-repeat: no-repeat;
       padding-left: 30px;
