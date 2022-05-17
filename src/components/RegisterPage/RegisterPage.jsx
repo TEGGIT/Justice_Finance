@@ -22,13 +22,13 @@ const RegisterPage = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-
-  const registration = () => {
-    const newUser = {
+  const newUser = {
     name: name,
     email: email,
     password: password
   }
+  const registration = () => {
+
     if (newUser){
       localStorage.setItem('USERS_DATA', JSON.stringify(newUser));
       navigate("/exchange-rates-page", { replace: true });
