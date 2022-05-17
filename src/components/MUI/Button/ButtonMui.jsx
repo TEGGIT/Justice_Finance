@@ -29,7 +29,7 @@ const ButtonMui = ({
   const BootstrapButton = styled(Button)({
     boxShadow: 'none',
     display: 'flex',
-    flexDirection:`${flexDirection}`,
+    flexDirection: `${flexDirection}`,
     border: `${border}`,
     color: `${color}`,
     borderRadius: `${borderRadius}`,

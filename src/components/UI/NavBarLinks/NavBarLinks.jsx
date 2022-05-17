@@ -30,11 +30,12 @@ const NavBarLinks = () => {
     {
       img: suitcase,
       text: 'Кошельки',
-      pass: ''
+      pass: '/purse-page'
     },
     {
       img: checklist,
       text: 'Транзакции',
+      pass: '/transactions-page'
     },
 
   ]

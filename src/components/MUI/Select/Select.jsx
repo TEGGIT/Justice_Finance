@@ -6,9 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-const SelectMui = ({selectValue, handleChangeSelect}) => {
+const SelectMui = ({selectValue, handleChangeSelect, minWidth}) => {
   return (
-      <Box sx={{ minWidth: 336 }}>
+      <Box sx={{minWidth}}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Выберите кошелек</InputLabel>
           <Select
