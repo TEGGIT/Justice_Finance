@@ -25,6 +25,7 @@ const NavBarLinks = () => {
     {
       img: arrow,
       text: 'Обмен валют',
+      pass: '/currency-exchange'
     },
     {
       img: suitcase,

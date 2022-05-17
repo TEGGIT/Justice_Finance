@@ -7,7 +7,7 @@ import './App.css';
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import ExchangeRatesPage from "./components/ExchangeRates/ExchangeRatesPage";
 import Profile from "./components/Profile/Profile";
-
+import CurrencyExchange from "./components/СurrencyExchange/СurrencyExchange";
 function App() {
   return (
     <div className="App">
@@ -19,6 +19,7 @@ function App() {
           <Route path='register-page' element={<RegisterPage/>}/>
           <Route path='exchange-rates-page' element={<ExchangeRatesPage/>}/>
           <Route path='profile-page' element={<Profile/>}/>
+          <Route path='currency-exchange' element={<CurrencyExchange/>}/>
 
         </Routes>
       </BrowserRouter>
