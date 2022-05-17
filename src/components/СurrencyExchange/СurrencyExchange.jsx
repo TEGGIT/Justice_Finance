@@ -28,11 +28,11 @@ const CurrencyExchange = () => {
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Отдаю' type='number' styles={classes.main__wrapper__content__exchange__input}/>
-            <Select handleChangeSelect={handleChange} selectValue={age}/>
+            <Select handleChangeSelect={handleChange} selectValue={age} minWidth='21rem'/>
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Получаю' type='number' styles={classes.main__wrapper__content__exchange__input}/>
-            <Select handleChangeSelect={handleChange} selectValue={age}/>
+            <Select handleChangeSelect={handleChange} selectValue={age} minWidth='21rem'/>
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <ButtonMui text="Обменять"
