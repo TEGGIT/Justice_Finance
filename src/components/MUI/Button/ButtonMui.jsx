@@ -21,13 +21,15 @@ const ButtonMui = ({
                      onClick,
                      border,
                      fontWeight,
-                     disabled
+                     disabled,
+                     flexDirection,
                    }) => {
   const [hover, setHover] = useState(false)
 
   const BootstrapButton = styled(Button)({
     boxShadow: 'none',
     display: 'flex',
+    flexDirection:`${flexDirection}`,
     border: `${border}`,
     color: `${color}`,
     borderRadius: `${borderRadius}`,
