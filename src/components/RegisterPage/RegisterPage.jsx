@@ -12,12 +12,11 @@ import image from "../../assets/image/IllustrationTwo.svg";
 
 const RegisterPage = () => {
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate();
-
 
 
   const handleChange = (event) => {
