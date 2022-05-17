@@ -1,3 +1,121 @@
-.main{
+.main {
   display: flex;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F3F3F3;
+    width: 60%;
+    height: 100vh;
+    padding: 48px;
+
+    &__rows {
+      display: flex;
+      padding-top: 32px;
+      width: 100%;
+
+
+      &_info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        &_count {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding-right: 165px;
+          padding-left: 40px;
+          border-right: 1px solid #F3F3F3;
+
+        }
+
+        &_status {
+          display: flex;
+          align-items: center;
+
+          &_text{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+            color: #DEA000;
+            padding: 8px;
+            background: #DEA0001A;
+          }
+        }
+
+        &_plus {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding-left: 40px;
+          padding-right: 190px;
+
+
+
+        }
+
+        &_date_container {
+          display: flex;
+          flex-direction: column;
+          padding-right: 100px;
+          border-right: 1px solid #F3F3F3;
+
+
+          &_upper {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            color: #363636;
+          }
+
+          &_lower {
+            Font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+            color: #848484;
+          }
+        }
+      }
+    }
+
+    &__columns {
+      display: flex;
+      gap: 230px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #F3F3F3;
+
+      &_title {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 24px;
+        color: #848484;
+
+
+      }
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      padding-bottom: 48px;
+
+
+      &_text {
+        font-family: 'TT Firs Neue', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+      }
+    }
+  }
 }

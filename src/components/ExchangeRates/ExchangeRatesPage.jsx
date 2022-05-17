@@ -4,7 +4,6 @@ import NavBar from '../NavBar/NavBar'
 import Input from "../UI/Input/Input";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import {useNavigate} from "react-router-dom";
-
 const ExchangeRatesPage = () => {
   const [main, setMain] = useState(true)
   useEffect(() => {
