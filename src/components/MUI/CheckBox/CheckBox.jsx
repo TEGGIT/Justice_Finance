@@ -3,13 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { green } from '@mui/material/colors';
 
 
-const CheckBox = () => {
-  const [checked, setChecked] = React.useState(true);
-
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
+const CheckBox = ({checkedMui, onChange}) => {
   return (
     <>
       <Checkbox
@@ -20,8 +14,8 @@ const CheckBox = () => {
             color: green[500],
           },
         }}
-        checked={checked}
-        onChange={handleChange}
+        checked={checkedMui}
+        onChange={onChange}
         inputProps={{ 'aria-label': 'controlled' }}
 
       />

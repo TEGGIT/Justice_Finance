@@ -20,7 +20,8 @@ const ButtonMui = ({
                      height,
                      onClick,
                      border,
-                     fontWeight
+                     fontWeight,
+                     disabled
                    }) => {
   const [hover, setHover] = useState(false)
 
@@ -61,6 +62,7 @@ const ButtonMui = ({
       <Stack spacing={0} direction="row">
         <BootstrapButton
           onClick={onClick}
+          disabled={disabled}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           disableRipple>

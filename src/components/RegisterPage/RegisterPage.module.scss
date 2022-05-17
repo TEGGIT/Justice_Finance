@@ -137,9 +137,20 @@
   line-height: 24px;
   border: 1px solid #ECECEC;
   padding: 16px 10px 16px 16px;
+  color:#363636;
+;
 
 
-  color: #8C8C8C;
+  &_error{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    border: 1px solid #F31212;
+    padding: 16px 10px 16px 16px;
+    color: #8C8C8C;
+  }
 }
 
 .input_wrapper {
@@ -186,5 +197,5 @@
   font-size: 14px;
   line-height: 24px;
   text-decoration: none;
-
 }
+

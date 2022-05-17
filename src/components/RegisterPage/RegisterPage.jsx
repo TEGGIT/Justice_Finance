@@ -12,28 +12,31 @@ import image from "../../assets/image/IllustrationTwo.svg";
 
 const RegisterPage = () => {
 
-
+  const [checked, setChecked] = React.useState(false);
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate();
 
-  const newUser = {
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const registration = () => {
+    const newUser = {
     name: name,
     email: email,
     password: password
   }
-
-  let navigate = useNavigate();
-
-  const registration = () => {
-    if (!newUser.name){
-      alert("no")
-    }else{
+    if (newUser){
       localStorage.setItem('USERS_DATA', JSON.stringify(newUser));
       navigate("/exchange-rates-page", { replace: true });
+    }else{
+      alert("no")
     }
-
   }
+
 
   return (
     <main className={classes.main}>
@@ -70,8 +73,8 @@ const RegisterPage = () => {
               <div className={classes.line}/>
             </div>
             <div className={classes.input_wrapper}>
-              <Input placeholder="Имя, Фамилия" styles={classes.input} type= 'text' value={name}
-                     onChange={(e) => setName(e.target.value)}/>
+                    <Input placeholder="Имя, Фамилия" styles={classes.input} type= 'text' value={name}
+                           onChange={(e) => setName(e.target.value)}/>
               <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
                      onChange={(e) => setEmail(e.target.value)}/>
               <div className={classes.input_wrapper_password}>
@@ -81,17 +84,38 @@ const RegisterPage = () => {
               </div>
 
               <div className={classes.checkbox}>
-                <CheckBox/><p>i accept the Terms of Service and have read Privacy Policy</p>
+                <CheckBox onChange={handleChange} checkedMui={checked}/><p>i accept the Terms of Service and have read Privacy Policy</p>
               </div>
             </div>
-            <ButtonMui text='Зарегистрироваться'
-                       padding="12px 190px"
-                       background='#EDEDED'
-                       color='#8C8C8C'
-                       onClick={registration}
-                       fontWeight='600'
+            {name && email && password && checked ? (
+                <>
+                  <ButtonMui text='Зарегистрироваться'
+                             padding="12px 190px"
+                             background='#363636'
+                             color='#FFFFFF'
+                             onClick={registration}
+                             disabled={false}
+                             fontWeight='600'
+                             hoverBackground='#363636'
 
-            />
+                  />
+
+                </>
+            ) : (
+                <>
+                  <ButtonMui text='Зарегистрироваться'
+                             padding="12px 190px"
+                             background='#EDEDED'
+                             color='#8C8C8C'
+                             disabled={true}
+                             onClick={registration}
+                             fontWeight='600'
+                             hoverBackground='#EDEDED'
+
+                  />
+                </>
+            )}
+
             <div className={classes.newperson}>
               <p> У вас уже есть учетная запись? <NavLink to='/login-page' className={classes.signup}>Авторизоваться
               </NavLink></p>
