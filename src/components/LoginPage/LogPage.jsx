@@ -18,6 +18,8 @@ const LogPage = () => {
   const [checked, setChecked] = React.useState(false);
   const user = JSON.parse(localStorage.getItem('USERS_DATA'))
   const navigate = useNavigate();
+
+
   const checkUser = () => {
     user.map(item => {
       if (email === item.email && password === item.password) {

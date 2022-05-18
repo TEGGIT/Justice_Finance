@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './ProfileBar.module.scss'
 import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
 import transactions from '../../assets/image/transaction.svg'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
+import Wallet from "./WalletBar/Wallet";
 const ProfileBar = () => {
 
 
 
   const user = JSON.parse(localStorage.getItem('LOGIN_USER'));
+  const [walletsArray] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
+  const wallets = walletsArray.map((item) => item.wallets)
 
+  const wallet = wallets[0]
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
@@ -20,10 +24,25 @@ const ProfileBar = () => {
      </div>
         <div className={classes.profile_wrapper__balance}>
         <p>Мой баланс</p>
-              <div className={classes.profile_wrapper__balance__purse}>
-                <p>Добавьте кошелек</p>
-                <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636' hoverBackground='#363636' borderRadius='30px ' padding='12px' height='60px'/></NavLink>
-              </div>
+          {wallets.length ? (
+              <>
+                {wallet.map((wallet) => {
+                  return <Wallet countryName={wallet.currency}
+                                country={wallet.currency}
+                                count={wallet.sum}
+                  />
+                })}
+
+              </>
+          ) : (
+
+            <div className={classes.profile_wrapper__balance__purse}>
+            <p>Добавьте кошелек</p>
+            <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636' hoverBackground='#363636' borderRadius='30px ' padding='12px' height='60px'/></NavLink>
+            </div>
+
+          )}
+
         </div>
         <div className={classes.profile_wrapper__transactions}>
           <p>Последние транзацкции </p>

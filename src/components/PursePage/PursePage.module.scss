@@ -47,6 +47,15 @@
     padding-bottom: 81px;
     border-bottom: 1px solid #F3F3F3;
 
+    &__wallets{
+      padding-top: 81px;
+      gap: 16px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-bottom: 81px;
+      border-bottom: 1px solid #F3F3F3;
+    }
 
 
     &__add{
