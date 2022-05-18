@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./RegisterPage.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import google from "../../assets/image/google.svg";
 import github from "../../assets/image/github.svg";
@@ -9,16 +10,11 @@ import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 import image from "../../assets/image/IllustrationTwo.svg";
-import { Patterns } from '../../appConstans';
-
 const RegisterPage = () => {
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(JSON.stringify(data));
   const [checked, setChecked] = React.useState(false);
   const [name, setName] = useState('')
-  const [error, setError] = useState({
-    nameError: 'Введите имя!',
-    emailError:'Введите Email',
-  })
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [storageUser, setStorageUser] = useState([])
@@ -26,14 +22,6 @@ const RegisterPage = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  const test = (e) => {
-    if (!Patterns.name.test(name)){
-      alert("Нет")
-    }else{
-      alert("Работает")
-
-    }
-  }
   const newUser = {
     name: name,
     email: email,
@@ -59,7 +47,7 @@ const RegisterPage = () => {
     <main className={classes.main}>
       <div className={classes.main__register}>
         <div className={classes.main__register_wrapper}>
-          <form className={classes.main__register_wrapper__form}>
+          <form className={classes.main__register_wrapper__form} onSubmit={handleSubmit(onSubmit)}>
             <p className={classes.main__register_wrapper__form_text}>Регистрация</p>
             <div className={classes.main__register_wrapper__form__buttons}>
               <ButtonMui fontSize='12px'
@@ -90,8 +78,10 @@ const RegisterPage = () => {
               <div className={classes.line}/>
             </div>
             <div className={classes.input_wrapper}>
-                    <Input placeholder="Имя, Фамилия" styles={classes.input} type= 'text' value={name}
-                           onChange={(e) => setName(e.target.value)} onBlur={() => test()}/>
+                    <input placeholder="Имя, Фамилия"  type= 'text'
+                        {...register('firstName', {required: true})}/>
+              <input type='submit'/>
+              <div style={{height:'40px'}}>{errors?.firstName && <p>Error</p>}</div>
               <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
                      onChange={(e) => setEmail(e.target.value)}/>
               <div className={classes.input_wrapper_password}>
@@ -104,34 +94,18 @@ const RegisterPage = () => {
                 <CheckBox onChange={handleChange} checkedMui={checked}/><p>i accept the Terms of Service and have read Privacy Policy</p>
               </div>
             </div>
-            {name && email && password && checked ? (
-                <>
+
                   <ButtonMui text='Зарегистрироваться'
                              padding="12px 190px"
                              background='#363636'
                              color='#FFFFFF'
-                             onClick={registration}
+                             onClick={() =>onSubmit()}
                              disabled={false}
                              fontWeight='600'
                              hoverBackground='#363636'
 
                   />
 
-                </>
-            ) : (
-                <>
-                  <ButtonMui text='Зарегистрироваться'
-                             padding="12px 190px"
-                             background='#EDEDED'
-                             color='#8C8C8C'
-                             disabled={true}
-                             onClick={registration}
-                             fontWeight='600'
-                             hoverBackground='#EDEDED'
-
-                  />
-                </>
-            )}
 
             <div className={classes.newperson}>
               <p> У вас уже есть учетная запись? <NavLink to='/login-page' className={classes.signup}>Авторизоваться
