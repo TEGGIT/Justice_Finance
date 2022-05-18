@@ -6,6 +6,7 @@ import waller from '../../assets/image/wallet.svg'
 import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
+import Wallet from "../ProfileBar/WalletBar/Wallet";
 
 const PursePage = () => {
   const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
@@ -13,6 +14,8 @@ const PursePage = () => {
   const [numberPurse, setNumberPurse] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const [currentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
+  const wallets = storage.map((item) => item.wallets)
+  const wallet = wallets[0]
   useEffect(() => {
     if (!numberPurse || !currency){
       setIsDisabledBtn(true)
@@ -37,13 +40,11 @@ const PursePage = () => {
             ...user,
             wallets: [...user.wallets, {currency, numberPurse, sum:0}]
           }
-
           return updateUser
         } else {
           return user
         }
       })
-      console.log(updateStorage)
 
       setStorage(updateStorage)
     }
@@ -63,10 +64,22 @@ const PursePage = () => {
             Кошельки
           </h1>
         </div>
-        <div className={classes.main__wrapper__wallet_container}>
-          <img src={waller} alt='Кошелек'/>
-          <p className={classes.main__wrapper__title_wallet}>На данный момент у вас не созданно ни одного кошелька</p>
-        </div>
+        {wallets.length ? (
+            <div className={classes.main__wrapper__wallet_container__wallets}>
+              {wallet.map((wallet) => {
+                return <Wallet countryName={wallet.currency}
+                               country={wallet.currency}
+                               count={wallet.sum}
+                />
+              })}
+            </div>
+        ): (
+            <div className={classes.main__wrapper__wallet_container}>
+              <img src={waller} alt='Кошелек'/>
+              <p className={classes.main__wrapper__title_wallet}>На данный момент у вас не созданно ни одного кошелька</p>
+            </div>
+        )}
+
         <div className={classes.main__wrapper__wallet_container__add}>
           <div className={classes.main__wrapper__wallet_container__add_title}>
             <p>Добавление кошелька</p>
