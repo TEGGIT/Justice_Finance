@@ -83,14 +83,14 @@ const RegisterPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!nameError && !emailError && !passwordError && !repeatPasswordError) {
-      setDisabledBtn(false)
-
-    } else {
+    if (!name || !email || !password || !repeatPassword || repeatPasswordError || !checked) {
       setDisabledBtn(true)
 
+    } else {
+      setDisabledBtn(false)
+
     }
-  }, [nameError, emailError, passwordError, repeatPasswordError])
+  }, [name, email, password, repeatPassword, repeatPasswordError , checked])
 
 
 
