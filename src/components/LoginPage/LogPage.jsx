@@ -12,8 +12,8 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 const LogPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isEmailError, setIsEmailError] = useState(true)
-  const [isPasswordError, setIsPasswordError] = useState(true)
+  const [isEmailError, setIsEmailError] = useState(false)
+  const [isPasswordError, setIsPasswordError] = useState(false)
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const [checked, setChecked] = React.useState(false);
   const user = JSON.parse(localStorage.getItem('USERS_DATA'))
