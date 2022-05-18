@@ -1,26 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import classes from './ExchangeRatesPage.module.scss'
 import NavBar from '../NavBar/NavBar'
 import Input from "../UI/Input/Input";
 import ProfileBar from "../ProfileBar/ProfileBar";
-import {useNavigate} from "react-router-dom";
 import SlideButton from "../UI/SlideButton/SlideButton";
 import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
 import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import arrowUp from '../../assets/image/ArrowUp.svg'
 const ExchangeRatesPage = () => {
-  const [main, setMain] = useState(true)
-  useEffect(() => {
-    if (!localStorage.USERS_DATA) {
-      setMain(navigate("/", {replace: true})
-      )
-    }
-  }, [main])
-  const navigate = useNavigate();
-
   return (
       <>
-        {localStorage.USERS_DATA ? (<>
           <div className={classes.wrapper}>
             <NavBar/>
             <main className={classes.main}>
@@ -45,10 +34,6 @@ const ExchangeRatesPage = () => {
             </main>
             <ProfileBar/>
           </div>
-        </>) : (<>
-          {main}
-        </>)}
-
       </>
   );
 };

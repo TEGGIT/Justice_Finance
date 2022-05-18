@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './PursePage.module.scss'
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
@@ -8,11 +8,52 @@ import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
 
 const PursePage = () => {
-  const [age, setAge] = React.useState('');
+  const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
+  const [currency, setСurrency] = React.useState('');
+  const [numberPurse, setNumberPurse] = useState('')
+  const [isDisabledBtn, setIsDisabledBtn] = useState(true)
+  const [currentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
+  useEffect(() => {
+    if (!numberPurse || !currency){
+      setIsDisabledBtn(true)
+    }else{
+      setIsDisabledBtn(false)
+    }
+  }, [numberPurse, currency])
+
+  useEffect(() => {
+    localStorage.setItem('USERS_DATA', JSON.stringify(storage))
+  }, [storage])
+
+  const addPurse = () => {
+    const isFindWallet = storage.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
+
+    if (isFindWallet){
+      console.log('кошелёк с такой валютой уже существует')
+    } else {
+      const updateStorage = storage.map(user => {
+        if (user.email === currentUser[0].email) {
+          const updateUser = {
+            ...user,
+            wallets: [...user.wallets, {currency, numberPurse, sum:0}]
+          }
+
+          return updateUser
+        } else {
+          return user
+        }
+      })
+      console.log(updateStorage)
+
+      setStorage(updateStorage)
+    }
+
+  }
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setСurrency(event.target.value);
   };
+
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -31,17 +72,20 @@ const PursePage = () => {
             <p>Добавление кошелька</p>
           </div>
           <div className={classes.main__wrapper__wallet_container__add__select}>
-            <Select handleChangeSelect={handleChange} selectValue={age} minWidth='388px'/>
+            <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px'/>
             <Input placeholder='# Номер кошелька' type='number'
-                   styles={classes.main__wrapper__wallet_container__add__select_input}/>
+                   styles={classes.main__wrapper__wallet_container__add__select_input}
+                   value={numberPurse} onChange={(e) => {setNumberPurse(e.target.value) }}
+            />
             <ButtonMui text='Добавить кошелек'
-                       background='#EDEDED'
-                       padding='15px 24px'
-                       color='#8C8C8C'
+                       background ='#363636'
+                        padding='15px 24px'
+                       disabled={isDisabledBtn}
+                       color='#EEEEEE'
                        fontSize='16px'
                        fontWeight='600'
-                       hoverBackground='#EDEDED'
-
+                       hoverBackground='#363636'
+                       onClick={addPurse}
             />
           </div>
 

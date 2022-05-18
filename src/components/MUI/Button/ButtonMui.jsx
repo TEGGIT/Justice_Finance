@@ -23,6 +23,7 @@ const ButtonMui = ({
                      fontWeight,
                      disabled,
                      flexDirection,
+                     type
                    }) => {
   const [hover, setHover] = useState(false)
 
@@ -56,6 +57,10 @@ const ButtonMui = ({
     '&:active': {
       boxShadow: 'none',
     },
+    '&:disabled':{
+      background: '#EDEDED',
+      color:'#8C8C8C',
+    },
   });
 
 
@@ -63,6 +68,7 @@ const ButtonMui = ({
     <>
       <Stack spacing={0} direction="row">
         <BootstrapButton
+          type={type}
           onClick={onClick}
           disabled={disabled}
           onMouseEnter={() => setHover(true)}

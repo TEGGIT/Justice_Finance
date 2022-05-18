@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from "./RegisterPage.module.scss";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import google from "../../assets/image/google.svg";
 import github from "../../assets/image/github.svg";
@@ -11,31 +11,87 @@ import {NavLink} from "react-router-dom";
 import image from "../../assets/image/IllustrationTwo.svg";
 
 const RegisterPage = () => {
-
   const [checked, setChecked] = React.useState(false);
+  const [disabledBtn, setDisabledBtn] = useState(true)
   const [name, setName] = useState('')
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+  const [repeatPassword, setRepeatPassword] = useState('')
+  const [repeatPasswordError, setRepeatPasswordError] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [storageUsers, setStorageUsers] = useState([])
   const navigate = useNavigate();
-
-
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-
-  const registration = () => {
-    const newUser = {
+  const newUser = {
     name: name,
     email: email,
-    password: password
+    password: password,
+    wallets: [],
   }
-    if (newUser){
-      localStorage.setItem('USERS_DATA', JSON.stringify(newUser));
-      navigate("/exchange-rates-page", { replace: true });
-    }else{
-      alert("no")
+  const nameErrorChecker = () => {
+    const nameChecker = new RegExp(`^(?=.*[а-я])(?=.*[А-Я])(?=.{${2},})`)
+    if (!nameChecker.test(name)) {
+      setNameError(true)
+    } else {
+      setNameError(false)
     }
   }
+  const emailErrorChecker = () => {
+    const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
+    if (!emailChecker.test(email)) {
+      setEmailError(true)
+    } else {
+      setEmailError(false)
+    }
+  }
+  const passwordErrorChecker = () => {
+    const passwordChecker = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
+    if (!passwordChecker.test(password)) {
+      setPasswordError(true)
+    } else {
+      setPasswordError(false)
+    }
+  }
+  const passwordRepeatChecker = () => {
+    if (password !== repeatPassword) {
+      setRepeatPasswordError(true)
+    } else {
+      setRepeatPasswordError(false)
+    }
+  }
+
+
+
+
+
+  const registration = () => {
+    if (newUser) {
+      storageUsers.push(newUser)
+      localStorage.setItem('USERS_DATA', JSON.stringify(storageUsers));
+      localStorage.setItem('LOGIN_DATA', JSON.stringify(newUser))
+      navigate("/exchange-rates-page", {replace: true});
+    } else {
+    }
+  }
+  useEffect(() => {
+    if (localStorage.getItem('USERS_DATA'))
+      setStorageUsers(JSON.parse(localStorage.getItem("USERS_DATA")));
+  }, []);
+
+  useEffect(() => {
+    if (!name || !email || !password || !repeatPassword || repeatPasswordError || !checked) {
+      setDisabledBtn(true)
+
+    } else {
+      setDisabledBtn(false)
+
+    }
+  }, [name, email, password, repeatPassword, repeatPasswordError , checked])
+
 
 
   return (
@@ -73,48 +129,66 @@ const RegisterPage = () => {
               <div className={classes.line}/>
             </div>
             <div className={classes.input_wrapper}>
-                    <Input placeholder="Имя, Фамилия" styles={classes.input} type= 'text' value={name}
-                           onChange={(e) => setName(e.target.value)}/>
-              <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
-                     onChange={(e) => setEmail(e.target.value)}/>
+              {nameError ? (
+                <>
+                  <Input placeholder="Имя, Фамилия" type='text'
+                         styles={classes.input} onBlur={() => nameErrorChecker()} value={name}
+                         onChange={(e) => setName(e.target.value)}/>
+                  <p className={classes.input_error_text}>Поле заполненно некорекктно</p>
+                </>
+              ) : (
+                <Input placeholder="Имя, Фамилия" type='text'
+                       styles={classes.input} onBlur={() => nameErrorChecker()} value={name}
+                       onChange={(e) => setName(e.target.value)}/>
+              )}
+              {emailError ? (
+                <>
+                  <Input placeholder='E-mail' styles={classes.input_error} type="email" value={email}
+                         onChange={(e) => setEmail(e.target.value)} onBlur={emailErrorChecker}/>
+                  <p className={classes.input_error_text_email}>Поле заполненно некорекктно</p>
+                </>
+              ) : (
+                <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
+                       onChange={(e) => setEmail(e.target.value)} onBlur={emailErrorChecker}/>
+              )}
               <div className={classes.input_wrapper_password}>
-                <Input placeholder='Пароль' styles={classes.input} type="password" value={password}
-                       onChange={(e) => setPassword(e.target.value)}/>
-                <Input placeholder="Подтвердите пароль" styles={classes.input} type='password'/>
-              </div>
+                {passwordError ? (
+                  <>
+                    <Input placeholder='Пароль' styles={classes.input_error} type="password" value={password}
+                           onChange={(e) => setPassword(e.target.value)} onBlur={passwordErrorChecker}/>
+                    <p className={classes.input_error_text_password}>Поле заполненно некорекктно</p>
+                  </>
 
+                ) : (
+                  <Input placeholder='Пароль' styles={classes.input} type="password" value={password}
+                         onChange={(e) => setPassword(e.target.value)} onBlur={passwordErrorChecker}/>
+                )}
+                {repeatPasswordError ? (
+                  <Input placeholder="Подтвердите пароль" styles={classes.input_error} onBlur={passwordRepeatChecker}
+                         type='password' onChange={(e) => setRepeatPassword(e.target.value)} value={repeatPassword}/>
+
+                ) : (
+                  <Input placeholder="Подтвердите пароль" styles={classes.input} onBlur={passwordRepeatChecker}
+                         type='password' onChange={(e) => setRepeatPassword(e.target.value)} value={repeatPassword}/>
+                )}
+              </div>
               <div className={classes.checkbox}>
-                <CheckBox onChange={handleChange} checkedMui={checked}/><p>i accept the Terms of Service and have read Privacy Policy</p>
+                <CheckBox onChange={handleChange} checkedMui={checked}/><p>i accept the Terms of Service and have read
+                Privacy Policy</p>
               </div>
             </div>
-            {name && email && password && checked ? (
-                <>
-                  <ButtonMui text='Зарегистрироваться'
-                             padding="12px 190px"
-                             background='#363636'
-                             color='#FFFFFF'
-                             onClick={registration}
-                             disabled={false}
-                             fontWeight='600'
-                             hoverBackground='#363636'
 
-                  />
+            <ButtonMui text='Зарегистрироваться'
+                       padding="12px 190px"
+                       background='#363636'
+                       color='#FFFFFF'
+                       onClick={() => registration()}
+                       disabled={disabledBtn}
+                       fontWeight='600'
+                       hoverBackground='#363636'
 
-                </>
-            ) : (
-                <>
-                  <ButtonMui text='Зарегистрироваться'
-                             padding="12px 190px"
-                             background='#EDEDED'
-                             color='#8C8C8C'
-                             disabled={true}
-                             onClick={registration}
-                             fontWeight='600'
-                             hoverBackground='#EDEDED'
+            />
 
-                  />
-                </>
-            )}
 
             <div className={classes.newperson}>
               <p> У вас уже есть учетная запись? <NavLink to='/login-page' className={classes.signup}>Авторизоваться

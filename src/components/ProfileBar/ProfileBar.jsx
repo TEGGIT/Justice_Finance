@@ -4,24 +4,25 @@ import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
 import transactions from '../../assets/image/transaction.svg'
 import ButtonMui from "../MUI/Button/ButtonMui";
+import {NavLink} from "react-router-dom";
 const ProfileBar = () => {
 
 
 
-  const user = JSON.parse(localStorage.getItem('USERS_DATA'));
+  const user = JSON.parse(localStorage.getItem('LOGIN_USER'));
 
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
      <div className={classes.profile_wrapper__avatar}>
      <img src={avatar} alt='аватар'/>
-         <p>{user.name}</p>
+         <p>{user[0].name}</p>
      </div>
         <div className={classes.profile_wrapper__balance}>
         <p>Мой баланс</p>
               <div className={classes.profile_wrapper__balance__purse}>
                 <p>Добавьте кошелек</p>
-                <ButtonMui img={plus} background='#363636' hoverBackground='#363636' borderRadius='30px ' padding='12px' height='60px'/>
+                <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636' hoverBackground='#363636' borderRadius='30px ' padding='12px' height='60px'/></NavLink>
               </div>
         </div>
         <div className={classes.profile_wrapper__transactions}>
