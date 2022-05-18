@@ -18,9 +18,12 @@ const SelectMui = ({selectValue, handleChangeSelect, minWidth}) => {
             label="age"
             onChange={handleChangeSelect}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            <MenuItem value={'RUB'}>RUB</MenuItem>
+            <MenuItem value={'USD'}>USD</MenuItem>
+            <MenuItem value={'CNY'}>CNY</MenuItem>
+            <MenuItem value={'EUR'}>EUR</MenuItem>
+            <MenuItem value={'TRY'}>TRY</MenuItem>
+
           </Select>
         </FormControl>
       </Box>

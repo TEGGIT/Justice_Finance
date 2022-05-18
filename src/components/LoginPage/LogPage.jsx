@@ -16,13 +16,17 @@ const LogPage = () => {
   const user = JSON.parse(localStorage.getItem('USERS_DATA'))
   const navigate = useNavigate();
   const checkUser = () => {
-    user.map(item =>{
-      if (email === item.email && password === item.password) {
-        navigate("/exchange-rates-page", {replace: true});
-      }else{
-        console.log('error')
-      }
-    } )
+    setTimeout(() => {
+      user.map(item =>{
+        if (email === item.email && password === item.password) {
+          navigate("/exchange-rates-page", {replace: true});
+          localStorage.setItem('LOGIN_USER', JSON.stringify(user))
+        }else{
+          console.log('error')
+        }
+      } )
+    }, 3000)
+
   }
 
   const handleChange = (event) => {
