@@ -38,7 +38,6 @@ const ProfileBar = () => {
             <p>Добавьте кошелек</p>
             <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636' hoverBackground='#363636' borderRadius='30px ' padding='12px' height='60px'/></NavLink>
             </div>
-
           )}
 
         </div>
