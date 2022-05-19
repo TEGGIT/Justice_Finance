@@ -36,9 +36,9 @@ const PursePage = () => {
     const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
     const [currency, setСurrency] = React.useState('');
     const {currentUser, changeCurrentUser} = useStateContext()
+    const [currentUserNow, setCurrentUserNow] = useState({currency})
     const [numberPurse, setNumberPurse] = useState('')
     const [isDisabledBtn, setIsDisabledBtn] = useState(true)
-
     const navigate = useNavigate()
 
     const wallets = [...currentUser]

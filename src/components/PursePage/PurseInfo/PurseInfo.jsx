@@ -19,9 +19,12 @@ const PurseInfo = () => {
 
 
     const deleteWallet = () => {
-        const filteredWalletStorage = currentUser[0].wallets.filter((wallet) => wallet.currency !== currentWallet.currency)
+        currentUser[0].wallets.forEach( (wallet,index) => {
+            wallet.currency === currentWallet.currency && currentUser[0].wallets.splice(index,1);
+        } )
+        changeCurrentUser(currentUser)
         navigate("/purse-page", {replace: true});
-        changeCurrentUser(filteredWalletStorage)
+
     }
     const addSumWallet = () => {
         const newWalletStorage = currentUser[0].wallets.map((wallet) => {
