@@ -1,0 +1,89 @@
+.main{
+  display: flex;
+
+
+  &_wrapper{
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F3F3F3;
+    width: 60%;
+    height: 100vh;
+    padding: 48px;
+
+
+    &__title{
+      display: flex;
+      align-items: center;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #F3F3F3;
+      justify-content: space-between;
+
+      &_purse_id{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+      }
+
+
+      &_text{
+        font-family: 'TT Firs Neue', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+        color: #363636;
+
+        &_number{
+          color: #848484;
+        }
+      }
+    }
+    &__purse{
+      padding-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-bottom: 56px;
+      border-bottom: 1px solid #F3F3F3;
+
+    }
+
+    &__replenishment{
+      padding-top: 56px;
+     display: flex;
+      flex-direction: column;
+
+
+      &_text{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #848484;
+        padding-bottom: 40px;
+      }
+
+      &_wrapper{
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+
+
+        &_input{
+          display: flex;
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 24px;
+          border: 1px solid #ECECEC;
+          padding: 16px 307px 16px 16px;
+          color: #363636;
+        }
+      }
+    }
+  }
+}
