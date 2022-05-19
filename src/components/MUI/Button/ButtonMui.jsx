@@ -23,7 +23,7 @@ const ButtonMui = ({
                      fontWeight,
                      disabled,
                      flexDirection,
-                     type
+                     type,
                    }) => {
   const [hover, setHover] = useState(false)
 

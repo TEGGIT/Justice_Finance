@@ -32,7 +32,7 @@ const RegisterPage = () => {
     password: password,
     wallets: [],
     city:'',
-    dataBirthday:'',
+    birthday:'',
     number:''
   }
   const nameErrorChecker = () => {
@@ -71,7 +71,6 @@ const RegisterPage = () => {
     if (newUser) {
       storageUsers.push(newUser)
       localStorage.setItem('USERS_DATA', JSON.stringify(storageUsers));
-      localStorage.setItem('LOGIN_DATA', JSON.stringify(newUser))
       navigate("/", {replace: true});
     } else {
     }

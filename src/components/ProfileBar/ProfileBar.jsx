@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useState} from 'react';
 import classes from './ProfileBar.module.scss'
 import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
@@ -7,10 +7,11 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 import Wallet from "./WalletBar/Wallet";
 const ProfileBar = () => {
-  const user = JSON.parse(localStorage.getItem('LOGIN_USER'));
+  const user = JSON.parse(localStorage.getItem('USERS_DATA'));
   const [walletsArray] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
   const wallets = walletsArray.map((item) => item.wallets)
   const wallet = wallets[0]
+
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
@@ -26,6 +27,7 @@ const ProfileBar = () => {
                   return <Wallet countryName={wallet.currency}
                                 country={wallet.currency}
                                 count={wallet.sum}
+                                 countryCounter={wallet.currency}
                   />
                 })}
 
