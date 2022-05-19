@@ -1,0 +1,94 @@
+.main {
+  display: flex;
+
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #F3F3F3;
+    width: 60%;
+    height: 100vh;
+    padding: 48px;
+
+  &_replenishment{
+    padding-top: 56px;
+
+    &_main{
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+
+      &_input{
+          display: flex;
+         flex-wrap: wrap;
+        gap: 40px ;
+
+        &_input{
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 24px;
+          border: 1px solid #ECECEC;
+          padding: 16px 270px 16px 16px;
+          color: #363636;
+        }
+      }
+    }
+    &_title{
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #848484;
+      padding-bottom: 40px;
+
+
+    }
+  }
+    &__navigate{
+      display: flex;
+      gap: 19px;
+
+    }
+
+    &_wallet{
+      padding-top: 48px;
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-bottom: 56px;
+      border-bottom: 1px solid #F3F3F3 ;
+    }
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #F3F3F3;
+
+      &_text{
+        font-family: 'TT Firs Neue', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 48px;
+
+        &_number{
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 48px;
+          color: #848484;
+        }
+      }
+    }
+
+  }
+
+}
