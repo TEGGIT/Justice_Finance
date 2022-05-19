@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './LogPage.module.scss'
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
@@ -29,6 +29,7 @@ const LogPage = () => {
         alert('Такого пользователя не существует')
       }
     })
+
   }
 
 
@@ -59,10 +60,12 @@ const LogPage = () => {
   }, [email, password, isEmailError, isPasswordError])
 
 
+
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  return (<main className={classes.main}>
+  return (
+      <main className={classes.main}>
     <div className={classes.main__login}>
       <div className={classes.main__login_wrapper}>
         <form className={classes.main__login_wrapper__form}>
