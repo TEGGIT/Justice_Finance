@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import classes from './Profile.module.scss'
@@ -7,6 +7,7 @@ import Input from "../UI/Input/Input";
 
 const Profile = () => {
   const user = JSON.parse(localStorage.getItem('USERS_DATA'));
+  const [name, setName] = useState([user[0].name])
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -23,7 +24,7 @@ const Profile = () => {
             <p>Информация о вашей учетной записи</p>
           </div>
           <div className={classes.main_wrapper__content__input}>
-            <Input placeholder="Имя, Фамилия"  defaultValue={user[0].name} styles={classes.main_wrapper__content__input_input}/>
+            <Input placeholder="Имя, Фамилия"  defaultValue={user[0].name} value={name} onChange={(e) => setName(e.target.value)} styles={classes.main_wrapper__content__input_input}/>
             <Input placeholder="Email" type='email' defaultValue={user[0].email}
                    styles={classes.main_wrapper__content__input_input}/>
             <Input placeholder="Город" styles={classes.main_wrapper__content__input_input}/>
