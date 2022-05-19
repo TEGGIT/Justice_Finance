@@ -14,6 +14,8 @@
     display: flex;
     padding-top: 48px;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 
     &__rate {
       padding: 16px;
@@ -23,7 +25,59 @@
       gap: 16px;
 
 
-      &__count{
+
+
+
+
+      &__positive{
+        display: flex;
+        align-items: center;
+        gap: 59px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        color: #363636;
+
+
+        &_plus{
+          width: 100%;
+          font-family: 'Inter', sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 16px;
+          color: #84A500;
+        }
+      }
+
+
+      &_wrapper{
+        display: flex;
+        flex-direction: column;
+      }
+
+
+      &__country{
+        display: flex;
+        align-items: center;
+        gap: 49px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+        color: #363636;
+    &_percent{
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      color: #84A500;
+
+    }
      }
       &_img{
         padding: 8px;

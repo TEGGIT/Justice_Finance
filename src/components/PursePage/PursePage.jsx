@@ -64,7 +64,7 @@ const PursePage = () => {
             Кошельки
           </h1>
         </div>
-        {wallets.length ? (
+        {wallet.length ? (
             <div className={classes.main__wrapper__wallet_container__wallets}>
               {wallet.map((wallet) => {
                 return <Wallet countryName={wallet.currency}

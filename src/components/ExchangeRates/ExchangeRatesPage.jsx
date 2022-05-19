@@ -8,6 +8,7 @@ import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
 import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import arrowUp from '../../assets/image/ArrowUp.svg'
 import Charts from "./Chart/Chart";
+import SliderRate from "./SliderRate/SliderRate";
 
 const ExchangeRatesPage = () => {
   return (
@@ -23,14 +24,9 @@ const ExchangeRatesPage = () => {
               </div>
               <div className={classes.main_wrapper__slider}>
                 <SlideButton img={arrowButtonLeft}/>
-                <div className={classes.main_wrapper__slider__rate}>
-                 <img src={arrowUp} alt="Положительно" className={classes.main_wrapper__slider__rate_img}/>
-
-                  <div className={classes.main_wrapper__slider__rate__count}>
-                    <p>USD / RUB</p>
-                    <p>83,6055</p>
-                  </div>
-                </div>
+                 <SliderRate/>
+                  <SliderRate/>
+                <SliderRate/>
                 <SlideButton img={arrowButtonRight}/>
               </div>
               <Charts/>

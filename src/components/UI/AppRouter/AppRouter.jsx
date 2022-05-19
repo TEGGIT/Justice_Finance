@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
+import {Context} from '../../../context'
 import {privateRoutes, publicRoutes} from "../../../router/routes";
-
 const AppRouter = () => {
-  const aut =  JSON.parse(localStorage.getItem('LOGIN_USER'))
-
+  const {aut} = useContext(Context)
   return (
     <Routes>
       {aut ? (
