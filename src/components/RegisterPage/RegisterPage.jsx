@@ -31,6 +31,9 @@ const RegisterPage = () => {
     email: email,
     password: password,
     wallets: [],
+    city:'',
+    dataBirthday:'',
+    number:''
   }
   const nameErrorChecker = () => {
     const nameChecker = new RegExp(`^(?=.*[а-я])(?=.*[А-Я])(?=.{${2},})`)
