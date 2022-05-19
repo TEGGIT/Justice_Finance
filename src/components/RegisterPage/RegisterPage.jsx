@@ -64,16 +64,12 @@ const RegisterPage = () => {
     }
   }
 
-
-
-
-
   const registration = () => {
     if (newUser) {
       storageUsers.push(newUser)
       localStorage.setItem('USERS_DATA', JSON.stringify(storageUsers));
       localStorage.setItem('LOGIN_DATA', JSON.stringify(newUser))
-      navigate("/exchange-rates-page", {replace: true});
+      navigate("/", {replace: true});
     } else {
     }
   }
