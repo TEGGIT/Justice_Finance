@@ -10,6 +10,7 @@ import arrowUpMin from '../../assets/image/ArrowUpMin.svg'
 import Charts from "./Chart/Chart";
 import SliderRate from "./SliderRate/SliderRate";
 import ButtonMui from "../MUI/Button/ButtonMui";
+import {NavLink} from "react-router-dom";
 
 const ExchangeRatesPage = () => {
   return (
@@ -40,13 +41,16 @@ const ExchangeRatesPage = () => {
                 US Dollar/Russian Ruble
               </p>
             </div>
-            <ButtonMui
-              padding='12px 24px'
-              text="Обменять"
-              color='white'
-              background='#363636'
-              hoverBackground='#363636'
-            />
+            <NavLink to='/currency-exchange'>
+              <ButtonMui
+                padding='12px 24px'
+                text="Обменять"
+                color='white'
+                background='#363636'
+                hoverBackground='#363636'
+              />
+            </NavLink>
+
           </div>
           <div className={classes.main_wrapper__chart}>
             <div className={classes.main_wrapper__chart_price}>
