@@ -26,7 +26,7 @@ const LogPage = () => {
         navigate("/exchange-rates-page", {replace: true});
         localStorage.setItem('LOGIN_USER', JSON.stringify(user))
       } else {
-        console.log('error')
+        alert('Такого пользователя не существует')
       }
     })
   }

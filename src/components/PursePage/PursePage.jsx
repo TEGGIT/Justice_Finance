@@ -4,11 +4,32 @@ import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import waller from '../../assets/image/wallet.svg'
 import Input from "../UI/Input/Input";
+import Modal from 'react-modal';
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Wallet from "../ProfileBar/WalletBar/Wallet";
+import walletIcon from '../../assets/image/WalletIcon.svg'
+import close from '../../assets/image/Close.svg'
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex:'3',
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'flex-end'
+  },
+};
 
 const PursePage = () => {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
   const [currency, setСurrency] = React.useState('');
   const [numberPurse, setNumberPurse] = useState('')
@@ -36,6 +57,7 @@ const PursePage = () => {
     } else {
       const updateStorage = storage.map(user => {
         if (user.email === currentUser[0].email) {
+          setIsOpen(true)
           const updateUser = {
             ...user,
             wallets: [...user.wallets, {currency, numberPurse, sum:0}]
@@ -50,6 +72,14 @@ const PursePage = () => {
     }
 
   }
+  useEffect(() => {
+    if (modalIsOpen) {
+      setTimeout(() => {
+        setIsOpen(false)
+      }, 3000)
+    }
+  },[modalIsOpen])
+
 
   const handleChange = (event) => {
     setСurrency(event.target.value);
@@ -64,12 +94,28 @@ const PursePage = () => {
             Кошельки
           </h1>
         </div>
+        <Modal style={customStyles}
+               isOpen={modalIsOpen}
+        >
+          <img src={close} alt='закрыть' className={classes.img} onClick={()=>setIsOpen(false)}/>
+          <div className={classes.modal_wrapper}>
+          <div className={classes.modal_wrapper__content}>
+            <img src={walletIcon} alt='Иконка кошелька'/>
+            <p className={classes.modal_wrapper__content_text_main}>
+              Кошелек успешно добавлен
+            </p>
+            <p className={classes.modal_wrapper__content_text_bottom}>Теперь вы можете совершать любые операции.</p>
+          </div>
+        </div>
+        </Modal>
         {wallet.length ? (
             <div className={classes.main__wrapper__wallet_container__wallets}>
               {wallet.map((wallet) => {
                 return <Wallet countryName={wallet.currency}
                                country={wallet.currency}
                                count={wallet.sum}
+                               countryCount={wallet.currency}
+                               countryCounter={wallet.currency}
                 />
               })}
             </div>
