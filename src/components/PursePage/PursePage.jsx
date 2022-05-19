@@ -30,6 +30,7 @@ const customStyles = {
 
 const PursePage = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
   const [currency, setСurrency] = React.useState('');
   const [numberPurse, setNumberPurse] = useState('')
@@ -49,11 +50,11 @@ const PursePage = () => {
     localStorage.setItem('USERS_DATA', JSON.stringify(storage))
   }, [storage])
 
-  const addPurse = () => {
-    const isFindWallet = storage.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
+  const isFindWallet = storage.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
 
+  const addPurse = () => {
     if (isFindWallet){
-      console.log('кошелёк с такой валютой уже существует')
+      setModalErrorIsOpen(true)
     } else {
       const updateStorage = storage.map(user => {
         if (user.email === currentUser[0].email) {
@@ -80,6 +81,14 @@ const PursePage = () => {
     }
   },[modalIsOpen])
 
+  useEffect(() => {
+    if (modalErrorIsOpen){
+      setTimeout(() => {
+        setModalErrorIsOpen(false)
+      }, 3000)
+    }
+  })
+
 
   const handleChange = (event) => {
     setСurrency(event.target.value);
@@ -94,20 +103,37 @@ const PursePage = () => {
             Кошельки
           </h1>
         </div>
-        <Modal style={customStyles}
-               isOpen={modalIsOpen}
-        >
-          <img src={close} alt='закрыть' className={classes.img} onClick={()=>setIsOpen(false)}/>
-          <div className={classes.modal_wrapper}>
-          <div className={classes.modal_wrapper__content}>
-            <img src={walletIcon} alt='Иконка кошелька'/>
-            <p className={classes.modal_wrapper__content_text_main}>
-              Кошелек успешно добавлен
-            </p>
-            <p className={classes.modal_wrapper__content_text_bottom}>Теперь вы можете совершать любые операции.</p>
-          </div>
-        </div>
-        </Modal>
+        {!modalErrorIsOpen ? (
+            <Modal style={customStyles}
+                   isOpen={modalIsOpen}
+            >
+              <img src={close} alt='закрыть' className={classes.img} onClick={()=>setIsOpen(false)}/>
+              <div className={classes.modal_wrapper}>
+                <div className={classes.modal_wrapper__content}>
+                  <img src={walletIcon} alt='Иконка кошелька'/>
+                  <p className={classes.modal_wrapper__content_text_main}>
+                    Кошелек успешно добавлен
+                  </p>
+                  <p className={classes.modal_wrapper__content_text_bottom}>Теперь вы можете совершать любые операции.</p>
+                </div>
+              </div>
+            </Modal>
+
+        ) : (
+            <Modal style={customStyles}
+                   isOpen={modalErrorIsOpen}
+            >
+              <img src={close} alt='закрыть' className={classes.img} onClick={()=>setModalErrorIsOpen(false)}/>
+              <div className={classes.modal_wrapper}>
+                <div className={classes.modal_wrapper__content}>
+                  <p className={classes.modal_wrapper__content_text_main}>
+                    Кошелек с такой валютой уже существует
+                  </p>
+                </div>
+              </div>
+            </Modal>
+        )}
+
         {wallet.length ? (
             <div className={classes.main__wrapper__wallet_container__wallets}>
               {wallet.map((wallet) => {
