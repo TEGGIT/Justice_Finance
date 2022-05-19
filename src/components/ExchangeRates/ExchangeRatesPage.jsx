@@ -7,6 +7,8 @@ import SlideButton from "../UI/SlideButton/SlideButton";
 import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
 import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import arrowUp from '../../assets/image/ArrowUp.svg'
+import Charts from "./Chart/Chart";
+
 const ExchangeRatesPage = () => {
   return (
       <>
@@ -31,6 +33,7 @@ const ExchangeRatesPage = () => {
                 </div>
                 <SlideButton img={arrowButtonRight}/>
               </div>
+              <Charts/>
             </main>
             <ProfileBar/>
           </div>
