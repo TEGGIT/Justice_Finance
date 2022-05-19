@@ -10,6 +10,7 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 import Wallet from "../ProfileBar/WalletBar/Wallet";
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
+import {NavLink , useNavigate} from "react-router-dom";
 const customStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -35,9 +36,13 @@ const PursePage = () => {
   const [currency, setСurrency] = React.useState('');
   const [numberPurse, setNumberPurse] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
-  const [currentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
+  const navigate = useNavigate()
+
+
+  const [sumWallets] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
   const wallets = storage.map((item) => item.wallets)
   const wallet = wallets[0]
+  const currentSumWallet = sumWallets.wallets
   useEffect(() => {
     if (!numberPurse || !currency){
       setIsDisabledBtn(true)
@@ -57,7 +62,7 @@ const PursePage = () => {
       setModalErrorIsOpen(true)
     } else {
       const updateStorage = storage.map(user => {
-        if (user.email === currentUser[0].email) {
+        if (user.email === sumWallets[0].email) {
           setIsOpen(true)
           const updateUser = {
             ...user,
@@ -93,6 +98,10 @@ const PursePage = () => {
   const handleChange = (event) => {
     setСurrency(event.target.value);
   };
+
+  const walletLink = (wallet) => {
+    navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
+  }
 
   return (
     <main className={classes.main}>
@@ -137,12 +146,15 @@ const PursePage = () => {
         {wallet.length ? (
             <div className={classes.main__wrapper__wallet_container__wallets}>
               {wallet.map((wallet) => {
-                return <Wallet countryName={wallet.currency}
+                return<Wallet countryName={wallet.currency}
                                country={wallet.currency}
-                               count={wallet.sum}
+                               count={currentSumWallet[0].sum}
                                countryCount={wallet.currency}
                                countryCounter={wallet.currency}
+                              onClick={() => walletLink(wallet)}
+
                 />
+
               })}
             </div>
         ): (

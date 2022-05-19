@@ -1,21 +1,21 @@
 import {BrowserRouter} from "react-router-dom";
-import {Context} from './context'
+import {AuthContext} from './context'
 import './App.css';
 import AppRouter from "./components/UI/AppRouter/AppRouter";
 
 function App() {
-  const aut = () => {
-    JSON.parse(localStorage.getItem('LOGIN_USER'))
-  }
+    const aut = () => {
+        JSON.parse(localStorage.getItem('LOGIN_USER'))
+    }
   return (
     <div className="App">
-     <Context.Provider value={{
+     <AuthContext.Provider value={{
        aut
      }}>
       <BrowserRouter>
         <AppRouter/>
       </BrowserRouter>
-    </Context.Provider>
+    </AuthContext.Provider>
     </div>
 
   );
