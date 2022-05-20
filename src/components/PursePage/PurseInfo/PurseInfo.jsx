@@ -27,8 +27,6 @@ const PurseInfo = () => {
             if (wallet.currency === currentWallet.currency) wallet.sum = Number(wallet.sum) + Number(sum)
             return wallet
         })
-        localStorage.setItem('LOGIN_USER', JSON.stringify(updateCurrentUser))
-
     }
 
     return (
