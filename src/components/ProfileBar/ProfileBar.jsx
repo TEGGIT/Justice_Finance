@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from './ProfileBar.module.scss'
 import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
@@ -6,17 +6,15 @@ import transactions from '../../assets/image/transaction.svg'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 import Wallet from "./WalletBar/Wallet";
+import {useStateContext} from "../../context/stateContext";
 
 const ProfileBar = () => {
     const user = JSON.parse(localStorage.getItem('USERS_DATA'));
-    const [walletsArray] = useState(JSON.parse(localStorage.getItem('USERS_DATA')))
+    const [walletsArray] = useState(JSON.parse(localStorage.getItem('LOGIN_USER')))
     const [sumWallet] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
-
     const wallets = walletsArray.map((item) => item.wallets)
     const wallet = wallets[0]
-    const currentSumWallet = sumWallet.wallets
-
-
+    const currentSumWallet = sumWallet[0].wallets.find((wallet) => wallet.sum)
     return (
         <div className={classes.profile}>
             <div className={classes.profile_wrapper}>
@@ -29,10 +27,12 @@ const ProfileBar = () => {
                     {wallet.length ? (
                         <>
                             {wallet.map((wallet) => {
-                                return <Wallet countryName={wallet.currency}
-                                               country={wallet.currency}
-                                               count={currentSumWallet[0].sum}
-                                               countryCounter={wallet.currency}
+                                return <Wallet
+                                  key={wallet.currency}
+                                  countryName={wallet.currency}
+                                  country={wallet.currency}
+                                  // count={currentSumWallet.sum}
+                                  countryCounter={wallet.currency}
                                 />
                             })}
 

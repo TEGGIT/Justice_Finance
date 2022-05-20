@@ -8,11 +8,14 @@ import checklist from '../../../assets/image/Checklist.svg'
 import logOut from '../../../assets/image/LogOut.svg'
 import ButtonMui from "../../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
+import {useStateContext} from "../../../context/stateContext";
 
 const NavBarLinks = () => {
+  const {onLogout} = useStateContext()
 
-  const clear = () =>{
-      localStorage.removeItem('LOGIN_USER')
+  const clear = () => {
+    localStorage.removeItem('LOGIN_USER')
+    onLogout()
   }
   const item = [
     {
@@ -50,8 +53,8 @@ const NavBarLinks = () => {
 
         {item.map((items) => {
 
-          return <NavLink to={`${items.pass}`}>
-          <ButtonMui text={items.text}
+          return <NavLink  key={items.pass} to={`${items.pass}`}>
+          <ButtonMui  text={items.text}
                             img={items.img}
                             padding="12px 61px 12px 8px"
                             gap='8px'

@@ -7,6 +7,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
+import {useStateContext} from "../../context/stateContext";
 
 
 const LogPage = () => {
@@ -19,19 +20,18 @@ const LogPage = () => {
   const user = JSON.parse(localStorage.getItem('USERS_DATA'))
   const navigate = useNavigate();
 
+  const {onLogin} = useStateContext()
 
   const checkUser = () => {
-    user.map(item => {
-      if (email === item.email && password === item.password) {
-        navigate("/exchange-rates-page", {replace: true});
-        localStorage.setItem('LOGIN_USER', JSON.stringify(user))
-      } else {
-        alert('Такого пользователя не существует')
-      }
-    })
-
+    const isValid = !!user.find(item => email === item.email && password === item.password)
+    if (isValid) {
+      navigate("/exchange-rates-page", {replace: true});
+      localStorage.setItem('LOGIN_USER', JSON.stringify(user))
+      onLogin()
+    } else {
+      alert('Такого пользователя не существует')
+    }
   }
-
 
   const checkEmail = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
@@ -50,6 +50,7 @@ const LogPage = () => {
       setIsPasswordError(false)
     }
   }
+
   useEffect(() => {
 
      if (!email || !password || isEmailError || isPasswordError){
@@ -59,11 +60,10 @@ const LogPage = () => {
      }
   }, [email, password, isEmailError, isPasswordError])
 
-
-
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+
   return (
       <main className={classes.main}>
     <div className={classes.main__login}>

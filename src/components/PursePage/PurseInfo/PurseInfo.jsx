@@ -8,26 +8,28 @@ import Wallet from "../../ProfileBar/WalletBar/Wallet";
 import banner from '../../../assets/image/Banner.png'
 import Input from "../../UI/Input/Input";
 import {NavLink, useLocation} from "react-router-dom";
+import {useStateContext} from "../../../context/stateContext";
 
 const PurseInfo = () => {
     const location = useLocation()
-    const [currentUser] = JSON.parse(localStorage.getItem('USERS_DATA'))
+    const [currentyUser] = useState(JSON.parse(localStorage.getItem('USERS_DATA')))
     const [sum, setSum] = useState('')
-    const currentWallet = currentUser.wallets.find((wallet) => `#${wallet.currency}` === location.hash)
+    const currentWallet = currentyUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
     const [sumWallets] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
-    const currentSumWallet = sumWallets.wallets
+    const currentSumWallet = sumWallets[0].wallets[0]
+
 
     const deleteWallet = () => {
     }
 
     const addSumWallet = () => {
-        (currentUser.wallets.map((wallet) => {
+        const updateCurrentUser = currentyUser[0].wallets.map((wallet) => {
             if (wallet.currency === currentWallet.currency) wallet.sum = Number(wallet.sum) + Number(sum)
             return wallet
-        }))
-        localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
-    }
+        })
+        localStorage.setItem('LOGIN_USER', JSON.stringify(updateCurrentUser))
 
+    }
 
     return (
         <main className={classes.main}>
@@ -39,8 +41,12 @@ const PurseInfo = () => {
                             <img src={arrowBack} alt='Назад'/>
                         </NavLink>
                         <h1 className={classes.main_wrapper__title_text}>
-                            {currentWallet.currency} / <span
-                            className={classes.main_wrapper__title_text_number}>{`#${currentWallet.numberPurse}`}</span>
+                            {currentWallet.currency}
+
+                            <span
+                            className={classes.main_wrapper__title_text_number}>
+                                {`#${currentWallet.numberPurse}`}
+                            </span>
                         </h1>
                     </div>
                     <ButtonMui
@@ -56,7 +62,7 @@ const PurseInfo = () => {
                     />
                 </div>
                 <div className={classes.main_wrapper__purse}>
-                    <Wallet countryName='RUB' country='RUB' count={currentSumWallet[0].sum} countryCounter='RUB'/>
+                    <Wallet countryName='RUB' country='RUB' count={currentSumWallet.sum} countryCounter='RUB'/>
                     <img src={banner} alt='баннер'/>
                 </div>
                 <div className={classes.main_wrapper__replenishment}>
