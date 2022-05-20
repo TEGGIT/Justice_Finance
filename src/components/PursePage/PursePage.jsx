@@ -33,7 +33,6 @@ const customStyles = {
 const PursePage = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
-  const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
   const [currency, setСurrency] = React.useState('');
   const {currentUser, changeCurrentUser} = useStateContext()
   const [numberPurse, setNumberPurse] = useState('')
@@ -41,7 +40,6 @@ const PursePage = () => {
   const navigate = useNavigate()
   const wallets = currentUser[0].wallets
   const currentSumWallet = wallets.sum
-  console.log(currentUser)
 
 
   useEffect(() => {
@@ -59,15 +57,15 @@ const PursePage = () => {
     if (isFindWallet) {
       setModalErrorIsOpen(true)
     } else {
-      const {wallets} = currentUser[0]
+      const wallets = currentUser[0]
 
-      const updateWallets = [wallets.wallets, {currency, numberPurse, sum: 0}]
-      console.log(...updateWallets)
-      // changeCurrentUser([{
-      //   ...currentUser,
-      //   wallets: updateWallets
-      // }
-      // ])
+      console.log(wallets)
+
+
+      const updateWallets = {...wallets, wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]}
+      console.log(currentUser)
+
+      changeCurrentUser([updateWallets])
 
   }}
     useEffect(() => {
@@ -143,7 +141,7 @@ const PursePage = () => {
                   key={wallet.currency}
                   countryName={wallet.currency}
                   country={wallet.currency}
-                  count={currentSumWallet.sum}
+                  // count={currentSumWallet.sum}
                   countryCount={wallet.currency}
                   countryCounter={wallet.currency}
                   onClick={() => walletLink(wallet)}
