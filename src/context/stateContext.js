@@ -25,7 +25,7 @@ export const StateProvider = ({children}) => {
     localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
 
     const updateUserData = userData.map((user) => {
-      if (user.email === currentUser.email) {
+      if (user === currentUser) {
         return currentUser
       } else {
         return user
