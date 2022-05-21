@@ -42,8 +42,8 @@ const PursePage = () => {
     const navigate = useNavigate()
 
     const wallets = [...currentUser]
-    const currentWallet = wallets[0].wallets[0]
 
+    const currentWallet = wallets[0].wallets
     useEffect(() => {
         if (!numberPurse || !currency) {
             setIsDisabledBtn(true)
@@ -59,13 +59,13 @@ const PursePage = () => {
         if (isFindWallet) {
             setModalErrorIsOpen(true)
         } else {
+            setIsOpen(true)
             const wallets = currentUser[0]
 
             const updateWallets = {
                 ...wallets,
                 wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]
             }
-            console.log(currentUser)
 
             changeCurrentUser([updateWallets])
 
@@ -139,9 +139,9 @@ const PursePage = () => {
                     </Modal>
                 )}
 
-                {wallets.length ? (
+                {currentWallet.length ? (
                 <div className={classes.main__wrapper__wallet_container__wallets}>
-                    {wallets.map((wallet) => (
+                    {currentWallet.map((wallet) => (
                     <Wallet
                         key={wallet.currency}
                         countryName={wallet.currency}

@@ -7,26 +7,35 @@ import ButtonMui from "../../MUI/Button/ButtonMui";
 import Wallet from "../../ProfileBar/WalletBar/Wallet";
 import banner from '../../../assets/image/Banner.png'
 import Input from "../../UI/Input/Input";
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../../context/stateContext";
 
 const PurseInfo = () => {
     const location = useLocation()
-    const [currentyUser] = useState(JSON.parse(localStorage.getItem('USERS_DATA')))
+    const navigate = useNavigate()
+    const {currentUser, changeCurrentUser} = useStateContext()
     const [sum, setSum] = useState('')
-    const currentWallet = currentyUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
-    const [sumWallets] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')))
-    const currentSumWallet = sumWallets[0].wallets[0]
+    const currentWallet = currentUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
 
 
     const deleteWallet = () => {
+        const filteredWalletStorage = currentUser[0].wallets.filter((wallet) => wallet.currency !== currentWallet.currency)
+        navigate("/purse-page", {replace: true});
+        changeCurrentUser(filteredWalletStorage)
     }
-
     const addSumWallet = () => {
-        const updateCurrentUser = currentyUser[0].wallets.map((wallet) => {
-            if (wallet.currency === currentWallet.currency) wallet.sum = Number(wallet.sum) + Number(sum)
+        const newWalletStorage = currentUser[0].wallets.map((wallet) => {
+            if (wallet.currency === currentWallet.currency)
+                wallet.sum =  +currentWallet.sum + +sum
+            console.log(wallet.sum)
             return wallet
         })
+        const updatedUserWallet = {
+            ...currentUser[0],
+            wallets: newWalletStorage
+        }
+        console.log(currentUser[0].wallets)
+        changeCurrentUser([updatedUserWallet])
     }
 
     return (
@@ -60,7 +69,7 @@ const PurseInfo = () => {
                     />
                 </div>
                 <div className={classes.main_wrapper__purse}>
-                    <Wallet countryName='RUB' country='RUB' count={currentSumWallet.sum} countryCounter='RUB'/>
+                    <Wallet countryName={currentWallet.currency} country={currentWallet.currency} count={currentWallet.sum} countryCounter={currentWallet.currency}/>
                     <img src={banner} alt='баннер'/>
                 </div>
                 <div className={classes.main_wrapper__replenishment}>
