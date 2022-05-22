@@ -1,8 +1,8 @@
 .profile {
   display: flex;
   flex-direction: column;
-  width: 23%;
   height: 100vh;
+  align-items: center;
 
 
 
@@ -11,6 +11,7 @@
     flex-direction: column;
     padding: 32px;
     border-left: 1px solid #F3F3F3;
+    align-items: center;
 
 
 
@@ -28,6 +29,11 @@
       line-height: 24px;
       color: #363636;
 
+
+
+      &_name{
+        width: 140px;
+      }
     }
 
     &__balance {

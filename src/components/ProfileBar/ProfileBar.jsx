@@ -28,7 +28,7 @@ const ProfileBar = () => {
           <div className={classes.profile_wrapper__avatar}>
             <img src={avatar} alt='аватар'/>
 
-            <p>{currentUser[0].name}</p>
+            <p className={classes.profile_wrapper__avatar_name}>{currentUser[0].name}</p>
 
           </div>
           <div className={classes.profile_wrapper__balance}>
@@ -64,7 +64,7 @@ const ProfileBar = () => {
           </div>
           <div className={classes.profile_wrapper__transactions}>
             <p>Последние транзацкции </p>
-            {test ? (
+            {!test ? (
 
                 <div className={classes.profile_wrapper__transactions__history}>
                 <img src={transactions} alt="Транзакции"/>
@@ -75,7 +75,7 @@ const ProfileBar = () => {
 
                 <div className={classes.profile_wrapper__transactions__history_actual}>
                   {transaction.map((item)=> (
-                      <p>2</p>
+                      2
                   ))}
                 </div>
 
