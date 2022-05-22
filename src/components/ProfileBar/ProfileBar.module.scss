@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 23%;
   height: 100vh;
 
 
@@ -69,6 +69,8 @@
 
       &__history {
         margin-top: 24px;
+        max-height: 257px;
+        overflow: hidden;
         border: 1px solid #F1F1F1;
         color: #848484;
         display: flex;
@@ -77,6 +79,19 @@
         padding: 49px 48px 49px 49px;
         gap: 1.25rem;
         font-size: 14px;
+
+        &_actual{
+          max-height: 257px;
+          overflow: hidden;
+          border: 1px solid #F1F1F1;
+          color: #848484;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 49px 48px 49px 49px;
+          gap: 1.25rem;
+          font-size: 14px;
+        }
       }
     }
   }

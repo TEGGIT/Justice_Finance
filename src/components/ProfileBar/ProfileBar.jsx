@@ -18,7 +18,9 @@ const ProfileBar = () => {
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
+  const transaction = currentUser[0].transaction
 
+  const test = true
   return (
 
       <div className={classes.profile}>
@@ -62,10 +64,23 @@ const ProfileBar = () => {
           </div>
           <div className={classes.profile_wrapper__transactions}>
             <p>Последние транзацкции </p>
-            <div className={classes.profile_wrapper__transactions__history}>
-              <img src={transactions} alt="Транзакции"/>
+            {test ? (
+
+                <div className={classes.profile_wrapper__transactions__history}>
+                <img src={transactions} alt="Транзакции"/>
               <p>Вы не совершили не одной транзакции</p>
-            </div>
+              </div>
+
+            ): (
+
+                <div className={classes.profile_wrapper__transactions__history_actual}>
+                  {transaction.map((item)=> (
+                      <p>2</p>
+                  ))}
+                </div>
+
+            )}
+
           </div>
         </div>
       </div>
