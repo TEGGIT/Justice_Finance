@@ -1,6 +1,6 @@
 import React from 'react';
 import './Input.module.scss'
-const Input = ({placeholder, value, styles, type, onChange, onBlur, name, defaultValue}) => {
+const Input = ({placeholder, value, styles, type, onChange, onBlur, name, defaultValue, readOnly}) => {
 
   return (
     <>
@@ -12,6 +12,7 @@ const Input = ({placeholder, value, styles, type, onChange, onBlur, name, defaul
                  onBlur={onBlur}
                  name={name}
                  defaultValue={defaultValue}
+                 readOnly={readOnly}
           />
     </>
 

@@ -9,6 +9,7 @@ import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 import image from "../../assets/image/IllustrationTwo.svg";
+import {useStateContext} from "../../context/stateContext";
 
 const RegisterPage = () => {
   const [checked, setChecked] = React.useState(false);
@@ -21,11 +22,14 @@ const RegisterPage = () => {
   const [repeatPasswordError, setRepeatPasswordError] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [storageUsers, setStorageUsers] = useState([])
+  const {currentUser, changeCurrentUser} = useStateContext()
+
   const navigate = useNavigate();
+
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+
   const newUser = {
     name: name,
     email: email,
@@ -33,7 +37,8 @@ const RegisterPage = () => {
     wallets: [],
     city:'',
     birthday:'',
-    number:''
+    number:'',
+    transaction:[]
   }
   const nameErrorChecker = () => {
     const nameChecker = new RegExp(`^(?=.*[а-я])(?=.*[А-Я])(?=.{${2},})`)
@@ -69,16 +74,18 @@ const RegisterPage = () => {
 
   const registration = () => {
     if (newUser) {
-      storageUsers.push(newUser)
-      localStorage.setItem('USERS_DATA', JSON.stringify(storageUsers));
+      currentUser.push(newUser)
+      localStorage.setItem('USERS_DATA', JSON.stringify(currentUser));
       navigate("/", {replace: true});
     } else {
     }
   }
+
   useEffect(() => {
     if (localStorage.getItem('USERS_DATA'))
-      setStorageUsers(JSON.parse(localStorage.getItem("USERS_DATA")));
+      changeCurrentUser(JSON.parse(localStorage.getItem("USERS_DATA")));
   }, []);
+
 
   useEffect(() => {
     if (!name || !email || !password || !repeatPassword || repeatPasswordError || !checked) {

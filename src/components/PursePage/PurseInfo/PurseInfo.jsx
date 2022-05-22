@@ -26,21 +26,20 @@ const PurseInfo = () => {
         }
         changeCurrentUser([updUser])
         navigate("/purse-page", {replace: true});
-
-
     }
+
     const addSumWallet = () => {
+
         const newWalletStorage = currentUser[0].wallets.map((wallet) => {
             if (wallet.currency === currentWallet.currency)
                 wallet.sum =  +currentWallet.sum + +sum
-            //console.log(wallet.sum)
             return wallet
         })
+
         const updatedUserWallet = {
             ...currentUser[0],
             wallets: newWalletStorage
         }
-        // console.log(currentUser[0].wallets)
         changeCurrentUser([updatedUserWallet])
     }
 

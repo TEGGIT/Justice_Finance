@@ -4,14 +4,15 @@ import ProfileBar from "../ProfileBar/ProfileBar";
 import classes from './Profile.module.scss'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Input from "../UI/Input/Input";
+import {useStateContext} from "../../context/stateContext";
 
 const Profile = () => {
-  const [storage, setStorage] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')))
-  const [name, setName] = useState(storage[0].name)
-  const [email, setEmail] = useState(storage[0].email)
-  const [city, setCity] = useState(storage[0].city)
-  const [birthday, setBirthday] = useState(storage[0].birthday)
-  const [number, setNumber] = useState(storage[0].number)
+  const {currentUser, changeCurrentUser} = useStateContext()
+  const [name, setName] = useState(currentUser[0].name)
+  const [email, setEmail] = useState(currentUser[0].email)
+  const [city, setCity] = useState(currentUser[0].city)
+  const [birthday, setBirthday] = useState(currentUser[0].birthday)
+  const [number, setNumber] = useState(currentUser[0].number)
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
@@ -20,7 +21,7 @@ const Profile = () => {
   const [isOldPassword, setIsOldPassword] = useState(true)
 
   const passwordChecker = () => {
-    if (storage[0].password === oldPassword){
+    if (currentUser[0].password === oldPassword){
       setIsOldPassword(false)
     }else{
       setIsOldPassword(true)
@@ -61,13 +62,10 @@ const Profile = () => {
    }
   },[name, email, city, birthday, number])
 
-  useEffect(() => {
-    localStorage.setItem('USERS_DATA', JSON.stringify(storage))
-  }, [storage])
 
   const changeProfile = () => {
-    const updateStorage = storage.map((item) => {
-      if (item.email === storage[0].email){
+    const updateStorage = currentUser.map((item) => {
+      if (item.email === currentUser[0].email){
         const updateUser = {
           ...item,
           email: email,
@@ -79,12 +77,12 @@ const Profile = () => {
         return updateUser
       }
     })
-    setStorage(updateStorage)
+    changeCurrentUser(updateStorage)
   }
 
   const changePassword = () => {
-    const updatePassword = storage.map((item) => {
-      if (item.email === storage[0].email){
+    const updatePassword = currentUser.map((item) => {
+      if (item.email === currentUser[0].email){
         const updatePassword = {
           ...item,
           email: email,
@@ -97,7 +95,7 @@ const Profile = () => {
         return updatePassword
       }
     })
-    setStorage(updatePassword)
+    changeCurrentUser(updatePassword)
   }
   return (
     <main className={classes.main}>

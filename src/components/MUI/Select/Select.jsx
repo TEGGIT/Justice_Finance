@@ -4,13 +4,16 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import {countryIcon} from "../../../mockdata/countryIcon";
 
 
-const SelectMui = ({selectValue, handleChangeSelect, minWidth}) => {
+const SelectMui = ({selectValue, handleChangeSelect, minWidth, name}) => {
+
   return (
+
       <Box sx={{minWidth}}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Выберите кошелек</InputLabel>
+          <InputLabel id="demo-simple-select-label">{name}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -18,11 +21,16 @@ const SelectMui = ({selectValue, handleChangeSelect, minWidth}) => {
             label="age"
             onChange={handleChangeSelect}
           >
-            <MenuItem value={'RUB'}>RUB</MenuItem>
-            <MenuItem value={'USD'}>USD</MenuItem>
-            <MenuItem value={'CNY'}>CNY</MenuItem>
-            <MenuItem value={'EUR'}>EUR</MenuItem>
-            <MenuItem value={'TRY'}>TRY</MenuItem>
+            {countryIcon.map(country => {
+              return <MenuItem
+                  key={country.currencyName}
+                  value={country.currencyName}>
+                <img
+                  src={country.icon} alt='Иконка'/>
+                {country.currencyName}</MenuItem>
+
+            })}
+
 
           </Select>
         </FormControl>

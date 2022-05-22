@@ -5,7 +5,7 @@ export const exchangeRates = [
     },
     {
         currencyName: 'USD',
-        rubleRatio: 61.88
+        rubleRatio: 83.8750
     },
     {
         currencyName: 'CNY',

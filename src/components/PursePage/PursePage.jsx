@@ -36,7 +36,6 @@ const PursePage = () => {
     const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
     const [currency, setСurrency] = React.useState('');
     const {currentUser, changeCurrentUser} = useStateContext()
-    const [currentUserNow, setCurrentUserNow] = useState({currency})
     const [numberPurse, setNumberPurse] = useState('')
     const [isDisabledBtn, setIsDisabledBtn] = useState(true)
     const navigate = useNavigate()
@@ -143,6 +142,7 @@ const PursePage = () => {
                 <div className={classes.main__wrapper__wallet_container__wallets}>
                     {currentWallet.map((wallet) => (
                     <Wallet
+                        pointer={{cursor:'pointer'}}
                         key={wallet.currency}
                         countryName={wallet.currency}
                         country={wallet.currency}
@@ -166,7 +166,7 @@ const PursePage = () => {
                         <p>Добавление кошелька</p>
                     </div>
                     <div className={classes.main__wrapper__wallet_container__add__select}>
-                        <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px'/>
+                        <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите кошелек'/>
                         <Input placeholder='# Номер кошелька' type='number'
                                styles={classes.main__wrapper__wallet_container__add__select_input}
                                value={numberPurse} onChange={(e) => {

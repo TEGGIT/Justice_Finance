@@ -5,7 +5,7 @@ export const StateContext = createContext(null)
 
 export const StateProvider = ({children}) => {
   const [isAuth, setIsAuth] = useState(() => JSON.parse(localStorage.getItem('AUTH')) ?? false)
-  const [currentUser, changeCurrentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')) ?? null)
+  const [currentUser, changeCurrentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')) ?? [])
   const [userData, changeUserData] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')) ?? [])
 
   const onLogin = useCallback(() => {
@@ -26,7 +26,7 @@ export const StateProvider = ({children}) => {
     localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
 
     const updateUserData = userData.map((user) => {
-      if (user === currentUser) {
+      if (user.email === currentUser.email) {
         return currentUser
       } else {
         return user

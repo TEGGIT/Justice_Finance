@@ -29,6 +29,9 @@
 
     &__balance {
       margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
       Font-family: 'Inter', sans-serif;
       font-style: normal;
       font-weight: 500;
@@ -46,6 +49,7 @@
         gap: 1.25rem;
         font-size: 14px;
         padding: 32px;
+
 
       }
     }
