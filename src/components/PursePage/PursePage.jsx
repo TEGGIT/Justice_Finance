@@ -10,7 +10,7 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 import Wallet from "../ProfileBar/WalletBar/Wallet";
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
-import {NavLink, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {useStateContext} from "../../context/stateContext";
 import {countryIcon} from "../../mockdata/countryIcon";
 

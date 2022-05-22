@@ -3,8 +3,16 @@ import classes from './TransactionsPage.module.scss'
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import TransactionStatus from "./TransactionStatus/TransactionStatus";
+import {useStateContext} from "../../context/stateContext";
+
 
 const TransactionsPage = () => {
+
+  const {currentUser} = useStateContext()
+  const transaction = [...currentUser]
+
+  const currentTransaction = transaction[0].transaction
+
   return (<main className={classes.main}>
     <NavBar/>
     <section className={classes.main__wrapper}>
@@ -15,7 +23,7 @@ const TransactionsPage = () => {
       </div>
       <div className={classes.main__wrapper__columns}>
         <p className={classes.main__wrapper__columns_title}>
-          12 апреля
+          23 мая
         </p>
         <p className={classes.main__wrapper__columns_title}>
           Обменяно
@@ -27,56 +35,21 @@ const TransactionsPage = () => {
           Статус
         </p>
       </div>
-      <TransactionStatus
-        exchangeValue='USD to RUB'
-        time='04:00'
-        changeValue='-123,02'
-        currency='USD'
-        plus='10 000'
-        currencyPlus='RUB'
-        styles={classes.main__wrapper__rows_info_status_text}
-        status='В обработке'
-      />
-      <TransactionStatus
-        exchangeValue='USD to RUB'
-        time='08:42'
-        changeValue='-123,02'
-        currency='USD'
-        plus='10 000'
-        currencyPlus='RUB'
-        styles={classes.main__wrapper__rows_info_status_text}
-        status='В обработке'
-      />
-      <TransactionStatus
-        exchangeValue='USD to RUB'
-        time='04:00'
-        changeValue='-123,02'
-        currency='USD'
-        plus='10 000'
-        currencyPlus='RUB'
-        styles={classes.main__wrapper__rows_info_status_text}
-        status='В обработке'
-      />
-      <TransactionStatus
-        exchangeValue='USD to RUB'
-        time='04:00'
-        changeValue='-123,02'
-        currency='USD'
-        plus='10 000'
-        currencyPlus='RUB'
-        styles={classes.main__wrapper__rows_info_status_text}
-        status='В обработке'
-      />
-      <TransactionStatus
-        exchangeValue='USD to RUB'
-        time='04:00'
-        changeValue='-123,02'
-        currency='USD'
-        plus='10 000'
-        currencyPlus='RUB'
-        styles={classes.main__wrapper__rows_info_status_text}
-        status='В обработке'
-      />
+      {currentTransaction.map((transactionItem)=> (
+
+          <TransactionStatus
+              exchangeValue= {`${transactionItem.give} to ${transactionItem.get}`}
+              time='10:00'
+              changeValue={`-${transactionItem.giveValue}`}
+              currency={`${transactionItem.give}`}
+              plus={`${transactionItem.getValue}`}
+              currencyPlus={`${transactionItem.get}`}
+              styles={classes.main__wrapper__rows_info_status_text}
+              status='Успешно'
+          />
+
+      ))}
+
 
 
 

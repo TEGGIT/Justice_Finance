@@ -20,20 +20,33 @@ const CurrencyExchange = () => {
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
   const {currentUser, changeCurrentUser} = useStateContext()
-
+  const [isDisabled, setIsDisabled] = useState(true)
 
   const addTransaction = () => {
     const transaction = currentUser[0]
+    const trans2 = transaction.wallets.map(item => item.currency===give ? {currency: item.currency, numberPurse: item.numberPurse, sum: item.sum-giveValue } : item)
     const updateTransaction = {
       ...transaction,
-      transaction: [...transaction.transaction, {get: get, give: give, giveValue: giveValue, getValue: getValue}]
+      transaction: [...transaction.transaction, {get: get, give: give, giveValue: giveValue, getValue: getValue}],
+      wallets: trans2
     }
+    console.log([updateTransaction])
+    setIsDisabled(true)
     changeCurrentUser([updateTransaction])
 
   }
 
   useEffect(() => {
     const wallet = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
+    wallet.length && (giveValue>wallet[0].sum
+    ||
+    Boolean(!get)
+    ||
+    Boolean(!give)
+    ||
+    Boolean(!giveValue)
+        ?
+        setIsDisabled(true) : setIsDisabled(false))
     exchangeRates.map((input) => {
       wallet.length
       &&
@@ -45,7 +58,7 @@ const CurrencyExchange = () => {
         setGetValue(((input.rubleRatio * giveValue)/output.rubleRatio).toFixed(2))
       })})
 
-  },[giveValue])
+  },[giveValue, getValue, get,give , isDisabled])
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -63,6 +76,8 @@ const CurrencyExchange = () => {
             <Input placeholder='Отдаю' type='number' styles={classes.main__wrapper__content__exchange__input}
                    onChange={(e)=> setGiveValue(e.target.value)}
                    value={giveValue}
+                   max='100000'
+
             />
 
             <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem' name='Выберите кошелек'
@@ -89,6 +104,7 @@ const CurrencyExchange = () => {
                        fontWeight='600'
                        fontSize='16px'
                        hoverBackground='#363636'
+                       disabled={isDisabled}
                        flexDirection='row-reverse'
                        onClick={addTransaction}
             />

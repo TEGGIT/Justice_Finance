@@ -5,10 +5,13 @@
   height: 100vh;
 
 
+
   &_wrapper {
     display: flex;
     flex-direction: column;
     padding: 32px;
+    border-left: 1px solid #F3F3F3;
+
 
 
     &__avatar {
