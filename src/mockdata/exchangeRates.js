@@ -17,6 +17,6 @@ export const exchangeRates = [
     },
     {
         currencyName: 'EUR',
-        rubleRatio: 65.30
+        rubleRatio: 90.30
     },
 ]

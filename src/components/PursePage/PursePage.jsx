@@ -12,6 +12,7 @@ import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
 import {NavLink, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../context/stateContext";
+import {countryIcon} from "../../mockdata/countryIcon";
 
 const customStyles = {
     overlay: {
@@ -166,7 +167,7 @@ const PursePage = () => {
                         <p>Добавление кошелька</p>
                     </div>
                     <div className={classes.main__wrapper__wallet_container__add__select}>
-                        <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите кошелек'/>
+                        <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите кошелек' array={countryIcon}/>
                         <Input placeholder='# Номер кошелька' type='number'
                                styles={classes.main__wrapper__wallet_container__add__select_input}
                                value={numberPurse} onChange={(e) => {

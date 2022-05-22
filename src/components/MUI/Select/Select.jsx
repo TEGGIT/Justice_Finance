@@ -4,11 +4,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {countryIcon} from "../../../mockdata/countryIcon";
 
-
-const SelectMui = ({selectValue, handleChangeSelect, minWidth, name}) => {
-
+const SelectMui = ({selectValue, handleChangeSelect, minWidth, name, array}) => {
+//country[`${image}`]
   return (
 
       <Box sx={{minWidth}}>
@@ -21,13 +19,13 @@ const SelectMui = ({selectValue, handleChangeSelect, minWidth, name}) => {
             label="age"
             onChange={handleChangeSelect}
           >
-            {countryIcon.map(country => {
+            {array.map(country => {
               return <MenuItem
-                  key={country.currencyName}
-                  value={country.currencyName}>
+                  key={country.currency}
+                  value={country.currency}>
                 <img
-                  src={country.icon} alt='Иконка'/>
-                {country.currencyName}</MenuItem>
+                  src={`./${country.currency}.svg`} alt='Иконка'/>
+                    {country.currency}</MenuItem>
 
             })}
 

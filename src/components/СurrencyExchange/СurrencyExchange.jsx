@@ -10,6 +10,10 @@ import {exchangeRates} from '../../mockdata/exchangeRates'
 import {useStateContext} from "../../context/stateContext";
 import wallet from "../ProfileBar/WalletBar/Wallet";
 
+import {countryIcon} from "../../mockdata/countryIcon";
+
+
+
 const CurrencyExchange = () => {
   const [give, setGive] = React.useState('');
   const [get, setGet] = React.useState('');
@@ -17,28 +21,27 @@ const CurrencyExchange = () => {
   const [getValue, setGetValue] = useState('')
   const {currentUser, changeCurrentUser} = useStateContext()
 
-  const wallets = [...currentUser]
 
   const transaction = () => {
-
   }
+
   useEffect(() => {
+    const wallet = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
 
 
+    exchangeRates.map((input) => {
 
-     exchangeRates.map((item) => {
-      if (item.currencyName === get){
-        console.log(get)
-        setGetValue(item.rubleRatio * giveValue)
+      wallet.length
+      &&
+      wallet[0].currency === input.currencyName
+      &&
+      exchangeRates.map( output => {
+        get === output.currencyName
+        &&
+        setGetValue(((input.rubleRatio * giveValue)/output.rubleRatio).toFixed(2))
+      })})
 
-      }
-      wallets[0].wallets.find((sum) => {
-         if (sum.currency === give){
-           console.log(sum.sum - 61 )
-         }
-       })
-    })
-  }, [giveValue])
+  },[giveValue])
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -57,7 +60,9 @@ const CurrencyExchange = () => {
                    onChange={(e)=> setGiveValue(e.target.value)}
                    value={giveValue}
             />
-            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem' name='Выберите кошелек'/>
+            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem' name='Выберите кошелек'
+                    array={currentUser[0].wallets}
+            />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Получаю' type='number' styles={classes.main__wrapper__content__exchange__input}
@@ -65,7 +70,9 @@ const CurrencyExchange = () => {
                    value={getValue}
                    readOnly={true}
             />
-            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem' name='Выберите валюту'/>
+            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem' name='Выберите валюту'
+                    array={countryIcon}
+                    />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <ButtonMui text="Обменять"
