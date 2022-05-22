@@ -22,15 +22,19 @@ const CurrencyExchange = () => {
   const {currentUser, changeCurrentUser} = useStateContext()
 
 
-  const transaction = () => {
+  const addTransaction = () => {
+    const transaction = currentUser[0]
+    const updateTransaction = {
+      ...transaction,
+      transaction: [...transaction.transaction, {get: get, give: give, giveValue: giveValue, getValue: getValue}]
+    }
+    changeCurrentUser([updateTransaction])
+
   }
 
   useEffect(() => {
     const wallet = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
-
-
     exchangeRates.map((input) => {
-
       wallet.length
       &&
       wallet[0].currency === input.currencyName
@@ -60,6 +64,7 @@ const CurrencyExchange = () => {
                    onChange={(e)=> setGiveValue(e.target.value)}
                    value={giveValue}
             />
+
             <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem' name='Выберите кошелек'
                     array={currentUser[0].wallets}
             />
@@ -85,8 +90,7 @@ const CurrencyExchange = () => {
                        fontSize='16px'
                        hoverBackground='#363636'
                        flexDirection='row-reverse'
-                       onClick={transaction}
-
+                       onClick={addTransaction}
             />
 
           </div>

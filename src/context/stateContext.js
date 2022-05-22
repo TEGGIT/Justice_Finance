@@ -22,7 +22,6 @@ export const StateProvider = ({children}) => {
   }, [isAuth])
 
   useEffect(() => {
-    console.log('Я отработал',currentUser)
     localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
 
     const updateUserData = userData.map((user) => {
