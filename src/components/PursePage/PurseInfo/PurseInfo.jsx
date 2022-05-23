@@ -34,12 +34,16 @@ const PurseInfo = () => {
     };
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
-
+    const [isDisabled, setIsDisabled] = useState(true)
     const location = useLocation()
     const navigate = useNavigate()
     const {currentUser, changeCurrentUser} = useStateContext()
     const [sum, setSum] = useState('')
     const currentWallet = currentUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
+    const [numberCard, setNumberCard] = useState('')
+    const [date, setDate] = useState('')
+    const [cvc, setCvc] = useState('')
+    const [ownerCard, setOwnerCard] = useState('')
 
 
     const deleteWallet = () => {
@@ -67,7 +71,13 @@ const PurseInfo = () => {
         setIsOpen(true)
         changeCurrentUser([updatedUserWallet])
     }
-
+    useEffect(() => {
+     if (!sum || !numberCard || !date || !cvc || !ownerCard){
+         setIsDisabled(true)
+     }else{
+         setIsDisabled(false)
+     }
+    },[sum, isDisabled, numberCard, date, cvc, ownerCard])
     return (
         <main className={classes.main}>
             <NavBar/>
@@ -125,16 +135,29 @@ const PurseInfo = () => {
                                onChange={(e) => setSum(e.target.value)}
                         />
                         <Input placeholder='Номер карты' type="number"
-                               styles={classes.main_wrapper__replenishment_wrapper_input}/>
+                               styles={classes.main_wrapper__replenishment_wrapper_input}
+                               value={numberCard}
+                               onChange={(e) => setNumberCard(e.target.value)}
+                        />
                         <Input placeholder='Даты' type="number"
-                               styles={classes.main_wrapper__replenishment_wrapper_input}/>
+                               styles={classes.main_wrapper__replenishment_wrapper_input}
+                               value={date}
+                               onChange={(e) => setDate(e.target.value)}
+                        />
                         <Input placeholder='CVC' type="number"
-                               styles={classes.main_wrapper__replenishment_wrapper_input}/>
+                               styles={classes.main_wrapper__replenishment_wrapper_input}
+                               value={cvc}
+                               onChange={(e) => setCvc(e.target.value)}
+                        />
                         <Input placeholder='Владелец карты' type="number"
-                               styles={classes.main_wrapper__replenishment_wrapper_input}/>
+                               styles={classes.main_wrapper__replenishment_wrapper_input}
+                               value={ownerCard}
+                               onChange={(e) => setOwnerCard(e.target.value)}
+                        />
                         <ButtonMui text="Пополнить кошелек"
                                    padding="15px 24px"
                                    background='#363636'
+                                   disabled={isDisabled}
                                    hoverBackground='#363636'
                                    color='#FFFFFF'
                                    fontSize='16px'
