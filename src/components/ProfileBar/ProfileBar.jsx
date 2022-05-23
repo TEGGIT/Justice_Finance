@@ -17,6 +17,7 @@ const ProfileBar = () => {
   const wallets = [...currentUser]
   const currentWallet = wallets[0].wallets
   const [x, setX] = useState(0)
+
   const moveBlockLeft = () => {
     setX(x + 20)
     if (x === 0) setX(0)
@@ -25,7 +26,6 @@ const ProfileBar = () => {
     setX(x - 20)
     if (x === -80) setX(0)
   }
-  console.log(x)
 
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});

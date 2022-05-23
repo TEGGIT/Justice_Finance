@@ -139,7 +139,6 @@ const RegisterPage = () => {
                   <Input placeholder="Имя, Фамилия" type='text'
                          styles={classes.input} onBlur={() => nameErrorChecker()} value={name}
                          onChange={(e) => setName(e.target.value)}/>
-                  <p className={classes.input_error_text}>Поле заполненно некорекктно</p>
                 </>
               ) : (
                 <Input placeholder="Имя, Фамилия" type='text'
@@ -150,7 +149,6 @@ const RegisterPage = () => {
                 <>
                   <Input placeholder='E-mail' styles={classes.input_error} type="email" value={email}
                          onChange={(e) => setEmail(e.target.value)} onBlur={emailErrorChecker}/>
-                  <p className={classes.input_error_text_email}>Поле заполненно некорекктно</p>
                 </>
               ) : (
                 <Input placeholder='E-mail' styles={classes.input} type="email" value={email}
@@ -161,7 +159,6 @@ const RegisterPage = () => {
                   <>
                     <Input placeholder='Пароль' styles={classes.input_error} type="password" value={password}
                            onChange={(e) => setPassword(e.target.value)} onBlur={passwordErrorChecker}/>
-                    <p className={classes.input_error_text_password}>Поле заполненно некорекктно</p>
                   </>
 
                 ) : (

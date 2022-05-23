@@ -24,21 +24,35 @@ const CurrencyExchange = () => {
 
   const addTransaction = () => {
     const transaction = currentUser[0]
-    const trans2 = transaction.wallets.map(item => item.currency===give ? {currency: item.currency, numberPurse: item.numberPurse, sum: item.sum-giveValue } : item)
+    const refreshWalletSum = transaction.wallets.map(item => {
+      if ( item.currency === give){
+        return {
+          ...item,
+          sum: item.sum - giveValue
+        }
+      }
+      if (item.currency === get){
+        return {
+          ...item,
+          sum: item.sum + +giveValue
+        }
+      }
+      return item
+    })
+
     const updateTransaction = {
       ...transaction,
-      transaction: [...transaction.transaction, {get: get, give: give, giveValue: giveValue, getValue: getValue}],
-      wallets: trans2
+      transaction: [...transaction.transaction, {get, give, giveValue, getValue}],
+      wallets: refreshWalletSum,
     }
-    console.log([updateTransaction])
     setIsDisabled(true)
     changeCurrentUser([updateTransaction])
 
   }
 
   useEffect(() => {
-    const wallet = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
-    wallet.length && (giveValue>wallet[0].sum
+    const walletGive = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
+    walletGive.length && (giveValue>walletGive[0].sum
     ||
     Boolean(!get)
     ||
@@ -48,9 +62,9 @@ const CurrencyExchange = () => {
         ?
         setIsDisabled(true) : setIsDisabled(false))
     exchangeRates.map((input) => {
-      wallet.length
+      walletGive.length
       &&
-      wallet[0].currency === input.currencyName
+      walletGive[0].currency === input.currencyName
       &&
       exchangeRates.map( output => {
         get === output.currencyName
@@ -76,7 +90,6 @@ const CurrencyExchange = () => {
             <Input placeholder='Отдаю' type='number' styles={classes.main__wrapper__content__exchange__input}
                    onChange={(e)=> setGiveValue(e.target.value)}
                    value={giveValue}
-                   max='100000'
 
             />
 
@@ -91,7 +104,7 @@ const CurrencyExchange = () => {
                    readOnly={true}
             />
             <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem' name='Выберите валюту'
-                    array={countryIcon}
+                    array={currentUser[0].wallets}
                     />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
