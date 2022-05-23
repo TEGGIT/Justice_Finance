@@ -7,9 +7,6 @@ import Input from "../UI/Input/Input";
 import Modal from 'react-modal';
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import SlideButton from "../UI/SlideButton/SlideButton";
-import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
-import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import Wallet from "../ProfileBar/WalletBar/Wallet";
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
@@ -98,9 +95,7 @@ const PursePage = () => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
 
-
   return (
-
     <main className={classes.main}>
       <NavBar/>
       <section className={classes.main__wrapper}>
@@ -110,8 +105,9 @@ const PursePage = () => {
           </h1>
         </div>
         {!modalErrorIsOpen ? (
-          <Modal style={customStyles}
-                 isOpen={modalIsOpen}
+          <Modal
+            style={customStyles}
+            isOpen={modalIsOpen}
           >
             <img src={close} alt='закрыть' className={classes.img} onClick={() => setIsOpen(false)}/>
             <div className={classes.modal_wrapper}>
@@ -156,12 +152,8 @@ const PursePage = () => {
                 countryCounter={wallet.currency}
                 onClick={() => walletLink(wallet)}
               />
-
-
             ))}
           </div>
-
-
         ) : (
           <div className={classes.main__wrapper__wallet_container}>
             <img src={waller} alt='Кошелек'/>

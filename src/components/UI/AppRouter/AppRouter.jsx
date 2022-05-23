@@ -7,40 +7,35 @@ const AppRouter = () => {
   const {isAuth} = useStateContext();
   return (
     <Routes>
-      {isAuth ? (
-        <>
-          {privateRoutes.map((route) =>
-
-            <Route
-              key={route.path}
-              element={route.element}
-              path={route.path}
-              exact={route.exact}
-            />
-          )}
-
-        </>
-
-
-      ) : (
-        <>
-          {publicRoutes.map((route) =>
-
-            <Route
-              element={route.element}
-              path={route.path}
-              exact={route.exact}
-
-            />
-          )}
-
-        </>
-      )}
+      {isAuth
+        ? (
+          <>
+            {privateRoutes.map((route) =>
+              <Route
+                key={route.path}
+                element={route.element}
+                path={route.path}
+                exact={route.exact}
+              />
+            )}
+          </>
+        )
+        : (
+          <>
+            {publicRoutes.map((route) =>
+              <Route
+                key={route.path}
+                element={route.element}
+                path={route.path}
+                exact={route.exact}
+              />
+            )}
+          </>
+        )}
       <Route
         path="*"
         element={<Navigate to="/" replace/>}
       />
-
     </Routes>
   );
 };

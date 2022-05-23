@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import classes from "./RegisterPage.module.scss";
+
+import {NavLink} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
-import google from "../../assets/image/google.svg";
-import github from "../../assets/image/github.svg";
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import {NavLink} from "react-router-dom";
-import image from "../../assets/image/IllustrationTwo.svg";
+
 import {useStateContext} from "../../context/stateContext";
+
+import classes from "./RegisterPage.module.scss";
+import image from "../../assets/image/IllustrationTwo.svg";
+import google from "../../assets/image/google.svg";
+import github from "../../assets/image/github.svg";
 
 const RegisterPage = () => {
   const [checked, setChecked] = React.useState(false);
