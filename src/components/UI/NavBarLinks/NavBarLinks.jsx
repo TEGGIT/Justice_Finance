@@ -56,7 +56,7 @@ const NavBarLinks = () => {
           return <NavLink  key={items.pass} to={`${items.pass}`}>
           <ButtonMui  text={items.text}
                             img={items.img}
-                            padding="12px 61px 12px 8px"
+                            padding="12px 0 12px 8px"
                             gap='8px'
                             background='#FFFFFF'
                             color="#363636"
