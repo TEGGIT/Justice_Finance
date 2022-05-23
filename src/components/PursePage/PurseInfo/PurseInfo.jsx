@@ -5,12 +5,36 @@ import ProfileBar from "../../ProfileBar/ProfileBar";
 import arrowBack from '../../../assets/image/Back.svg'
 import ButtonMui from "../../MUI/Button/ButtonMui";
 import Wallet from "../../ProfileBar/WalletBar/Wallet";
+import Modal from 'react-modal';
 import banner from '../../../assets/image/Banner.png'
 import Input from "../../UI/Input/Input";
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../../context/stateContext";
+import close from "../../../assets/image/Close.svg";
+import walletIcon from "../../../assets/image/WalletIcon.svg";
 
 const PurseInfo = () => {
+
+    const customStyles = {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            zIndex: '3',
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end'
+        },
+    };
+
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
     const location = useLocation()
     const navigate = useNavigate()
     const {currentUser, changeCurrentUser} = useStateContext()
@@ -40,6 +64,7 @@ const PurseInfo = () => {
             ...currentUser[0],
             wallets: newWalletStorage
         }
+        setIsOpen(true)
         changeCurrentUser([updatedUserWallet])
     }
 
@@ -61,6 +86,20 @@ const PurseInfo = () => {
                             </span>
                         </h1>
                     </div>
+                    <Modal style={customStyles}
+                           isOpen={modalIsOpen}
+                    >
+                        <img src={close} alt='закрыть' className={classes.img} onClick={() => setIsOpen(false)}/>
+                        <div className={classes.modal_wrapper}>
+                            <div className={classes.modal_wrapper__content}>
+                                <img src={walletIcon} alt='Иконка кошелька'/>
+                                <p className={classes.modal_wrapper__content_text_main}>
+                                    Пополнение прошло успешно
+                                </p>
+                                <p className={classes.modal_wrapper__content_text_bottom}>Вы успешно пополнили свой кошелек.</p>
+                            </div>
+                        </div>
+                    </Modal>
                     <ButtonMui
                         text="Удалить кошелёк"
                         padding='12px'

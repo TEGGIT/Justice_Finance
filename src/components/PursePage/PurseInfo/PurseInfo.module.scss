@@ -87,3 +87,33 @@
     }
   }
 }
+.modal_wrapper{
+  width: 284px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__content{
+    padding: 32px;
+    &_text_main{
+      padding-top: 32px;
+      padding-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: #363636;
+
+    }
+    &_text_bottom{
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #848484;
+    }
+  }
+
+}
