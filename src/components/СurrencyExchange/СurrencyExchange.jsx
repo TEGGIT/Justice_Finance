@@ -22,8 +22,12 @@ const CurrencyExchange = () => {
   const {currentUser, changeCurrentUser} = useStateContext()
   const [isDisabled, setIsDisabled] = useState(true)
 
+  const Data = new Date();
+  const Hour = Data.getHours();
+  const Minutes = Data.getMinutes();
   const addTransaction = () => {
     const transaction = currentUser[0]
+
     const refreshWalletSum = transaction.wallets.map(item => {
       if ( item.currency === give){
         return {
@@ -34,7 +38,7 @@ const CurrencyExchange = () => {
       if (item.currency === get){
         return {
           ...item,
-          sum: item.sum + +giveValue
+          sum: item.sum + +getValue
         }
       }
       return item
@@ -42,7 +46,7 @@ const CurrencyExchange = () => {
 
     const updateTransaction = {
       ...transaction,
-      transaction: [...transaction.transaction, {get, give, giveValue, getValue}],
+      transaction: [...transaction.transaction, {get,Hour, Minutes, give, giveValue, getValue}],
       wallets: refreshWalletSum,
     }
     setIsDisabled(true)

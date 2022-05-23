@@ -1,6 +1,10 @@
 .main {
   display: flex;
 
+  @media (max-width: 735px){
+    display: flex;
+    flex-direction: column;
+  }
 
   &__wrapper {
     display: flex;
@@ -13,22 +17,18 @@
     &__rows {
       display: flex;
       padding-top: 32px;
-      max-width:100%;
 
 
       &_info {
         display: flex;
         align-items: center;
         gap: 16px;
-        width: 100%;
 
 
         &_count {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding-right: 10%;
-          padding-left: 40px;
           border-right: 1px solid #F3F3F3;
           width: 100%;
 
@@ -44,9 +44,9 @@
             font-style: normal;
             font-weight: 500;
             font-size: 12px;
+            padding: 8px;
             line-height: 16px;
             color: rgba(132, 165, 0, 1);
-            padding: 8px;
             background: rgba(132, 165, 0, 0.1);
 
           }
@@ -56,8 +56,6 @@
           display: flex;
           align-items: center;
           gap: 8px;
-          padding-left: 40px;
-          padding-right: 10%;
           width: 100%;
 
 
@@ -67,9 +65,20 @@
         &_date_container {
           display: flex;
           flex-direction: column;
-          padding-right: 100px;
           border-right: 1px solid #F3F3F3;
           width: 200px;
+          @media (max-width: 735px){
+            width: 100px;
+          }
+          @media (max-width: 1510px){
+            width: 150px;
+          }
+          @media(max-width: 1188px){
+            width: 150px;
+          }
+          @media(max-width: 560px){
+            width: 100px;
+          }
 
 
 
@@ -96,20 +105,80 @@
 
     &__columns {
       display: flex;
-      gap: 28%;
-
       padding-bottom: 16px;
       border-bottom: 1px solid #F3F3F3;
+      @media (max-width: 735px){
+        display: flex;
+      }
 
-      &_title {
+      &_title_data {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;
+        width: 20px;
+        padding-right: 24%;
         font-size: 12px;
         line-height: 24px;
         color: #848484;
+        @media (max-width: 735px){
+          padding-right: 35%;
 
+        }
+      @media (max-width: 1750px){
+        padding-right: 30%;
+      }
+        @media(max-width: 1188px){
+          padding-right: 46%;
+        }
 
+      }
+
+      &_title_give{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        width: 20px;
+        padding-right: 35%;
+        font-size: 12px;
+        line-height: 24px;
+        color: #848484;
+        @media (max-width: 735px){
+          padding-right: 25%;
+        }
+        @media (max-width: 1750px){
+          padding-right: 30%;
+        }
+        @media(max-width: 1188px){
+          padding-right: 20%;
+        }
+      }
+      &_title_get{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        width: 20px;
+        padding-right: 37%;
+        font-size: 12px;
+        line-height: 24px;
+        color: #848484;
+        @media (max-width: 735px){
+          padding-right: 25%;
+        }
+        @media (max-width: 1750px){
+          padding-right: 35%;
+        }
+        @media(max-width: 1188px){
+          padding-right: 20%;
+        }
+      }
+      &_title_status{
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        width: 20px;
+        font-size: 12px;
+        line-height: 24px;
+        color: #848484;
       }
     }
 
@@ -129,3 +198,5 @@
     }
   }
 }
+
+

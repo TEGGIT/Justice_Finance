@@ -123,7 +123,7 @@ const PurseInfo = () => {
                     />
                 </div>
                 <div className={classes.main_wrapper__purse}>
-                    <Wallet countryName={currentWallet.currency} country={currentWallet.currency} count={currentWallet.sum} countryCounter={currentWallet.currency}/>
+                    <Wallet countryName={currentWallet.currency} country={currentWallet.currency} count={currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
                     <img src={banner} alt='баннер'/>
                 </div>
                 <div className={classes.main_wrapper__replenishment}>

@@ -105,8 +105,10 @@ const Profile = () => {
           <h1 className={classes.main_wrapper__title_text}>
             Мой профиль
           </h1>
+          <div className={classes.main_wrapper__title_button}>
           <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
                      hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
+        </div>
         </div>
         <div className={classes.main_wrapper__content}>
           <div className={classes.main_wrapper__content__title__info}>
@@ -119,6 +121,10 @@ const Profile = () => {
             <Input placeholder="Город" styles={classes.main_wrapper__content__input_input} value={city} onChange={(e) =>setCity(e.target.value)}/>
             <Input placeholder="Дата рождения" styles={classes.main_wrapper__content__input_input} value={birthday} onChange={(e) => setBirthday(e.target.value)}/>
             <Input placeholder="Номер телефона" styles={classes.main_wrapper__content__input_input} value={number} onChange={(e) => setNumber(e.target.value)}/>
+          </div>
+          <div className={classes.main_wrapper__title_button_bottom}>
+            <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
           </div>
           <div className={classes.main_wrapper__content__title__password}>
             <p>Пароль</p>

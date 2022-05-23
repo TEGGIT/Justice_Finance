@@ -1,5 +1,9 @@
 .main{
   display: flex;
+  @media (max-width: 735px){
+    display: flex;
+    flex-direction: column;
+  }
 
 
   &__wrapper{
@@ -42,8 +46,8 @@
     padding-top: 81px;
     gap: 16px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     padding-bottom: 81px;
     border-bottom: 1px solid #F3F3F3;
 
@@ -51,11 +55,17 @@
       padding-top: 81px;
       gap: 16px;
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
+      align-items: center;
       padding-bottom: 81px;
       border-bottom: 1px solid #F3F3F3;
-
+      width: 940px;
+      @media (max-width: 735px){
+        overflow: unset;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+      }
     }
 
 
@@ -79,6 +89,9 @@
         border: 1px solid #ECECEC;
         padding: 16px 190px 16px 16px;
         color: #363636;
+        @media (max-width: 735px){
+          padding: 16px 15px 16px 16px;
+        }
       }
     }
       &_title{
@@ -124,6 +137,20 @@
     color: #848484;
   }
 }
-
 }
+
+.desktop_button{
+  display: flex;
+  @media (max-width: 735px){
+    display: none;
+  }
+}
+
+.mobile_button{
+  display: none;
+  @media (max-width: 735px){
+    display: flex;
+  }
+}
+
 

@@ -6,7 +6,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const SelectMui = ({selectValue, handleChangeSelect, minWidth, name, array}) => {
-//country[`${image}`]
   return (
 
       <Box sx={{minWidth}}>

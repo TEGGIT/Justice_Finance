@@ -24,7 +24,7 @@ const MainPage = () => {
             <h1 className={classes.title}>Обменивайте валюту по выгодному курсу</h1>
           </div>
           <div className={classes.main__section__content}>
-            <img src={interfaceFinance} alt='interface'/>
+            <img src={interfaceFinance} alt='interface' className={classes.image}/>
             <div className={classes.test} style={{backgroundImage: `url(${positive})`}}/>
           </div>
         </section>

@@ -7,6 +7,9 @@ import Input from "../UI/Input/Input";
 import Modal from 'react-modal';
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
+import SlideButton from "../UI/SlideButton/SlideButton";
+import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
+import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import Wallet from "../ProfileBar/WalletBar/Wallet";
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
@@ -87,7 +90,6 @@ const PursePage = () => {
         }
     })
 
-
     const handleChange = (event) => {
         setСurrency(event.target.value);
     };
@@ -96,7 +98,10 @@ const PursePage = () => {
         navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
     }
 
+
+
     return (
+
         <main className={classes.main}>
             <NavBar/>
             <section className={classes.main__wrapper}>
@@ -139,7 +144,7 @@ const PursePage = () => {
                     </Modal>
                 )}
 
-                {currentWallet.length ? (
+                {currentWallet.length  ? (
                 <div className={classes.main__wrapper__wallet_container__wallets}>
                     {currentWallet.map((wallet) => (
                     <Wallet
@@ -147,13 +152,17 @@ const PursePage = () => {
                         key={wallet.currency}
                         countryName={wallet.currency}
                         country={wallet.currency}
-                        count={wallet.sum}
+                        count={wallet.sum.toFixed(2)}
                         countryCount={wallet.currency}
                         countryCounter={wallet.currency}
                         onClick={() => walletLink(wallet)}
                     />
+
+
                     ))}
                 </div>
+
+
                 ) : (
                 <div className={classes.main__wrapper__wallet_container}>
                     <img src={waller} alt='Кошелек'/>
@@ -167,7 +176,12 @@ const PursePage = () => {
                         <p>Добавление кошелька</p>
                     </div>
                     <div className={classes.main__wrapper__wallet_container__add__select}>
+                        <div className={classes.desktop_button}>
                         <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите кошелек' array={countryIcon}/>
+                    </div>
+                        <div className={classes.mobile_button}>
+                            <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='250px' name='Выберите кошелек' array={countryIcon}/>
+                        </div>
                         <Input placeholder='# Номер кошелька' type='number'
                                styles={classes.main__wrapper__wallet_container__add__select_input}
                                value={numberPurse} onChange={(e) => {

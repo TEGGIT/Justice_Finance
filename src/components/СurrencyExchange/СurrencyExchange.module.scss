@@ -1,5 +1,9 @@
 .main{
   display: flex;
+  @media (max-width: 600px){
+    display: flex;
+    flex-direction: column;
+  }
 
   &__wrapper{
     display: flex;

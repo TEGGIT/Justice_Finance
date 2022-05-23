@@ -61,10 +61,12 @@ const NavBarLinks = () => {
                             background='#FFFFFF'
                             color="#363636"
                             fontSize='0.875rem'
+
                             hoverBackground='transparent'
           />
             </NavLink>
         })}
+        <div className={classes.desktop}>
         <NavLink to='/'>
           <ButtonMui
             onClick={clear}
@@ -80,6 +82,24 @@ const NavBarLinks = () => {
             marginTop='200px'
           />
         </NavLink>
+      </div>
+        <div className={classes.mobile}>
+          <NavLink to='/'>
+            <ButtonMui
+              onClick={clear}
+              text="Выход"
+              img={logOut}
+              padding='12px 61px 12px 8px'
+              gap='8px'
+              borderTop='1px solid'
+              background='#FFFFFF'
+              color="#363636"
+              fontSize='0.875rem'
+              hoverBackground='transparent'
+              marginTop='0'
+            />
+          </NavLink>
+        </div>
       </div>
     </div>
   );

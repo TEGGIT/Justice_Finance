@@ -1,6 +1,9 @@
 .main{
   display: flex;
-
+  @media (max-width: 735px){
+    display: flex;
+    flex-direction: column;
+  }
 
   &_wrapper{
     display: flex;
@@ -20,8 +23,20 @@
       padding-bottom: 32px;
       border-bottom: 1px solid #F3F3F3;
 
+    &_button{
+      display: flex;
+      @media (max-width: 735px){
+        display: none;
 
+      }
 
+      &_bottom{
+        display: none;
+        @media (max-width: 735px){
+          display: flex;
+        }
+      }
+    }
 
       &_text{
         font-family: 'TT Firs Neue', sans-serif;
@@ -75,8 +90,14 @@
           border: 1px solid #ECECEC;
           padding: 18px 230px 18px 16px;
           color: #363636;
+
+          @media (max-width: 735px){
+            padding: 18px 18px 18px 16px;
+
+          }
         }
       }
     }
 }
 }
+

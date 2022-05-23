@@ -26,7 +26,7 @@ const ProfileBar = () => {
     setX(x - 20)
     if (x === -80) setX(0)
   }
-
+  console.log(x)
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
@@ -62,7 +62,7 @@ const ProfileBar = () => {
                         key={wallet.currency}
                         countryName={wallet.currency}
                         country={wallet.currency}
-                        count={wallet.sum}
+                        count={wallet.sum.toFixed(2)}
                         countryCounter={wallet.currency}
                         onClick={() => walletLink(wallet)}
 

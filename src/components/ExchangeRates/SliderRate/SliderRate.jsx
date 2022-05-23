@@ -2,7 +2,7 @@ import React from 'react';
 import classes from "../ExchangeRatesPage.module.scss";
 import arrowUp from "../../../assets/image/ArrowUp.svg";
 
-const SliderRate = ({onClick}) => {
+const SliderRate = () => {
   return (
       <div className={classes.main_wrapper__slider__rate}>
         <img src={arrowUp} alt="Положительно" className={classes.main_wrapper__slider__rate_img}/>

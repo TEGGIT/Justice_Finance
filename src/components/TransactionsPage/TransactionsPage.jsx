@@ -12,7 +12,6 @@ const TransactionsPage = () => {
   const transaction = [...currentUser]
 
   const currentTransaction = transaction[0].transaction
-
   return (<main className={classes.main}>
     <NavBar/>
     <section className={classes.main__wrapper}>
@@ -22,16 +21,17 @@ const TransactionsPage = () => {
         </h1>
       </div>
       <div className={classes.main__wrapper__columns}>
-        <p className={classes.main__wrapper__columns_title}>
+        <p className={classes.main__wrapper__columns_title_data}>
           23 мая
         </p>
-        <p className={classes.main__wrapper__columns_title}>
+
+        <p className={classes.main__wrapper__columns_title_give}>
           Обменяно
         </p>
-        <p className={classes.main__wrapper__columns_title}>
+        <p className={classes.main__wrapper__columns_title_get}>
           Полученно
         </p>
-        <p className={classes.main__wrapper__columns_title}>
+        <p className={classes.main__wrapper__columns_title_status}>
           Статус
         </p>
       </div>
@@ -39,7 +39,7 @@ const TransactionsPage = () => {
 
           <TransactionStatus
               exchangeValue= {`${transactionItem.give} to ${transactionItem.get}`}
-              time='10:00'
+              time={`${transactionItem.Hour}:${transactionItem.Minutes}`}
               changeValue={`-${transactionItem.giveValue}`}
               currency={`${transactionItem.give}`}
               plus={`${transactionItem.getValue}`}
@@ -48,7 +48,7 @@ const TransactionsPage = () => {
               status='Успешно'
           />
 
-      ))}
+      )).reverse()}
 
 
 

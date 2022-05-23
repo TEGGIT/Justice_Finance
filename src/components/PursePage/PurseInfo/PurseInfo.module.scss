@@ -1,12 +1,14 @@
 .main{
   display: flex;
-
+  @media (max-width: 735px){
+   display: flex;
+    flex-direction: column;
+  }
 
   &_wrapper{
     display: flex;
     flex-direction: column;
     border-right: 1px solid #F3F3F3;
-    width: 60%;
     height: 100vh;
     padding: 48px;
 
@@ -17,6 +19,8 @@
       padding-bottom: 32px;
       border-bottom: 1px solid #F3F3F3;
       justify-content: space-between;
+      flex-wrap: wrap;
+
 
       &_purse_id{
         display: flex;
@@ -47,6 +51,7 @@
       flex-wrap: wrap;
       padding-bottom: 56px;
       border-bottom: 1px solid #F3F3F3;
+      gap: 20px;
 
     }
 
@@ -115,5 +120,4 @@
       color: #848484;
     }
   }
-
 }
