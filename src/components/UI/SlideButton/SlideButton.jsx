@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './SlideButton.module.scss'
-const SlideButton = ({img}) => {
+const SlideButton = ({img, onClick}) => {
   return (
     <button className={classes.button}>
-      <img src={img} alt='Левый слайд'/>
+      <img src={img} alt='Левый слайд' onClick={onClick}/>
     </button>
   );
 };

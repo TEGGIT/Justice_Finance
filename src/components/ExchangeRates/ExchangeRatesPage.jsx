@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './ExchangeRatesPage.module.scss'
 import NavBar from '../NavBar/NavBar'
 import Input from "../UI/Input/Input";
@@ -13,6 +13,15 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 import {NavLink} from "react-router-dom";
 
 const ExchangeRatesPage = () => {
+  const [x, setX] = useState(0)
+  const moveBlockLeft = () => {
+    setX(x + 10)
+    if (x === 0) setX(-30)
+  }
+  const moveBlockRight = () => {
+    setX(x - 10)
+    if (x === -30) setX(0)
+  }
   return (
     <>
       <div className={classes.wrapper}>
@@ -25,13 +34,18 @@ const ExchangeRatesPage = () => {
             <Input styles={classes.main_title_input} placeholder="Поиск валюты"/>
           </div>
           <div className={classes.main_wrapper__slider}>
-            <SlideButton img={arrowButtonLeft}/>
+
+            <SlideButton img={arrowButtonLeft} onClick={moveBlockLeft}/>
+              <div className={classes.slider} >
+                <div style={{transform: `translateX(${x}%)`, display:'flex', gap:'16px', transition:'0.5s'}}>
             <SliderRate/>
             <SliderRate/>
             <SliderRate/>
             <SliderRate/>
             <SliderRate/>
-            <SlideButton img={arrowButtonRight}/>
+              </div>
+          </div>
+            <SlideButton img={arrowButtonRight} onClick={moveBlockRight}/>
           </div>
           <div className={classes.main_wrapper__chart__title}>
             <div className={classes.main_wrapper__chart__title_text}>
