@@ -15,7 +15,8 @@
     display: flex;
     flex-direction: column;
     padding: 32px 32px;
-    &__title{
+
+    &__title {
       align-items: center;
       @media (max-width: 600px) {
         display: none;
@@ -23,9 +24,6 @@
     }
   }
 }
-
-
-
 
 
 .text_bold {

@@ -53,36 +53,36 @@ const NavBarLinks = () => {
 
         {item.map((items) => {
 
-          return <NavLink  key={items.pass} to={`${items.pass}`}>
-          <ButtonMui  text={items.text}
-                            img={items.img}
-                            padding="12px 0 12px 8px"
-                            gap='8px'
-                            background='#FFFFFF'
-                            color="#363636"
-                            fontSize='0.875rem'
+          return <NavLink key={items.pass} to={`${items.pass}`}>
+            <ButtonMui text={items.text}
+                       img={items.img}
+                       padding="12px 0 12px 8px"
+                       gap='8px'
+                       background='#FFFFFF'
+                       color="#363636"
+                       fontSize='0.875rem'
 
-                            hoverBackground='transparent'
-          />
-            </NavLink>
+                       hoverBackground='transparent'
+            />
+          </NavLink>
         })}
         <div className={classes.desktop}>
-        <NavLink to='/'>
-          <ButtonMui
-            onClick={clear}
-            text="Выход"
-            img={logOut}
-            padding='12px 61px 12px 8px'
-            gap='8px'
-            borderTop='1px solid'
-            background='#FFFFFF'
-            color="#363636"
-            fontSize='0.875rem'
-            hoverBackground='transparent'
-            marginTop='200px'
-          />
-        </NavLink>
-      </div>
+          <NavLink to='/'>
+            <ButtonMui
+              onClick={clear}
+              text="Выход"
+              img={logOut}
+              padding='12px 61px 12px 8px'
+              gap='8px'
+              borderTop='1px solid'
+              background='#FFFFFF'
+              color="#363636"
+              fontSize='0.875rem'
+              hoverBackground='transparent'
+              marginTop='200px'
+            />
+          </NavLink>
+        </div>
         <div className={classes.mobile}>
           <NavLink to='/'>
             <ButtonMui

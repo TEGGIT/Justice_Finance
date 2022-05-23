@@ -35,10 +35,10 @@ const RegisterPage = () => {
     email: email,
     password: password,
     wallets: [],
-    city:'',
-    birthday:'',
-    number:'',
-    transaction:[]
+    city: '',
+    birthday: '',
+    number: '',
+    transaction: []
   }
   const nameErrorChecker = () => {
     const nameChecker = new RegExp(`^(?=.*[а-я])(?=.*[А-Я])(?=.{${2},})`)
@@ -95,8 +95,7 @@ const RegisterPage = () => {
       setDisabledBtn(false)
 
     }
-  }, [name, email, password, repeatPassword, repeatPasswordError , checked])
-
+  }, [name, email, password, repeatPassword, repeatPasswordError, checked])
 
 
   return (

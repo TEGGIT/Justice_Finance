@@ -1,11 +1,11 @@
-.main{
+.main {
   display: flex;
-  @media (max-width: 735px){
+  @media (max-width: 735px) {
     display: flex;
     flex-direction: column;
   }
 
-  &_wrapper{
+  &_wrapper {
     display: flex;
     flex-direction: column;
     border-right: 1px solid #F3F3F3;
@@ -14,8 +14,7 @@
     padding: 48px;
 
 
-
-    &__title{
+    &__title {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -23,22 +22,22 @@
       padding-bottom: 32px;
       border-bottom: 1px solid #F3F3F3;
 
-    &_button{
-      display: flex;
-      @media (max-width: 735px){
-        display: none;
+      &_button {
+        display: flex;
+        @media (max-width: 735px) {
+          display: none;
 
-      }
+        }
 
-      &_bottom{
-        display: none;
-        @media (max-width: 735px){
-          display: flex;
+        &_bottom {
+          display: none;
+          @media (max-width: 735px) {
+            display: flex;
+          }
         }
       }
-    }
 
-      &_text{
+      &_text {
         font-family: 'TT Firs Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
@@ -46,11 +45,12 @@
         line-height: 48px;
       }
     }
-    &__content{
+
+    &__content {
       display: flex;
       flex-direction: column;
 
-      &__title__info{
+      &__title__info {
         padding-top: 48px;
         font-family: 'Inter', sans-serif;
         font-style: normal;
@@ -60,7 +60,8 @@
         color: #848484;
 
       }
-      &__title__password{
+
+      &__title__password {
         padding-top: 56px;
         font-family: 'Inter', sans-serif;
         font-style: normal;
@@ -70,7 +71,7 @@
         color: #848484;
       }
 
-      &__input{
+      &__input {
         padding-top: 40px;
         display: flex;
         flex-wrap: wrap;
@@ -79,7 +80,7 @@
         border-bottom: 1px solid #F3F3F3;;
         width: 100%;
 
-        &_input{
+        &_input {
           display: flex;
           width: 29.50rem;
           font-family: 'Inter', sans-serif;
@@ -91,13 +92,13 @@
           padding: 18px 230px 18px 16px;
           color: #363636;
 
-          @media (max-width: 735px){
+          @media (max-width: 735px) {
             padding: 18px 18px 18px 16px;
 
           }
         }
       }
     }
-}
+  }
 }
 

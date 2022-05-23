@@ -15,7 +15,8 @@
 
   }
 }
-.desktop{
+
+.desktop {
   display: flex;
   @media (max-width: 600px) {
     display: none;
@@ -23,7 +24,7 @@
 
 }
 
-.mobile{
+.mobile {
   display: none;
   @media (max-width: 600px) {
     display: flex;

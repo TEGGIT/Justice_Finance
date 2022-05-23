@@ -2,23 +2,25 @@
 @import url("assets/fonts/TTFirsNeue/regular.css");
 
 input[type='number'] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
 }
 
-html{
+html {
     height: 100%;
 }
+
 #root {
     height: 100%;
     display: flex;
@@ -26,7 +28,7 @@ html{
     flex: 1 0 auto;
 }
 
-.App{
+.App {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;

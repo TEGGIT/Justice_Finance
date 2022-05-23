@@ -1,19 +1,21 @@
 .wrapper {
   display: flex;
-  @media (max-width: 735px){
+  @media (max-width: 735px) {
     display: flex;
     flex-direction: column;
   }
 
 }
-.slider{
+
+.slider {
   display: flex;
   width: 700px;
   overflow: hidden;
 
 
 }
-.sliderRedact{
+
+.sliderRedact {
   display: flex;
   z-index: -1;
   position: relative;
@@ -22,6 +24,7 @@
   gap: 20px;
 
 }
+
 .main {
   display: flex;
   flex-direction: column;
@@ -35,21 +38,23 @@
     flex-direction: column;
     padding-top: 16px;
     padding-bottom: 58px;
+
     &_price {
       display: flex;
       gap: 16px;
       align-items: center;
 
-      &_plus{
+      &_plus {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 24px;
         color: #84A500;
-        @media (max-width: 735px){
+        @media (max-width: 735px) {
         }
       }
+
       &_percent {
         font-family: 'Inter', sans-serif;
         font-style: normal;
@@ -84,7 +89,7 @@
     justify-content: space-between;
     padding-bottom: 24px;
     border-bottom: 1px solid #F3F3F3;
-    @media (max-width: 735px){
+    @media (max-width: 735px) {
       flex-wrap: wrap;
       gap: 20px;
     }
@@ -143,7 +148,6 @@
         color: #363636;
 
 
-
         &_plus {
           width: 100%;
           font-family: 'Inter', sans-serif;
@@ -198,7 +202,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    @media (max-width: 735px){
+    @media (max-width: 735px) {
       gap: 30px;
     }
 
@@ -220,7 +224,7 @@
       line-height: 24px;
       border: 1px solid #ECECEC;
       padding: 16px 169px 16px 20px;
-      @media (max-width: 735px){
+      @media (max-width: 735px) {
         padding: 16px 16px 16px 20px;
       }
     }

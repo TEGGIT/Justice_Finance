@@ -1,11 +1,11 @@
-.main{
+.main {
   display: flex;
-  @media (max-width: 735px){
-   display: flex;
+  @media (max-width: 735px) {
+    display: flex;
     flex-direction: column;
   }
 
-  &_wrapper{
+  &_wrapper {
     display: flex;
     flex-direction: column;
     border-right: 1px solid #F3F3F3;
@@ -13,7 +13,7 @@
     padding: 48px;
 
 
-    &__title{
+    &__title {
       display: flex;
       align-items: center;
       padding-bottom: 32px;
@@ -22,7 +22,7 @@
       flex-wrap: wrap;
 
 
-      &_purse_id{
+      &_purse_id {
         display: flex;
         align-items: center;
         gap: 16px;
@@ -30,7 +30,7 @@
       }
 
 
-      &_text{
+      &_text {
         font-family: 'TT Firs Neue', sans-serif;
         font-style: normal;
         font-weight: 500;
@@ -38,12 +38,13 @@
         line-height: 48px;
         color: #363636;
 
-        &_number{
+        &_number {
           color: #848484;
         }
       }
     }
-    &__purse{
+
+    &__purse {
       padding-top: 48px;
       display: flex;
       align-items: center;
@@ -55,13 +56,13 @@
 
     }
 
-    &__replenishment{
+    &__replenishment {
       padding-top: 56px;
-     display: flex;
+      display: flex;
       flex-direction: column;
 
 
-      &_text{
+      &_text {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;
@@ -71,13 +72,13 @@
         padding-bottom: 40px;
       }
 
-      &_wrapper{
+      &_wrapper {
         display: flex;
         gap: 40px;
         flex-wrap: wrap;
 
 
-        &_input{
+        &_input {
           display: flex;
           font-family: 'Inter', sans-serif;
           font-style: normal;
@@ -92,15 +93,17 @@
     }
   }
 }
-.modal_wrapper{
+
+.modal_wrapper {
   width: 284px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  &__content{
+  &__content {
     padding: 32px;
-    &_text_main{
+
+    &_text_main {
       padding-top: 32px;
       padding-bottom: 16px;
       font-family: 'Inter', sans-serif;
@@ -111,7 +114,8 @@
       color: #363636;
 
     }
-    &_text_bottom{
+
+    &_text_bottom {
       font-family: 'Inter', sans-serif;
       font-style: normal;
       font-weight: 400;

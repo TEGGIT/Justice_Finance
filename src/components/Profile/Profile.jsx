@@ -21,51 +21,51 @@ const Profile = () => {
   const [isOldPassword, setIsOldPassword] = useState(true)
 
   const passwordChecker = () => {
-    if (currentUser[0].password === oldPassword){
+    if (currentUser[0].password === oldPassword) {
       setIsOldPassword(false)
-    }else{
+    } else {
       setIsOldPassword(true)
     }
   }
 
   const repeatsPassword = () => {
-    if (password === repeatPassword){
+    if (password === repeatPassword) {
       setIsOldPassword(false)
-    }else{
+    } else {
       setIsOldPassword(true)
 
     }
   }
   const newPassword = () => {
     const passwordChecker = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
-    if (!passwordChecker.test(password)){
+    if (!passwordChecker.test(password)) {
       setIsOldPassword(true)
-    }else {
+    } else {
       setIsOldPassword(false)
     }
   }
 
-  useEffect(()=>{
-    if (!isOldPassword && repeatPassword && password){
+  useEffect(() => {
+    if (!isOldPassword && repeatPassword && password) {
       setIsDisabledPassword(false)
-    }else
+    } else
       setIsDisabledPassword(true)
 
-  },[isOldPassword, repeatPassword, password])
+  }, [isOldPassword, repeatPassword, password])
 
   useEffect(() => {
 
-   if (!name || !email || !city || !birthday || !number){
-     setIsDisabled(true)
-   }else{
-     setIsDisabled(false)
-   }
-  },[name, email, city, birthday, number])
+    if (!name || !email || !city || !birthday || !number) {
+      setIsDisabled(true)
+    } else {
+      setIsDisabled(false)
+    }
+  }, [name, email, city, birthday, number])
 
 
   const changeProfile = () => {
     const updateStorage = currentUser.map((item) => {
-      if (item.email === currentUser[0].email){
+      if (item.email === currentUser[0].email) {
         const updateUser = {
           ...item,
           email: email,
@@ -82,7 +82,7 @@ const Profile = () => {
 
   const changePassword = () => {
     const updatePassword = currentUser.map((item) => {
-      if (item.email === currentUser[0].email){
+      if (item.email === currentUser[0].email) {
         const updatePassword = {
           ...item,
           email: email,
@@ -106,21 +106,25 @@ const Profile = () => {
             Мой профиль
           </h1>
           <div className={classes.main_wrapper__title_button}>
-          <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
-                     hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
-        </div>
+            <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
+          </div>
         </div>
         <div className={classes.main_wrapper__content}>
           <div className={classes.main_wrapper__content__title__info}>
             <p>Информация о вашей учетной записи</p>
           </div>
           <div className={classes.main_wrapper__content__input}>
-            <Input placeholder="Имя, Фамилия"  value={name} onChange={(e) => setName(e.target.value)} styles={classes.main_wrapper__content__input_input}/>
+            <Input placeholder="Имя, Фамилия" value={name} onChange={(e) => setName(e.target.value)}
+                   styles={classes.main_wrapper__content__input_input}/>
             <Input placeholder="Email" type='email' value={email} onChange={(e) => setEmail(e.target.value)}
                    styles={classes.main_wrapper__content__input_input}/>
-            <Input placeholder="Город" styles={classes.main_wrapper__content__input_input} value={city} onChange={(e) =>setCity(e.target.value)}/>
-            <Input placeholder="Дата рождения" styles={classes.main_wrapper__content__input_input} value={birthday} onChange={(e) => setBirthday(e.target.value)}/>
-            <Input placeholder="Номер телефона" styles={classes.main_wrapper__content__input_input} value={number} onChange={(e) => setNumber(e.target.value)}/>
+            <Input placeholder="Город" styles={classes.main_wrapper__content__input_input} value={city}
+                   onChange={(e) => setCity(e.target.value)}/>
+            <Input placeholder="Дата рождения" styles={classes.main_wrapper__content__input_input} value={birthday}
+                   onChange={(e) => setBirthday(e.target.value)}/>
+            <Input placeholder="Номер телефона" styles={classes.main_wrapper__content__input_input} value={number}
+                   onChange={(e) => setNumber(e.target.value)}/>
           </div>
           <div className={classes.main_wrapper__title_button_bottom}>
             <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
@@ -142,7 +146,7 @@ const Profile = () => {
                    onBlur={repeatsPassword}
                    value={repeatPassword}
                    onChange={(e) =>
-                     setRepeatPassword(e.target.value)} />
+                     setRepeatPassword(e.target.value)}/>
 
             <Input placeholder="Введите новый пароль" type='password'
                    styles={classes.main_wrapper__content__input_input}

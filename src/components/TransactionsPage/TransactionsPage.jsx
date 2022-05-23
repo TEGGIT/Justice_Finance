@@ -35,23 +35,20 @@ const TransactionsPage = () => {
           Статус
         </p>
       </div>
-      {currentTransaction.map((transactionItem)=> (
+      {currentTransaction.map((transactionItem) => (
 
-          <TransactionStatus
-              exchangeValue= {`${transactionItem.give} to ${transactionItem.get}`}
-              time={`${transactionItem.Hour}:${transactionItem.Minutes}`}
-              changeValue={`-${transactionItem.giveValue}`}
-              currency={`${transactionItem.give}`}
-              plus={`${transactionItem.getValue}`}
-              currencyPlus={`${transactionItem.get}`}
-              styles={classes.main__wrapper__rows_info_status_text}
-              status='Успешно'
-          />
+        <TransactionStatus
+          exchangeValue={`${transactionItem.give} to ${transactionItem.get}`}
+          time={`${transactionItem.Hour}:${transactionItem.Minutes}`}
+          changeValue={`-${transactionItem.giveValue}`}
+          currency={`${transactionItem.give}`}
+          plus={`${transactionItem.getValue}`}
+          currencyPlus={`${transactionItem.get}`}
+          styles={classes.main__wrapper__rows_info_status_text}
+          status='Успешно'
+        />
 
       )).reverse()}
-
-
-
 
 
     </section>

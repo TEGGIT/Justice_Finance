@@ -2,7 +2,8 @@ import React from 'react';
 import classes from "../TransactionsPage.module.scss";
 import exchange from "../../../assets/image/ExchangeIcon.svg";
 
-const TransactionStatus = ({exchangeValue,
+const TransactionStatus = ({
+                             exchangeValue,
                              time,
                              changeValue,
                              currency,

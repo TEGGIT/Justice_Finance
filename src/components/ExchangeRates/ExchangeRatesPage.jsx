@@ -36,15 +36,15 @@ const ExchangeRatesPage = () => {
           <div className={classes.main_wrapper__slider}>
 
             <SlideButton img={arrowButtonLeft} onClick={moveBlockLeft}/>
-              <div className={classes.slider} >
-                <div style={{transform: `translateX(${x}%)`, display:'flex', gap:'16px', transition:'0.5s'}}>
-            <SliderRate/>
-            <SliderRate/>
-            <SliderRate/>
-            <SliderRate/>
-            <SliderRate/>
+            <div className={classes.slider}>
+              <div style={{transform: `translateX(${x}%)`, display: 'flex', gap: '16px', transition: '0.5s'}}>
+                <SliderRate/>
+                <SliderRate/>
+                <SliderRate/>
+                <SliderRate/>
+                <SliderRate/>
               </div>
-          </div>
+            </div>
             <SlideButton img={arrowButtonRight} onClick={moveBlockRight}/>
           </div>
           <div className={classes.main_wrapper__chart__title}>
@@ -57,14 +57,14 @@ const ExchangeRatesPage = () => {
               </p>
             </div>
             <NavLink to='/currency-exchange'>
-            <ButtonMui
-              padding='12px 24px'
-              text="Обменять"
-              color='white'
-              background='#363636'
-              hoverBackground='#363636'
-            />
-          </NavLink>
+              <ButtonMui
+                padding='12px 24px'
+                text="Обменять"
+                color='white'
+                background='#363636'
+                hoverBackground='#363636'
+              />
+            </NavLink>
 
           </div>
           <div className={classes.main_wrapper__chart}>

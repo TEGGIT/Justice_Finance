@@ -8,7 +8,7 @@ import PursePage from "../components/PursePage/PursePage";
 import TransactionsPage from "../components/TransactionsPage/TransactionsPage";
 import PurseInfo from "../components/PursePage/PurseInfo/PurseInfo";
 
-export const privateRoutes  = [
+export const privateRoutes = [
   {path: '/', element: <MainPage/>, exact: true},
   {path: '/login-page', element: <LogPage/>, exact: true},
   {path: '/register-page', element: <RegisterPage/>, exact: true},

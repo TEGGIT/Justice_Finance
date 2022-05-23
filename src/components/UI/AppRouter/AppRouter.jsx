@@ -4,47 +4,45 @@ import {privateRoutes, publicRoutes} from "../../../router/routes";
 import {useStateContext} from "../../../context/stateContext";
 
 const AppRouter = () => {
-    const {isAuth} = useStateContext();
-    return (
-        <Routes>
-            {isAuth ? (
-                <>
-                    {privateRoutes.map((route) =>
+  const {isAuth} = useStateContext();
+  return (
+    <Routes>
+      {isAuth ? (
+        <>
+          {privateRoutes.map((route) =>
 
-                            <Route
-                                key = {route.path}
-                                element={route.element}
-                                path={route.path}
-                                exact={route.exact}
-                            />
-
-                    )}
-
-                </>
-
-
-            ) : (
-                <>
-                    {publicRoutes.map((route) =>
-
-                            <Route
-                                element={route.element}
-                                path={route.path}
-                                exact={route.exact}
-
-                            />
-
-                    )}
-
-                </>
-            )}
             <Route
-                path="*"
-                element={<Navigate to="/" replace/>}
+              key={route.path}
+              element={route.element}
+              path={route.path}
+              exact={route.exact}
             />
+          )}
 
-        </Routes>
-    );
+        </>
+
+
+      ) : (
+        <>
+          {publicRoutes.map((route) =>
+
+            <Route
+              element={route.element}
+              path={route.path}
+              exact={route.exact}
+
+            />
+          )}
+
+        </>
+      )}
+      <Route
+        path="*"
+        element={<Navigate to="/" replace/>}
+      />
+
+    </Routes>
+  );
 };
 
 export default AppRouter;

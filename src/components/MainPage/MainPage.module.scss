@@ -31,9 +31,6 @@
   flex: 1 0 auto;
 
 
-
-
-
   &__section {
     z-index: 2;
     display: flex;
@@ -41,11 +38,12 @@
     align-items: center;
 
 
-     &__title{
-       flex: 1 0 auto;
+    &__title {
+      flex: 1 0 auto;
 
 
-     }
+    }
+
     &__content {
       z-index: 2;
       display: flex;
@@ -57,11 +55,13 @@
     }
   }
 }
-.image{
+
+.image {
   @media (max-width: 1000px) {
-   width: 100%;
+    width: 100%;
   }
 }
+
 .ellipseOne {
   position: fixed;
   left: 35.625rem;
@@ -72,7 +72,8 @@
   background: rgba(132, 165, 0, 0.7);
   filter: blur(60px);
 }
-.test{
+
+.test {
   box-sizing: border-box;
   position: absolute;
   width: 14rem;
@@ -88,7 +89,7 @@
   box-shadow: 0 24px 17px -17px rgba(0, 0, 0, 0.25);
 }
 
-.ellipseTwo{
+.ellipseTwo {
   position: fixed;
   z-index: 1;
   width: 370px;
@@ -109,7 +110,7 @@
   height: 10.25rem;
 }
 
-.starTwo{
+.starTwo {
   z-index: 1;
   position: fixed;
   width: 72px;
@@ -119,20 +120,18 @@
 }
 
 
+.title {
+  font-family: 'TT Firs Neue', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 4rem;
+  line-height: 4.5rem;
+  z-index: 2;
+  text-align: center;
+  width: 41.25rem;
+  color: #363636;
 
-
-  .title {
-    font-family: 'TT Firs Neue', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 4rem;
-    line-height: 4.5rem;
-    z-index: 2;
-    text-align: center;
-    width: 41.25rem;
-    color: #363636;
-
-  }
+}
 
 
 

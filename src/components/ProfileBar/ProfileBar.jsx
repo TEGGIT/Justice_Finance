@@ -4,13 +4,14 @@ import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
 import transactions from '../../assets/image/transaction.svg'
 import ButtonMui from "../MUI/Button/ButtonMui";
-import {NavLink , useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Wallet from "./WalletBar/Wallet";
 import {useStateContext} from "../../context/stateContext";
 import greenEllipse from '../../assets/image/GreenElipse.svg'
 import left from '../../assets/image/arrowProfileLeft.svg'
 import right from '../../assets/image/arrowProfileRight.svg'
 import {useState} from "react";
+
 const ProfileBar = () => {
   const navigate = useNavigate()
   const {currentUser} = useStateContext()
@@ -34,16 +35,16 @@ const ProfileBar = () => {
 
   return (
 
-      <div className={classes.profile}>
-        <div className={classes.profile_wrapper}>
-          <div className={classes.profile_wrapper__avatar}>
-            <img src={avatar} alt='аватар'/>
+    <div className={classes.profile}>
+      <div className={classes.profile_wrapper}>
+        <div className={classes.profile_wrapper__avatar}>
+          <img src={avatar} alt='аватар'/>
 
-            <p className={classes.profile_wrapper__avatar_name}>{currentUser[0].name}</p>
+          <p className={classes.profile_wrapper__avatar_name}>{currentUser[0].name}</p>
 
-          </div>
-          <div className={classes.profile_wrapper__balance}>
-            <div className={classes.profile_wrapper__balance_arrows}>
+        </div>
+        <div className={classes.profile_wrapper__balance}>
+          <div className={classes.profile_wrapper__balance_arrows}>
             <p>Мой баланс</p>
             <div className={classes.profile_wrapper__balance_arrows_arrow}>
               <img src={left} onClick={moveBlockLeft}/>
@@ -51,62 +52,62 @@ const ProfileBar = () => {
             </div>
           </div>
 
-            {currentWallet.length ? (
-                <div className={classes.slider}>
-                  <div style={{transform: `translateX(${x}%)`, display:'flex', transition:'0.5s', gap:'10px'}}>
+          {currentWallet.length ? (
+            <div className={classes.slider}>
+              <div style={{transform: `translateX(${x}%)`, display: 'flex', transition: '0.5s', gap: '10px'}}>
 
 
-                  {currentWallet.map((wallet) => (
-                     <Wallet
-                        pointer={{cursor:'pointer'}}
-                        key={wallet.currency}
-                        countryName={wallet.currency}
-                        country={wallet.currency}
-                        count={wallet.sum.toFixed(2)}
-                        countryCounter={wallet.currency}
-                        onClick={() => walletLink(wallet)}
+                {currentWallet.map((wallet) => (
+                  <Wallet
+                    pointer={{cursor: 'pointer'}}
+                    key={wallet.currency}
+                    countryName={wallet.currency}
+                    country={wallet.currency}
+                    count={wallet.sum.toFixed(2)}
+                    countryCounter={wallet.currency}
+                    onClick={() => walletLink(wallet)}
 
-                    />
-                  ))}
-                  </div>
-                </div>
-
-            ) : (
-
-                <div className={classes.profile_wrapper__balance__purse}>
-                  <p>Добавьте кошелек</p>
-                  <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636'
-                                                       hoverBackground='#363636' borderRadius='30px '
-                                                       padding='12px' height='60px'/></NavLink>
-                </div>
-
-            )}
-
-          </div>
-          <div className={classes.profile_wrapper__transactions}>
-            <p>Последние транзацкции </p>
-            {!transaction.length ? (
-
-                <div className={classes.profile_wrapper__transactions__history}>
-                <img src={transactions} alt="Транзакции"/>
-              <p>Вы не совершили не одной транзакции</p>
+                  />
+                ))}
               </div>
+            </div>
 
-            ): (
-                <div className={classes.profile_wrapper__transactions__history_actual}>
-                  {transaction.map((item)=> (
-                      <div className={classes.profile_wrapper__transactions__history_actual_content}>
-                     <p>{`-${item.giveValue}${item.give} / +${item.getValue} ${item.get}`}</p>
-                        <img src={greenEllipse} alt='Успешно'/>
-                      </div>
-                  )).reverse()}
+          ) : (
+
+            <div className={classes.profile_wrapper__balance__purse}>
+              <p>Добавьте кошелек</p>
+              <NavLink to='/purse-page'><ButtonMui img={plus} background='#363636'
+                                                   hoverBackground='#363636' borderRadius='30px '
+                                                   padding='12px' height='60px'/></NavLink>
+            </div>
+
+          )}
+
+        </div>
+        <div className={classes.profile_wrapper__transactions}>
+          <p>Последние транзацкции </p>
+          {!transaction.length ? (
+
+            <div className={classes.profile_wrapper__transactions__history}>
+              <img src={transactions} alt="Транзакции"/>
+              <p>Вы не совершили не одной транзакции</p>
+            </div>
+
+          ) : (
+            <div className={classes.profile_wrapper__transactions__history_actual}>
+              {transaction.map((item) => (
+                <div className={classes.profile_wrapper__transactions__history_actual_content}>
+                  <p>{`-${item.giveValue}${item.give} / +${item.getValue} ${item.get}`}</p>
+                  <img src={greenEllipse} alt='Успешно'/>
                 </div>
+              )).reverse()}
+            </div>
 
-            )}
+          )}
 
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 

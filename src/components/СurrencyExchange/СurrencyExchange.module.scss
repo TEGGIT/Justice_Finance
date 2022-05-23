@@ -1,11 +1,11 @@
-.main{
+.main {
   display: flex;
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
   }
 
-  &__wrapper{
+  &__wrapper {
     display: flex;
     flex-direction: column;
     border-right: 1px solid #F3F3F3;
@@ -14,14 +14,12 @@
     padding: 48px;
 
 
-
-    &__content{
+    &__content {
       display: flex;
       flex-direction: column;
 
 
-
-      &__title__info{
+      &__title__info {
         padding-top: 48px;
         font-family: 'Inter', sans-serif;
         font-style: normal;
@@ -31,14 +29,14 @@
         color: #848484;
       }
 
-      &__exchange{
+      &__exchange {
         display: flex;
         gap: 40px;
         flex-wrap: wrap;
         padding-top: 40px;
 
 
-        &__input{
+        &__input {
           font-family: 'Inter', sans-serif;
           font-style: normal;
           width: 164px;
@@ -51,14 +49,15 @@
         }
       }
     }
-    &__title{
+
+    &__title {
       display: flex;
       align-items: center;
       padding-bottom: 32px;
       border-bottom: 1px solid #F3F3F3;
 
 
-      &_text{
+      &_text {
         font-family: 'TT Firs Neue', sans-serif;
         font-style: normal;
         font-weight: 500;

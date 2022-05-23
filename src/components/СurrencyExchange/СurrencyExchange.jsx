@@ -13,7 +13,6 @@ import wallet from "../ProfileBar/WalletBar/Wallet";
 import {countryIcon} from "../../mockdata/countryIcon";
 
 
-
 const CurrencyExchange = () => {
   const [give, setGive] = React.useState('');
   const [get, setGet] = React.useState('');
@@ -29,13 +28,13 @@ const CurrencyExchange = () => {
     const transaction = currentUser[0]
 
     const refreshWalletSum = transaction.wallets.map(item => {
-      if ( item.currency === give){
+      if (item.currency === give) {
         return {
           ...item,
           sum: item.sum - giveValue
         }
       }
-      if (item.currency === get){
+      if (item.currency === get) {
         return {
           ...item,
           sum: item.sum + +getValue
@@ -46,7 +45,7 @@ const CurrencyExchange = () => {
 
     const updateTransaction = {
       ...transaction,
-      transaction: [...transaction.transaction, {get,Hour, Minutes, give, giveValue, getValue}],
+      transaction: [...transaction.transaction, {get, Hour, Minutes, give, giveValue, getValue}],
       wallets: refreshWalletSum,
     }
     setIsDisabled(true)
@@ -55,28 +54,29 @@ const CurrencyExchange = () => {
   }
 
   useEffect(() => {
-    const walletGive = currentUser[0].wallets.filter(wallet => wallet.currency===give && wallet)
-    walletGive.length && (giveValue>walletGive[0].sum
+    const walletGive = currentUser[0].wallets.filter(wallet => wallet.currency === give && wallet)
+    walletGive.length && (giveValue > walletGive[0].sum
     ||
     Boolean(!get)
     ||
     Boolean(!give)
     ||
     Boolean(!giveValue)
-        ?
-        setIsDisabled(true) : setIsDisabled(false))
+      ?
+      setIsDisabled(true) : setIsDisabled(false))
     exchangeRates.map((input) => {
       walletGive.length
       &&
       walletGive[0].currency === input.currencyName
       &&
-      exchangeRates.map( output => {
+      exchangeRates.map(output => {
         get === output.currencyName
         &&
-        setGetValue(((input.rubleRatio * giveValue)/output.rubleRatio).toFixed(2))
-      })})
+        setGetValue(((input.rubleRatio * giveValue) / output.rubleRatio).toFixed(2))
+      })
+    })
 
-  },[giveValue, getValue, get,give , isDisabled])
+  }, [giveValue, getValue, get, give, isDisabled])
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -92,24 +92,26 @@ const CurrencyExchange = () => {
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Отдаю' type='number' styles={classes.main__wrapper__content__exchange__input}
-                   onChange={(e)=> setGiveValue(e.target.value)}
+                   onChange={(e) => setGiveValue(e.target.value)}
                    value={giveValue}
 
             />
 
-            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem' name='Выберите кошелек'
+            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
+                    name='Выберите кошелек'
                     array={currentUser[0].wallets}
             />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Получаю' type='number' styles={classes.main__wrapper__content__exchange__input}
-                   onChange={(e)=> setGetValue(e.target.value)}
+                   onChange={(e) => setGetValue(e.target.value)}
                    value={getValue}
                    readOnly={true}
             />
-            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem' name='Выберите валюту'
+            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
+                    name='Выберите валюту'
                     array={currentUser[0].wallets}
-                    />
+            />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <ButtonMui text="Обменять"

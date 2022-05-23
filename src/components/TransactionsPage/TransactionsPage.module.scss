@@ -1,7 +1,7 @@
 .main {
   display: flex;
 
-  @media (max-width: 735px){
+  @media (max-width: 735px) {
     display: flex;
     flex-direction: column;
   }
@@ -39,7 +39,7 @@
           align-items: center;
 
 
-          &_text{
+          &_text {
             font-family: 'Inter', sans-serif;
             font-style: normal;
             font-weight: 500;
@@ -59,7 +59,6 @@
           width: 100%;
 
 
-
         }
 
         &_date_container {
@@ -67,19 +66,18 @@
           flex-direction: column;
           border-right: 1px solid #F3F3F3;
           width: 200px;
-          @media (max-width: 735px){
+          @media (max-width: 735px) {
             width: 100px;
           }
-          @media (max-width: 1510px){
+          @media (max-width: 1510px) {
             width: 150px;
           }
-          @media(max-width: 1188px){
+          @media(max-width: 1188px) {
             width: 150px;
           }
-          @media(max-width: 560px){
+          @media(max-width: 560px) {
             width: 100px;
           }
-
 
 
           &_upper {
@@ -107,7 +105,7 @@
       display: flex;
       padding-bottom: 16px;
       border-bottom: 1px solid #F3F3F3;
-      @media (max-width: 735px){
+      @media (max-width: 735px) {
         display: flex;
       }
 
@@ -120,20 +118,20 @@
         font-size: 12px;
         line-height: 24px;
         color: #848484;
-        @media (max-width: 735px){
+        @media (max-width: 735px) {
           padding-right: 35%;
 
         }
-      @media (max-width: 1750px){
-        padding-right: 30%;
-      }
-        @media(max-width: 1188px){
+        @media (max-width: 1750px) {
+          padding-right: 30%;
+        }
+        @media(max-width: 1188px) {
           padding-right: 46%;
         }
 
       }
 
-      &_title_give{
+      &_title_give {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;
@@ -142,17 +140,18 @@
         font-size: 12px;
         line-height: 24px;
         color: #848484;
-        @media (max-width: 735px){
+        @media (max-width: 735px) {
           padding-right: 25%;
         }
-        @media (max-width: 1750px){
+        @media (max-width: 1750px) {
           padding-right: 30%;
         }
-        @media(max-width: 1188px){
+        @media(max-width: 1188px) {
           padding-right: 20%;
         }
       }
-      &_title_get{
+
+      &_title_get {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;
@@ -161,17 +160,18 @@
         font-size: 12px;
         line-height: 24px;
         color: #848484;
-        @media (max-width: 735px){
+        @media (max-width: 735px) {
           padding-right: 25%;
         }
-        @media (max-width: 1750px){
+        @media (max-width: 1750px) {
           padding-right: 35%;
         }
-        @media(max-width: 1188px){
+        @media(max-width: 1188px) {
           padding-right: 20%;
         }
       }
-      &_title_status{
+
+      &_title_status {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;

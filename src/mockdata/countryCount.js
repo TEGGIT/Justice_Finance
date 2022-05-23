@@ -1,4 +1,3 @@
-
 export const countryCount = {
   RUB: '₽',
   USD: '$',

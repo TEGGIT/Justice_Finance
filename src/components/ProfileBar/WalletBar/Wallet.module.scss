@@ -1,4 +1,4 @@
-.wallet{
+.wallet {
   margin-top: 1rem;
   border: 1px solid #ECECEC;
   color: #363636;;
@@ -10,9 +10,9 @@
   padding: 24px;
 
 
-  &_top{
+  &_top {
 
-   display: flex;
+    display: flex;
     align-items: center;
     gap: 111px;
     font-family: 'Inter', sans-serif;
@@ -23,8 +23,8 @@
     color: #363636;
   }
 
-  &_bottom{
-   display: flex;
+  &_bottom {
+    display: flex;
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;

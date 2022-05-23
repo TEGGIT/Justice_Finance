@@ -57,9 +57,9 @@ const ButtonMui = ({
     '&:active': {
       boxShadow: 'none',
     },
-    '&:disabled':{
+    '&:disabled': {
       background: '#EDEDED',
-      color:'#8C8C8C',
+      color: '#8C8C8C',
     },
   });
 
