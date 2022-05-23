@@ -9,7 +9,7 @@ import Wallet from "./WalletBar/Wallet";
 import {useStateContext} from "../../context/stateContext";
 import greenEllipse from '../../assets/image/GreenElipse.svg'
 import left from '../../assets/image/arrowProfileLeft.svg'
-import right from '../../assets/image/arrowButtonRight.svg'
+import right from '../../assets/image/arrowProfileRight.svg'
 import {useState} from "react";
 const ProfileBar = () => {
   const navigate = useNavigate()
