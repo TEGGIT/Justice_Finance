@@ -7,23 +7,6 @@
 
 }
 
-.title {
-  font-family: 'TT Firs Neue', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 4rem;
-  line-height: 4.5rem;
-  z-index: 2;
-  text-align: center;
-  width: 41.25rem;
-  color: #363636;
-  @media (max-width: 1000px) {
-    width: 20.25rem;
-    font-size: 2rem;
-  }
-
-}
-
 .main {
   margin-top: 7.5rem;
   display: flex;
@@ -60,20 +43,23 @@
   @media (max-width: 1000px) {
     width: 100%;
   }
+  @media (max-width: 660px) {
+    display: none;
+  }
 }
 
 .ellipseOne {
   position: fixed;
   left: 35.625rem;
-  top: 12.188rem;
   z-index: 1;
   width: 7.625rem;
   height: 7.625rem;
   background: rgba(132, 165, 0, 0.7);
   filter: blur(60px);
+
 }
 
-.test {
+.positive {
   box-sizing: border-box;
   position: absolute;
   width: 14rem;
@@ -130,6 +116,13 @@
   text-align: center;
   width: 41.25rem;
   color: #363636;
+  @media (max-width: 1000px) {
+    display: flex;
+    font-size: 3rem;
+    flex-direction: column;
+    align-items: center;
+    width: 100%
+  }
 
 }
 

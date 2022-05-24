@@ -15,9 +15,11 @@ const MainPage = () => {
   return (
 
     <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
-      <Header bold='Justice' regular='Finance'/>
+      <Header
+          bold='Justice'
+          regular='Finance'
+      />
       <main className={classes.main}>
-        {/*//todo:допилить мобильную адаптацию*/}
         <div className={classes.ellipseOne}/>
         <div className={classes.starOne} style={{backgroundImage: `url(${starOne})`}}/>
         <div className={classes.ellipseTwo}/>
@@ -28,7 +30,7 @@ const MainPage = () => {
           </div>
           <div className={classes.main__section__content}>
             <img src={interfaceFinance} alt='interface' className={classes.image}/>
-            <div className={classes.test} style={{backgroundImage: `url(${positive})`}}/>
+            <div className={classes.positive} style={{backgroundImage: `url(${positive})`}}/>
           </div>
         </section>
       </main>

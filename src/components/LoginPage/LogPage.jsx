@@ -77,6 +77,7 @@ const LogPage = () => {
           <form className={classes.main__login_wrapper__form}>
             <p className={classes.main__login_wrapper__form_text}>Вход</p>
             <div className={classes.main__login_wrapper__form__buttons}>
+              <div className={classes.main__login_wrapper__form__buttons_desktop}>
               <ButtonMui fontSize='12px'
                          img={google}
                          text='Sing up with Google'
@@ -100,6 +101,33 @@ const LogPage = () => {
 
 
               />
+              </div>
+                <div className={classes.main__login_wrapper__form__buttons_mobile}>
+                  <ButtonMui fontSize='12px'
+                             img={google}
+                             text='Sing up with Google'
+                             gap="8px"
+                             color='#363636'
+                             border='1px solid #ECECEC'
+                             padding="11px"
+                             fontWeight='500'
+
+
+                  />
+
+                  <ButtonMui fontSize='12px'
+                             img={github}
+                             text='Sing up with GitHub'
+                             gap="8px"
+                             color='#363636'
+                             border='1px solid #ECECEC'
+                             padding="11px"
+                             fontWeight='500'
+
+
+                  />
+                </div>
+
             </div>
             <div>
 
@@ -137,7 +165,7 @@ const LogPage = () => {
                 <p>Запомнить меня</p>
               </div>
             </div>
-
+            <div className={classes.buttons_bottom_desktop}>
             <ButtonMui text='Войти'
                        padding="12px 190px"
                        background='#363636'
@@ -147,6 +175,18 @@ const LogPage = () => {
                        onClick={checkUser}
                        disabled={isDisabledBtn}
             />
+        </div>
+            <div className={classes.buttons_bottom_mobile}>
+              <ButtonMui text='Войти'
+                         padding="12px 100px"
+                         background='#363636'
+                         color='#FFFFFF'
+                         hoverBackground="#363636"
+                         fontWeight='600'
+                         onClick={checkUser}
+                         disabled={isDisabledBtn}
+              />
+            </div>
             <div className={classes.newperson}>
               <p>Нет аккаунта? <NavLink to='/register-page' className={classes.signup}>Создать
                 аккаунт</NavLink></p>
