@@ -1,10 +1,19 @@
 import React from 'react';
-import classes from "./Header.module.scss";
-import ButtonMui from "../MUI/Button/ButtonMui";
+
 import {NavLink} from "react-router-dom";
 
+import ButtonMui from "../MUI/Button/ButtonMui";
 
-const Header = ({bold, regular, text}) => {
+import classes from "./Header.module.scss";
+
+const Header = (props) => {
+
+  const {
+    bold,
+    regular,
+    text
+  } = props
+
   return (
     <>
       <header className={classes.header}>

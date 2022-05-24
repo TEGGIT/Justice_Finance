@@ -6,25 +6,28 @@ import Stack from '@mui/material/Stack';
 
 import classes from "./ButtonMui.module.scss";
 
-const ButtonMui = ({
-                     text,
-                     padding,
-                     background,
-                     img,
-                     gap,
-                     color,
-                     fontSize,
-                     hoverBackground,
-                     marginTop,
-                     borderRadius,
-                     height,
-                     onClick,
-                     border,
-                     fontWeight,
-                     disabled,
-                     flexDirection,
-                     type,
-                   }) => {
+const ButtonMui = (props) => {
+
+  const {
+    text,
+    padding,
+    background,
+    img,
+    gap,
+    color,
+    fontSize,
+    hoverBackground,
+    marginTop,
+    borderRadius,
+    height,
+    onClick,
+    border,
+    fontWeight,
+    disabled,
+    flexDirection,
+    type,
+  } = props
+
   const [hover, setHover] = useState(false)
 
   const BootstrapButton = styled(Button)({
@@ -51,8 +54,6 @@ const ButtonMui = ({
     '&:hover': {
       boxShadow: 'none',
       backgroundColor: `${hoverBackground}`,
-
-
     },
     '&:active': {
       boxShadow: 'none',
@@ -62,7 +63,6 @@ const ButtonMui = ({
       color: '#8C8C8C',
     },
   });
-
 
   return (
     <>

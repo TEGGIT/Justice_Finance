@@ -1,18 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import classes from './PursePage.module.scss'
-import NavBar from "../NavBar/NavBar";
-import ProfileBar from "../ProfileBar/ProfileBar";
-import waller from '../../assets/image/wallet.svg'
-import Input from "../UI/Input/Input";
 import Modal from 'react-modal';
+import {useNavigate} from "react-router-dom";
+import {useStateContext} from "../../context/stateContext";
+
+import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Wallet from "../ProfileBar/WalletBar/Wallet";
+import NavBar from "../NavBar/NavBar";
+import ProfileBar from "../ProfileBar/ProfileBar";
+
+import {countryIcon} from "../../mockdata/countryIcon";
+
+import classes from './PursePage.module.scss'
+
+import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
-import {useNavigate} from "react-router-dom";
-import {useStateContext} from "../../context/stateContext";
-import {countryIcon} from "../../mockdata/countryIcon";
 
 const customStyles = {
   overlay: {
@@ -156,7 +160,7 @@ const PursePage = () => {
           </div>
         ) : (
           <div className={classes.main__wrapper__wallet_container}>
-            <img src={waller} alt='Кошелек'/>
+            <img src={wallet} alt='Кошелек'/>
             <p className={classes.main__wrapper__title_wallet}>На данный момент у вас не созданно ни одного
               кошелька</p>
           </div>

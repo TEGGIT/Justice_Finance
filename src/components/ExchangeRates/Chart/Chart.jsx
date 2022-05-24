@@ -3,6 +3,7 @@ import ReactApexChart from 'react-apexcharts'
 import './Charts.moduel.scss'
 
 const Chart = () => {
+
   const series = [{
     name: `19 May`,
     data: [82, 83, 82.75, 83.50, 82.70, 84, 82.95, 83.50]
@@ -14,6 +15,7 @@ const Chart = () => {
       height: 350,
       type: 'area'
     },
+
     fill: {
       type: 'gradient',
       gradient: {
@@ -21,6 +23,7 @@ const Chart = () => {
       },
 
     },
+
     colors: ['#84A500'],
 
     dataLabels: {

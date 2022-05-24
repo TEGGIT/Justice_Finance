@@ -1,16 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
-import classes from './LogPage.module.scss'
-import image from '../../assets/image/IllustrationOne.svg'
-import google from '../../assets/image/google.svg'
-import github from '../../assets/image/github.svg'
+import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
+import {useStateContext} from "../../context/stateContext";
+
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import {useStateContext} from "../../context/stateContext";
+
+import classes from './LogPage.module.scss'
+
+import image from '../../assets/image/IllustrationOne.svg'
+import google from '../../assets/image/google.svg'
+import github from '../../assets/image/github.svg'
+
 
 
 const LogPage = () => {
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isEmailError, setIsEmailError] = useState(false)
@@ -66,6 +71,7 @@ const LogPage = () => {
 
   return (
     <main className={classes.main}>
+      {/*//todo:допилить мобильную адаптацию*/}
       <div className={classes.main__login}>
         <div className={classes.main__login_wrapper}>
           <form className={classes.main__login_wrapper__form}>

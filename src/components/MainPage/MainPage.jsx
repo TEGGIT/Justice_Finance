@@ -11,10 +11,13 @@ import starTwo from '../../assets/image/StarTwo.svg'
 import positive from '../../assets/image/Positive.png'
 
 const MainPage = () => {
+
   return (
+
     <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
       <Header bold='Justice' regular='Finance'/>
       <main className={classes.main}>
+        {/*//todo:допилить мобильную адаптацию*/}
         <div className={classes.ellipseOne}/>
         <div className={classes.starOne} style={{backgroundImage: `url(${starOne})`}}/>
         <div className={classes.ellipseTwo}/>

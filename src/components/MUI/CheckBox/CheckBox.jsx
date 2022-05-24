@@ -3,7 +3,12 @@ import Checkbox from '@mui/material/Checkbox';
 import {green} from '@mui/material/colors';
 
 
-const CheckBox = ({checkedMui, onChange}) => {
+const CheckBox = (props) => {
+
+  const {
+    checkedMui,
+    onChange
+     } = props
   return (
     <>
       <Checkbox

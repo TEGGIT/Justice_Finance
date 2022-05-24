@@ -102,7 +102,9 @@ const RegisterPage = () => {
 
 
   return (
+
     <main className={classes.main}>
+      {/*//todo:допилить мобильную адаптацию*/}
       <div className={classes.main__register}>
         <div className={classes.main__register_wrapper}>
           <form className={classes.main__register_wrapper__form}>
