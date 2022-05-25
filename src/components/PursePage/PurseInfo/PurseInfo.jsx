@@ -58,7 +58,7 @@ const PurseInfo = () => {
 
   const addSumWallet = () => {
 
-    const newWalletStorage = currentUser[0].wallets.map((wallet) => {
+    const newWalletstorage = currentUser[0].wallets.map((wallet) => {
       if (wallet.currency === currentWallet.currency)
         wallet.sum = +currentWallet.sum + +sum
       return wallet
@@ -66,7 +66,7 @@ const PurseInfo = () => {
 
     const updatedUserWallet = {
       ...currentUser[0],
-      wallets: newWalletStorage
+      wallets: newWalletstorage
     }
     setIsOpen(true)
     changeCurrentUser([updatedUserWallet])
