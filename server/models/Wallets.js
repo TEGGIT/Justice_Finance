@@ -14,6 +14,10 @@ const walletSchema = new Schema({
   sum: {
     type:Number,
     required:false
+  },
+  wallets: {
+    ref:'users',
+    type: Schema.Types.ObjectId
   }
 })
 

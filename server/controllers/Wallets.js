@@ -1,11 +1,11 @@
-
+const User = require('../models/Users')
 const Wallets = require('../models/Wallets')
 const errorHandler = require('../utils/errorHandler')
 
 
 module.exports.getWallets = async function (req, res) {
   try {
-    const wallets = await Wallets.find({user: req.user.id})
+    const wallets = await Wallets.find({wallets: req.user.id})
     res.status(200).json(wallets)
   } catch (e) {
     errorHandler(res, e)
@@ -33,14 +33,18 @@ module.exports.remove = async function (req, res) {
 }
 
 module.exports.createWallets = async function (req, res) {
+
+  const candidate = await User.findOne({_id: req.user._id})
+
   const wallets = new Wallets({
     currency: req.body.currency,
     purseNumber: req.body.purseNumber,
-    sum: req.body.sum
+    sum: req.body.sum,
+    wallets: candidate._id
+
   })
 
   try {
-
     await wallets.save()
     res.status(201).json(wallets)
   } catch (e) {
