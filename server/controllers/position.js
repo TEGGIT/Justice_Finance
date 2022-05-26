@@ -15,10 +15,8 @@ module.exports.getBycategoryID = async function (req, res){
 module.exports.create = async function (req, res){
   try {
     const position = await new Position({
-     name: req.body.name,
-      cost: req.body.cost,
-      category: req.body.category,
-      user: req.user.id
+     currency: req.body.currency,
+      id: req.body.id,
     }).save()
     res.status(201).json(position)
   }catch (e){

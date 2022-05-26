@@ -51,6 +51,8 @@ const RegisterPage = () => {
       setNameError(false)
     }
   }
+
+
   const emailErrorChecker = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {
@@ -130,7 +132,6 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-
             </div>
             <div className={classes.line_wrapper}>
               <div className={classes.line}/>

@@ -32,6 +32,7 @@ module.exports.remove = async function (req, res) {
     errorHandler(res, e)
   }
 }
+
 module.exports.create = async function (req, res) {
   const category = new Category({
     name: req.body.name,
