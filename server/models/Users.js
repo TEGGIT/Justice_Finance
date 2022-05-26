@@ -12,6 +12,23 @@ const userSchema = new Schema({
     type: String,
     required:true
   },
+    name: {
+    type:String,
+    required:true
+  },
+  phoneNumber: {
+    type:Number,
+    required:false
+  },
+  city: {
+    type:String,
+    required:false
+  },
+  birthday:{
+    type:String,
+    required:false
+  },
+
 })
 
 module.exports = mongoose.model(' users', userSchema)
