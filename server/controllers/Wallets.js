@@ -4,8 +4,9 @@ const errorHandler = require('../utils/errorHandler')
 
 
 module.exports.getWallets = async function (req, res) {
+
   try {
-    const wallets = await Wallets.find({wallets: req.user.id})
+    const wallets = await Wallets.find({wallets: req.user._id})
     res.status(200).json(wallets)
   } catch (e) {
     errorHandler(res, e)
@@ -43,7 +44,6 @@ module.exports.createWallets = async function (req, res) {
     wallets: candidate._id
 
   })
-
   try {
     await wallets.save()
     res.status(201).json(wallets)
