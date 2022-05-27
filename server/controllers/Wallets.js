@@ -48,18 +48,17 @@ module.exports.createWallets = async function (req, res) {
    if (createWallet.wallets[0].currency !== req.body.wallets[0].currency){
     res.status(404).json('нельзя')
    }else{
-        await Users.findOneAndUpdate(
+
+     const wallet = await Users.findOneAndUpdate(
        {_id: req.user._id},
        {$set: createWallet},
        {new: true}
      )
      const newWallets = {
-      ...createWallet.wallets,
-       wallets: []
+      ...wallet.wallets,
+       wallets: [...createWallet.wallets, {currency: req.body.wallets[0].currency, numberPurse: req.body.wallets[0].purseNumber, sum: 0}]
      }
-     console.log(createWallet.wallets[0].currency)
-     console.log(req.body.wallets[0].currency)
-     res.status(200).json(newWallets)
+     res.status(200).json(wallet)
    }
 
   } catch (e) {
