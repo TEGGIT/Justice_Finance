@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {type} = require("@testing-library/user-event/dist/type");
 
 const Schema = mongoose.Schema
 
@@ -28,6 +29,18 @@ const userSchema = new Schema({
     type:String,
     required:false
   },
+  wallets:[
+    {
+      currency: {
+        type: String
+      },
+      purseNumber: {
+        type: Number
+      },
+      sum:{
+        type:Number
+      }}
+  ]
 })
 
 module.exports = mongoose.model('users', userSchema)
