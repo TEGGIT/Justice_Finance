@@ -39,8 +39,7 @@ const userSchema = new Schema({
       },
       sum:{
         type:Number
-      }}
-  ]
+      }}]
 })
 
 module.exports = mongoose.model('users', userSchema)
