@@ -53,6 +53,7 @@ const PurseInfo = () => {
       wallets: newWallet
     }
     changeCurrentUser([updUser])
+    console.log(updUser)
     navigate("/purse-page", {replace: true});
   }
 
@@ -68,6 +69,7 @@ const PurseInfo = () => {
       ...currentUser[0],
       wallets: newWalletstorage
     }
+    console.log(updatedUserWallet)
     setIsOpen(true)
     changeCurrentUser([updatedUserWallet])
   }
