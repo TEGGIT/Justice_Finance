@@ -39,7 +39,29 @@ const userSchema = new Schema({
       },
       sum:{
         type:Number
-      }}]
+      }}],
+  transaction:[
+    {
+      get:{
+        type:String
+      },
+      Hour:{
+        type:Number
+      },
+      Minutes:{
+        type:Number
+      },
+      give:{
+        type:String
+      },
+      giveValue:{
+        type:Number
+      },
+      getValue:{
+        type:Number
+      }
+    }
+  ]
 })
 
 module.exports = mongoose.model('users', userSchema)

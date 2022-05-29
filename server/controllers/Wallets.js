@@ -1,6 +1,5 @@
 const User = require('../models/Users')
 const errorHandler = require('../utils/errorHandler')
-const Users = require("../models/Users");
 
 
 module.exports.getWallets = async function (req, res) {
