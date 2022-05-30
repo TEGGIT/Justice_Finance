@@ -1,12 +1,14 @@
 import {createContext, useCallback, useContext, useEffect} from "react";
 import {useState} from "react";
+import axios from "axios";
 
 export const StateContext = createContext(null)
 
 export const StateProvider = ({children}) => {
-  const [isAuth, setIsAuth] = useState(() => JSON.parse(localStorage.getItem('AUTH')) ?? false)
+  const [isAuth, setIsAuth] = useState()
   const [currentUser, changeCurrentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')) ?? [])
   const [userData, changeUserData] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')) ?? [])
+
 
   const onLogin = useCallback(() => {
     setIsAuth(true)
@@ -15,7 +17,6 @@ export const StateProvider = ({children}) => {
   const onLogout = useCallback(() => {
     setIsAuth(false)
   }, [])
-
 
   useEffect(() => {
     localStorage.setItem('AUTH', JSON.stringify(isAuth))

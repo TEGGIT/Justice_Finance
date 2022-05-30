@@ -27,7 +27,6 @@ const ProfileBar = () => {
     setX(x - 20)
     if (x === -80) setX(0)
   }
-  console.log(x)
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }

@@ -17,6 +17,7 @@ import classes from './PursePage.module.scss'
 import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
+import axios from "axios";
 
 const customStyles = {
   overlay: {
@@ -43,6 +44,7 @@ const PursePage = () => {
   const {currentUser, changeCurrentUser} = useStateContext()
   const [numberPurse, setNumberPurse] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
+  const [post, setPost] = React.useState();
   const navigate = useNavigate()
 
   const wallets = [...currentUser]
@@ -55,6 +57,20 @@ const PursePage = () => {
       setIsDisabledBtn(false)
     }
   }, [numberPurse, currency])
+
+ useEffect(() => {
+   const test = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbG1hY2hldi56aGVueWEwNEBnbWFpbC5jb20iLCJ1c2VySWQiOiI2Mjk0OWJiMzY4NTNiOGRkZWJkNjk0M2EiLCJpYXQiOjE2NTM5MDY1NTcsImV4cCI6MTY1MzkxMDE1N30.ydd0rKgYj0bO0wvWyCicVI7nuIITYTx24fJzYDkOnFk"
+   axios.get('http://localhost:5000/api/wallets/', {headers: {
+     'Authorization': test
+     }}).then((responce) => {
+     setPost(responce.data)
+     console.log(responce.data)
+   })
+ },[])
+
+
+
+
 
 
   const isFindWallet = currentUser.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))

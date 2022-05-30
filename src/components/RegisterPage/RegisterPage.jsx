@@ -13,6 +13,7 @@ import classes from "./RegisterPage.module.scss";
 import image from "../../assets/image/IllustrationTwo.svg";
 import google from "../../assets/image/google.svg";
 import github from "../../assets/image/github.svg";
+import axios from "axios";
 
 const RegisterPage = () => {
   const [checked, setChecked] = React.useState(false);
@@ -78,12 +79,18 @@ const RegisterPage = () => {
   }
 
   const registration = () => {
-    if (newUser) {
-      currentUser.push(newUser)
-      localStorage.setItem('USERS_DATA', JSON.stringify(currentUser));
-      navigate("/", {replace: true});
-    } else {
-    }
+      axios.post('http://localhost:5000/api/auth/register-page', {
+        "name": name,
+        "email": email,
+        "password": password
+      }).then((responce) => {
+        // setPost(responce.data)
+        console.log(responce.data)
+      })
+      // currentUser.push(newUser)
+      // localStorage.setItem('USERS_DATA', JSON.stringify(currentUser));
+      // navigate("/", {replace: true});
+
   }
 
   useEffect(() => {

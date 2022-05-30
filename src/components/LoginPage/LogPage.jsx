@@ -11,6 +11,7 @@ import classes from './LogPage.module.scss'
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
 import github from '../../assets/image/github.svg'
+import axios from "axios";
 
 
 
@@ -30,11 +31,20 @@ const LogPage = () => {
   const checkUser = () => {
     const isValid = !!currentUser.find(item => email === item.email && password === item.password)
     if (isValid) {
+
       navigate("/exchange-rates-page", {replace: true});
       localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
       onLogin()
+
     } else {
       alert('Такого пользователя не существует')
+      axios.post('http://localhost:5000/api/auth/login-page', {
+        "email": email,
+        "password": password
+      }).then((responce) => {
+        // setPost(responce.data)
+        console.log(responce.data)
+      })
     }
   }
 
