@@ -5,7 +5,7 @@ import {useStateContext} from "../../context/stateContext";
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
-
+import Cookies from "js-cookie";
 import classes from './LogPage.module.scss'
 
 import image from '../../assets/image/IllustrationOne.svg'
@@ -26,28 +26,19 @@ const LogPage = () => {
 
   const navigate = useNavigate();
 
-  const {onLogin, currentUser} = useStateContext()
-
+  const {setIsAuth, isAuth} = useStateContext()
   const checkUser = () => {
-    const isValid = !!currentUser.find(item => email === item.email && password === item.password)
-    if (isValid) {
-
-      navigate("/exchange-rates-page", {replace: true});
-      localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
-      onLogin()
-
-    } else {
-      alert('Такого пользователя не существует')
       axios.post('http://localhost:5000/api/auth/login-page', {
         "email": email,
         "password": password
       }).then((responce) => {
-        // setPost(responce.data)
+        navigate("/exchange-rates-page", {replace: true});
+        setIsAuth(responce.data)
+        Cookies.set("TOKEN", responce.data.token)
         console.log(responce.data)
       })
-    }
   }
-
+  console.log('qwe', isAuth)
   const checkEmail = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {

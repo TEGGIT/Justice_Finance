@@ -7,12 +7,15 @@ import Input from "../UI/Input/Input";
 import {useStateContext} from "../../context/stateContext";
 
 const Profile = () => {
-  const {currentUser, changeCurrentUser} = useStateContext()
-  const [name, setName] = useState(currentUser[0].name)
-  const [email, setEmail] = useState(currentUser[0].email)
-  const [city, setCity] = useState(currentUser[0].city)
-  const [birthday, setBirthday] = useState(currentUser[0].birthday)
-  const [number, setNumber] = useState(currentUser[0].number)
+
+  const {isAuth: user} = useStateContext()
+
+
+  const [name, setName] = useState(user.candidate.name)
+  const [email, setEmail] = useState(user.candidate.email)
+  const [city, setCity] = useState(user.candidate.city)
+  const [birthday, setBirthday] = useState(user.candidate.birthday)
+  const [number, setNumber] = useState(user.candidate.number)
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
@@ -21,7 +24,7 @@ const Profile = () => {
   const [isOldPassword, setIsOldPassword] = useState(true)
 
   const passwordChecker = () => {
-    if (currentUser[0].password === oldPassword) {
+    if (user.password === oldPassword) {
       setIsOldPassword(false)
     } else {
       setIsOldPassword(true)
@@ -63,40 +66,41 @@ const Profile = () => {
   }, [name, email, city, birthday, number])
 
 
-  const changeProfile = () => {
-    const updateStorage = currentUser.map((item) => {
-      if (item.email === currentUser[0].email) {
-        const updateUser = {
-          ...item,
-          email: email,
-          name: name,
-          city: city,
-          birthday: birthday,
-          number: number
-        }
-        return updateUser
-      }
-    })
-    changeCurrentUser(updateStorage)
-  }
+  // const changeProfile = () => {
+  //   const updateStorage = user.map((item) => {
+  //     if (item.email === user.email) {
+  //       const updateUser = {
+  //         ...item,
+  //         email: email,
+  //         name: name,
+  //         city: city,
+  //         birthday: birthday,
+  //         number: number
+  //       }
+  //       return updateUser
+  //     }
+  //   })
+  //   changeCurrentUser(updateStorage)
+  // }
 
-  const changePassword = () => {
-    const updatePassword = currentUser.map((item) => {
-      if (item.email === currentUser[0].email) {
-        const updatePassword = {
-          ...item,
-          email: email,
-          name: name,
-          city: city,
-          birthday: birthday,
-          number: number,
-          password: password,
-        }
-        return updatePassword
-      }
-    })
-    changeCurrentUser(updatePassword)
-  }
+  // const changePassword = () => {
+  //   const updatePassword = currentUser.map((item) => {
+  //     if (item.email === currentUser[0].email) {
+  //       const updatePassword = {
+  //         ...item,
+  //         email: email,
+  //         name: name,
+  //         city: city,
+  //         birthday: birthday,
+  //         number: number,
+  //         password: password,
+  //       }
+  //       return updatePassword
+  //     }
+  //   })
+  //   changeCurrentUser(updatePassword)
+  // }
+
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -107,7 +111,7 @@ const Profile = () => {
           </h1>
           <div className={classes.main_wrapper__title_button}>
             <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
-                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} />
           </div>
         </div>
         <div className={classes.main_wrapper__content}>
@@ -128,7 +132,7 @@ const Profile = () => {
           </div>
           <div className={classes.main_wrapper__title_button_bottom}>
             <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
-                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} />
           </div>
           <div className={classes.main_wrapper__content__title__password}>
             <p>Пароль</p>
@@ -163,7 +167,7 @@ const Profile = () => {
                        fontSize='16px'
                        disabled={isDisabledPassword}
                        fontWeight='600'
-                       onClick={changePassword}/>
+            />
           </div>
 
         </div>

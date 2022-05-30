@@ -8,10 +8,7 @@ import {useStateContext} from "../../context/stateContext";
 
 const TransactionsPage = () => {
 
-  const {currentUser} = useStateContext()
-  const transaction = [...currentUser]
-
-  const currentTransaction = transaction[0].transaction
+  const {isAuth: user} = useStateContext()
   return (<main className={classes.main}>
     <NavBar/>
     <section className={classes.main__wrapper}>
@@ -35,7 +32,7 @@ const TransactionsPage = () => {
           Статус
         </p>
       </div>
-      {currentTransaction.map((transactionItem) => (
+      {user.candidate.transaction.map((transactionItem) => (
 
         <TransactionStatus
           exchangeValue={`${transactionItem.give} to ${transactionItem.get}`}

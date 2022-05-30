@@ -41,15 +41,12 @@ const PursePage = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [currency, setСurrency] = React.useState('');
-  const {currentUser, changeCurrentUser} = useStateContext()
+  const {isAuth: user} = useStateContext()
   const [numberPurse, setNumberPurse] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const [post, setPost] = React.useState();
   const navigate = useNavigate()
 
-  const wallets = [...currentUser]
-
-  const currentWallet = wallets[0].wallets
   useEffect(() => {
     if (!numberPurse || !currency) {
       setIsDisabledBtn(true)
@@ -73,24 +70,24 @@ const PursePage = () => {
 
 
 
-  const isFindWallet = currentUser.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
+  // const isFindWallet = user.candidate.wallets.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
 
-  const addPurse = () => {
-    if (isFindWallet) {
-      setModalErrorIsOpen(true)
-    } else {
-      setIsOpen(true)
-      const wallets = currentUser[0]
-
-      const updateWallets = {
-        ...wallets,
-        wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]
-      }
-
-      changeCurrentUser([updateWallets])
-
-    }
-  }
+  // const addPurse = () => {
+  //   if (isFindWallet) {
+  //     setModalErrorIsOpen(true)
+  //   } else {
+  //     setIsOpen(true)
+  //     const wallets = currentUser[0]
+  //
+  //     const updateWallets = {
+  //       ...wallets,
+  //       wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]
+  //     }
+  //
+  //     changeCurrentUser([updateWallets])
+  //
+  //   }
+  // }
   useEffect(() => {
     if (modalIsOpen) {
       setTimeout(() => {
@@ -159,9 +156,9 @@ const PursePage = () => {
           </Modal>
         )}
 
-        {currentWallet.length ? (
+        {user.candidate.wallets.length ? (
           <div className={classes.main__wrapper__wallet_container__wallets}>
-            {currentWallet.map((wallet) => (
+            {user.candidate.wallets.map((wallet) => (
               <Wallet
                 pointer={{cursor: 'pointer'}}
                 key={wallet.currency}
@@ -209,7 +206,7 @@ const PursePage = () => {
                        fontSize='16px'
                        fontWeight='600'
                        hoverBackground='#363636'
-                       onClick={addPurse}
+                       // onClick={addPurse}
             />
           </div>
 

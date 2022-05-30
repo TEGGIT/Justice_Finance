@@ -5,9 +5,10 @@ import {useStateContext} from "../../../context/stateContext";
 
 const AppRouter = () => {
   const {isAuth} = useStateContext();
+  const test = true
   return (
     <Routes>
-      {isAuth
+      {test
         ? (
           <>
             {privateRoutes.map((route) =>

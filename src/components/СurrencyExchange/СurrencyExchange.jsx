@@ -18,43 +18,42 @@ const CurrencyExchange = () => {
   const [get, setGet] = React.useState('');
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
-  const {currentUser, changeCurrentUser} = useStateContext()
+  const {isAuth: user} = useStateContext()
   const [isDisabled, setIsDisabled] = useState(true)
 
   const Data = new Date();
   const Hour = Data.getHours();
   const Minutes = Data.getMinutes();
-  const addTransaction = () => {
-    const transaction = currentUser[0]
-
-    const refreshWalletSum = transaction.wallets.map(item => {
-      if (item.currency === give) {
-        return {
-          ...item,
-          sum: item.sum - giveValue
-        }
-      }
-      if (item.currency === get) {
-        return {
-          ...item,
-          sum: item.sum + +getValue
-        }
-      }
-      return item
-    })
-
-    const updateTransaction = {
-      ...transaction,
-      transaction: [...transaction.transaction, {get, Hour, Minutes, give, giveValue, getValue}],
-      wallets: refreshWalletSum,
-    }
-    setIsDisabled(true)
-    changeCurrentUser([updateTransaction])
-
-  }
+  // const addTransaction = () => {
+  //
+  //   const refreshWalletSum = user.candidate.wallets.map(item => {
+  //     if (item.currency === give) {
+  //       return {
+  //         ...item,
+  //         sum: item.sum - giveValue
+  //       }
+  //     }
+  //     if (item.currency === get) {
+  //       return {
+  //         ...item,
+  //         sum: item.sum + +getValue
+  //       }
+  //     }
+  //     return item
+  //   })
+  //
+  //   const updateTransaction = {
+  //     ...transaction,
+  //     transaction: [...transaction.transaction, {get, Hour, Minutes, give, giveValue, getValue}],
+  //     wallets: refreshWalletSum,
+  //   }
+  //   setIsDisabled(true)
+  //   changeCurrentUser([updateTransaction])
+  //
+  // }
 
   useEffect(() => {
-    const walletGive = currentUser[0].wallets.filter(wallet => wallet.currency === give && wallet)
+    const walletGive = user.candidate.wallets.filter(wallet => wallet.currency === give && wallet)
     walletGive.length && (giveValue > walletGive[0].sum
     ||
     Boolean(!get)
@@ -77,6 +76,8 @@ const CurrencyExchange = () => {
     })
 
   }, [giveValue, getValue, get, give, isDisabled])
+
+
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -99,7 +100,7 @@ const CurrencyExchange = () => {
 
             <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
                     name='Выберите кошелек'
-                    array={currentUser[0].wallets}
+                    array={user.candidate.wallets}
             />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
@@ -110,7 +111,7 @@ const CurrencyExchange = () => {
             />
             <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
                     name='Выберите валюту'
-                    array={currentUser[0].wallets}
+                    array={user.candidate.wallets}
             />
           </div>
           <div className={classes.main__wrapper__content__exchange}>
@@ -125,7 +126,7 @@ const CurrencyExchange = () => {
                        hoverBackground='#363636'
                        disabled={isDisabled}
                        flexDirection='row-reverse'
-                       onClick={addTransaction}
+                       // onClick={addTransaction}
             />
 
           </div>
