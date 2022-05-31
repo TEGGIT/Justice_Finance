@@ -11,6 +11,8 @@ import {useStateContext} from "../../context/stateContext";
 import wallet from "../ProfileBar/WalletBar/Wallet";
 
 import {countryIcon} from "../../mockdata/countryIcon";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 
 const CurrencyExchange = () => {
@@ -18,7 +20,7 @@ const CurrencyExchange = () => {
   const [get, setGet] = React.useState('');
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
-  const {isAuth: user} = useStateContext()
+  const [walletsUser , setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
 
   const Data = new Date();
@@ -51,9 +53,17 @@ const CurrencyExchange = () => {
   //   changeCurrentUser([updateTransaction])
   //
   // }
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+    })
+  }, [])
 
   useEffect(() => {
-    const walletGive = user.candidate.wallets.filter(wallet => wallet.currency === give && wallet)
+    const walletGive = walletsUser && walletsUser.filter(wallet => wallet.currency === give && wallet)
     walletGive.length && (giveValue > walletGive[0].sum
     ||
     Boolean(!get)
@@ -97,11 +107,14 @@ const CurrencyExchange = () => {
                    value={giveValue}
 
             />
-
-            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
-                    name='Выберите кошелек'
-                    array={user.candidate.wallets}
-            />
+            {walletsUser ? (
+              <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
+                      name='Выберите кошелек'
+                      array={walletsUser}
+              />
+            ): (
+              <h1>LoAdInG...</h1>
+            )}
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Получаю' type='number' styles={classes.main__wrapper__content__exchange__input}
@@ -109,10 +122,15 @@ const CurrencyExchange = () => {
                    value={getValue}
                    readOnly={true}
             />
-            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
-                    name='Выберите валюту'
-                    array={user.candidate.wallets}
-            />
+            {walletsUser ? (
+              <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
+                      name='Выберите валюту'
+                      array={walletsUser}
+              />
+            ) : (
+              <h1>LoAdInG...</h1>
+            )}
+
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <ButtonMui text="Обменять"

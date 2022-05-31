@@ -64,7 +64,6 @@ const Profile = () => {
 
   },[])
 
-
   useEffect(() => {
     if (!isOldPassword && repeatPassword && password) {
       setIsDisabledPassword(false)
@@ -97,23 +96,16 @@ const Profile = () => {
       console.log(responce.data)
     })
   }
-  // const changePassword = () => {
-  //   const updatePassword = currentUser.map((item) => {
-  //     if (item.email === currentUser[0].email) {
-  //       const updatePassword = {
-  //         ...item,
-  //         email: email,
-  //         name: name,
-  //         city: city,
-  //         birthday: birthday,
-  //         number: number,
-  //         password: password,
-  //       }
-  //       return updatePassword
-  //     }
-  //   })
-  //   changeCurrentUser(updatePassword)
-  // }
+  const changePassword = () => {
+    axios.patch('http://localhost:5000/api/profile', {
+      password:password,
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
+      }
+    },).then((responce) => {
+      console.log(responce.data)
+    })
+  }
 
   return (
     <main className={classes.main}>
@@ -146,7 +138,7 @@ const Profile = () => {
           </div>
           <div className={classes.main_wrapper__title_button_bottom}>
             <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
-                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} />
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
           </div>
           <div className={classes.main_wrapper__content__title__password}>
             <p>Пароль</p>
@@ -181,6 +173,7 @@ const Profile = () => {
                        fontSize='16px'
                        disabled={isDisabledPassword}
                        fontWeight='600'
+                       onClick={changePassword}
             />
           </div>
 

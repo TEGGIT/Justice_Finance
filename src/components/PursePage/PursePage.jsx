@@ -18,6 +18,7 @@ import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const customStyles = {
   overlay: {
@@ -41,10 +42,9 @@ const PursePage = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [currency, setСurrency] = React.useState('');
-  const {isAuth: user} = useStateContext()
   const [numberPurse, setNumberPurse] = useState('')
+  const [walletsUser, setWalletsUser] = useState()
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
-  const [post, setPost] = React.useState();
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -55,21 +55,16 @@ const PursePage = () => {
     }
   }, [numberPurse, currency])
 
- useEffect(() => {
-   const test = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbG1hY2hldi56aGVueWEwNEBnbWFpbC5jb20iLCJ1c2VySWQiOiI2Mjk0OWJiMzY4NTNiOGRkZWJkNjk0M2EiLCJpYXQiOjE2NTM5MDY1NTcsImV4cCI6MTY1MzkxMDE1N30.ydd0rKgYj0bO0wvWyCicVI7nuIITYTx24fJzYDkOnFk"
-   axios.get('http://localhost:5000/api/wallets/', {headers: {
-     'Authorization': test
-     }}).then((responce) => {
-     setPost(responce.data)
-     console.log(responce.data)
-   })
- },[])
 
 
-
-
-
-
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+    })
+  }, [])
   // const isFindWallet = user.candidate.wallets.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
 
   // const addPurse = () => {
@@ -156,9 +151,9 @@ const PursePage = () => {
           </Modal>
         )}
 
-        {user.candidate.wallets.length ? (
+        {walletsUser ? (
           <div className={classes.main__wrapper__wallet_container__wallets}>
-            {user.candidate.wallets.map((wallet) => (
+            {walletsUser.map((wallet) => (
               <Wallet
                 pointer={{cursor: 'pointer'}}
                 key={wallet.currency}
