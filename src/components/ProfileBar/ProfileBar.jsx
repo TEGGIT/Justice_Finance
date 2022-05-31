@@ -18,7 +18,7 @@ const ProfileBar = () => {
 
   const navigate = useNavigate()
   const [userName , setUserName] = useState()
-  const [walletsUser, setWalletsUser] = useState()
+  const [walletsUser, setWalletsUser] = useState('')
   const [transactionUser, setTransactionUser] = useState()
   const [x, setX] = useState(0)
   const moveBlockLeft = () => {

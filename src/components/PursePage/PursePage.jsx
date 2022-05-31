@@ -19,6 +19,7 @@ import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
 import axios from "axios";
 import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
 const customStyles = {
   overlay: {
@@ -43,7 +44,7 @@ const PursePage = () => {
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [currency, setСurrency] = React.useState('');
   const [numberPurse, setNumberPurse] = useState('')
-  const [walletsUser, setWalletsUser] = useState()
+  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const navigate = useNavigate()
 
@@ -65,24 +66,28 @@ const PursePage = () => {
       setWalletsUser(responce.data[0].wallets)
     })
   }, [])
-  // const isFindWallet = user.candidate.wallets.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
+  const isFindWallet = walletsUser && walletsUser.some(user => walletsUser && user.length > 0 && user.some(wallet => wallet.currency === currency))
 
-  // const addPurse = () => {
-  //   if (isFindWallet) {
-  //     setModalErrorIsOpen(true)
-  //   } else {
-  //     setIsOpen(true)
-  //     const wallets = currentUser[0]
-  //
-  //     const updateWallets = {
-  //       ...wallets,
-  //       wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]
-  //     }
-  //
-  //     changeCurrentUser([updateWallets])
-  //
-  //   }
-  // }
+  const addPurse = () => {
+    if (isFindWallet) {
+      setModalErrorIsOpen(true)
+    } else {
+      setIsOpen(true)
+
+      axios.patch('http://localhost:5000/api/wallets/create', {
+        wallets:[{
+          currency,
+          purseNumber:numberPurse,
+          sum: 0
+        }]
+      },{headers:{
+          Authorization: Cookie.get("TOKEN")
+        }
+      },).then((responce) => {
+        console.log(responce.data)
+      })
+    }
+  }
   useEffect(() => {
     if (modalIsOpen) {
       setTimeout(() => {
@@ -201,7 +206,7 @@ const PursePage = () => {
                        fontSize='16px'
                        fontWeight='600'
                        hoverBackground='#363636'
-                       // onClick={addPurse}
+                       onClick={addPurse}
             />
           </div>
 
