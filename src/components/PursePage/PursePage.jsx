@@ -66,7 +66,7 @@ const PursePage = () => {
       setWalletsUser(responce.data[0].wallets)
     })
   }, [])
-  const isFindWallet = walletsUser && walletsUser.some(user => walletsUser && user.length > 0 && user.some(wallet => wallet.currency === currency))
+  const isFindWallet = walletsUser && walletsUser.some(wallet => wallet.currency === currency)
 
   const addPurse = () => {
     if (isFindWallet) {
@@ -75,7 +75,9 @@ const PursePage = () => {
       setIsOpen(true)
 
       axios.patch('http://localhost:5000/api/wallets/create', {
-        wallets:[{
+        wallets:[
+            ...walletsUser,
+          {
           currency,
           purseNumber:numberPurse,
           sum: 0

@@ -3,8 +3,6 @@ import classes from './TransactionsPage.module.scss'
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import TransactionStatus from "./TransactionStatus/TransactionStatus";
-import {useStateContext} from "../../context/stateContext";
-import loading from '../../assets/image/loading.gif'
 import {useEffect} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -67,7 +65,7 @@ const TransactionsPage = () => {
         </>
       ): (
         <>
-         <img src={loading} alt='loading'/>
+         <h1>LoAdInG</h1>
         </>
       )}
 
