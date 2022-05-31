@@ -12,6 +12,8 @@ import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../../context/stateContext";
 import close from "../../../assets/image/Close.svg";
 import walletIcon from "../../../assets/image/WalletIcon.svg";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const PurseInfo = () => {
 
@@ -37,41 +39,48 @@ const PurseInfo = () => {
   const [isDisabled, setIsDisabled] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
-  const {currentUser, changeCurrentUser} = useStateContext()
+  const [walletsUser, setWalletsUser] = useState('')
   const [sum, setSum] = useState('')
-  const currentWallet = currentUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
+  const currentWallet = walletsUser && walletsUser.find((wallet) => `#${wallet.currency}` === location.hash)
   const [numberCard, setNumberCard] = useState('')
   const [date, setDate] = useState('')
   const [cvc, setCvc] = useState('')
   const [ownerCard, setOwnerCard] = useState('')
 
 
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+    })
+  }, [])
+
   const deleteWallet = () => {
-    const newWallet = currentUser[0].wallets.filter(wallet => wallet.currency !== currentWallet.currency)
+    const newWallet = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
     const updUser = {
-      ...currentUser[0],
+      ...walletsUser,
       wallets: newWallet
     }
-    changeCurrentUser([updUser])
     console.log(updUser)
     navigate("/purse-page", {replace: true});
   }
 
   const addSumWallet = () => {
 
-    const newWalletstorage = currentUser[0].wallets.map((wallet) => {
+    const newWalletstorage = walletsUser.map((wallet) => {
       if (wallet.currency === currentWallet.currency)
         wallet.sum = +currentWallet.sum + +sum
       return wallet
     })
 
     const updatedUserWallet = {
-      ...currentUser[0],
+      ...walletsUser,
       wallets: newWalletstorage
     }
     console.log(updatedUserWallet)
     setIsOpen(true)
-    changeCurrentUser([updatedUserWallet])
   }
   useEffect(() => {
     if (!sum || !numberCard || !date || !cvc || !ownerCard) {
@@ -94,7 +103,7 @@ const PurseInfo = () => {
 
               <span
                 className={classes.main_wrapper__title_text_number}>
-                                {`#${currentWallet.numberPurse}`}
+                                {`#${currentWallet.purseNumber}`}
                             </span>
             </h1>
           </div>
@@ -126,7 +135,7 @@ const PurseInfo = () => {
         </div>
         <div className={classes.main_wrapper__purse}>
           <Wallet countryName={currentWallet.currency} country={currentWallet.currency}
-                  count={currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
+                  count={walletsUser && currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
           <img src={banner} alt='баннер'/>
         </div>
         <div className={classes.main_wrapper__replenishment}>

@@ -5,9 +5,25 @@ import ProfileBar from "../ProfileBar/ProfileBar";
 import TransactionStatus from "./TransactionStatus/TransactionStatus";
 import {useStateContext} from "../../context/stateContext";
 import loading from '../../assets/image/loading.gif'
+import {useEffect} from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {useState} from "react";
 
 const TransactionsPage = () => {
-  const {transactionUser} = useStateContext()
+
+
+
+  const [transactionUser, setTransactionUser] = useState()
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setTransactionUser(responce.data[0].transaction)
+    })
+  }, [])
   console.log(transactionUser)
   return (<main className={classes.main}>
     <NavBar/>
@@ -51,7 +67,7 @@ const TransactionsPage = () => {
         </>
       ): (
         <>
-         <img src={loading} alt='loading' style={{width:'500px'}}/>
+         <img src={loading} alt='loading'/>
         </>
       )}
 
