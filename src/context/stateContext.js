@@ -5,7 +5,7 @@ export const StateContext = createContext(null)
 
 export const StateProvider = ({children}) => {
   const [isAuth, setIsAuth] = useState('')
-  const [currentUser, changeCurrentUser] = useState()
+  const [currentUser, changeCurrentUser] = useState(isAuth)
 
   const onLogin = useCallback(() => {
     setIsAuth(true)
@@ -15,9 +15,6 @@ export const StateProvider = ({children}) => {
     setIsAuth(false)
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('AUTH', JSON.stringify(isAuth))
-  }, [isAuth])
 
   useEffect(() => {
 

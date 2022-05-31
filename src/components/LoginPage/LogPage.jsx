@@ -38,7 +38,6 @@ const LogPage = () => {
         console.log(responce.data)
       })
   }
-  console.log('qwe', isAuth)
   const checkEmail = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {

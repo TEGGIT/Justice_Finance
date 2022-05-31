@@ -5,6 +5,8 @@ import classes from './Profile.module.scss'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Input from "../UI/Input/Input";
 import {useStateContext} from "../../context/stateContext";
+import Cookie from "js-cookie";
+import axios from "axios";
 
 const Profile = () => {
 
@@ -66,23 +68,14 @@ const Profile = () => {
   }, [name, email, city, birthday, number])
 
 
-  // const changeProfile = () => {
-  //   const updateStorage = user.map((item) => {
-  //     if (item.email === user.email) {
-  //       const updateUser = {
-  //         ...item,
-  //         email: email,
-  //         name: name,
-  //         city: city,
-  //         birthday: birthday,
-  //         number: number
-  //       }
-  //       return updateUser
-  //     }
-  //   })
-  //   changeCurrentUser(updateStorage)
-  // }
-
+  const changeProfile = () => {
+    axios.patch('http://localhost:5000/api/profile', {header:{
+     Authorization: Cookie.get("TOKEN")
+      }
+    }).then((responce) => {
+      console.log(responce.data)
+    })
+  }
   // const changePassword = () => {
   //   const updatePassword = currentUser.map((item) => {
   //     if (item.email === currentUser[0].email) {
@@ -111,7 +104,7 @@ const Profile = () => {
           </h1>
           <div className={classes.main_wrapper__title_button}>
             <ButtonMui background='#363636' color='#FFFFFF' text='Сохранить изменения' padding='12px 24px'
-                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} />
+                       hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
           </div>
         </div>
         <div className={classes.main_wrapper__content}>
