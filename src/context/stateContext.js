@@ -22,21 +22,7 @@ export const StateProvider = ({children}) => {
     setLogin(true)
   }, [])
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
 
-    }).then((responce) => {
-      setUserName(responce.data[0].name)
-      setTransactionUser(responce.data[0].transaction)
-      setWalletsUser(responce.data[0].wallets)
-
-    })
-    console.log(userName)
-    console.log(walletsUser)
-    console.log(transactionUser)
-  }, [])
   return (
     <StateContext.Provider value={{
       isAuth,

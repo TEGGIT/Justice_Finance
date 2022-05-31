@@ -7,17 +7,16 @@ import Input from "../UI/Input/Input";
 import {useStateContext} from "../../context/stateContext";
 import Cookie from "js-cookie";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Profile = () => {
 
-  const {userName} = useStateContext()
 
-
-  const [name, setName] = useState(user.candidate.name)
-  const [email, setEmail] = useState(user.candidate.email)
-  const [city, setCity] = useState(user.candidate.city)
-  const [birthday, setBirthday] = useState(user.candidate.birthday)
-  const [number, setNumber] = useState(user.candidate.number)
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+  const [city, setCity] = useState()
+  const [birthday, setBirthday] = useState()
+  const [number, setNumber] = useState()
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
@@ -26,7 +25,7 @@ const Profile = () => {
   const [isOldPassword, setIsOldPassword] = useState(true)
 
   const passwordChecker = () => {
-    if (user.password === oldPassword) {
+    if (password.password === oldPassword) {
       setIsOldPassword(false)
     } else {
       setIsOldPassword(true)
@@ -50,6 +49,22 @@ const Profile = () => {
     }
   }
 
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setEmail(responce.data[0].email)
+      setName(responce.data[0].name)
+      setCity(responce.data[0].city)
+      setBirthday(responce.data[0].birthday)
+      setNumber(responce.data[0].phoneNumber)
+    })
+
+  },[])
+
+
   useEffect(() => {
     if (!isOldPassword && repeatPassword && password) {
       setIsDisabledPassword(false)
@@ -69,10 +84,16 @@ const Profile = () => {
 
 
   const changeProfile = () => {
-    axios.patch('http://localhost:5000/api/profile', {header:{
-     Authorization: Cookie.get("TOKEN")
+    axios.patch('http://localhost:5000/api/profile', {
+      name:name,
+      email:email,
+      city:city,
+      birthday:birthday,
+      phoneNumber: number
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
       }
-    }).then((responce) => {
+    },).then((responce) => {
       console.log(responce.data)
     })
   }

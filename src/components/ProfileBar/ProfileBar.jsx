@@ -15,10 +15,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const ProfileBar = () => {
-  const {userName, walletsUser, transactionUser} = useStateContext()
+
   const navigate = useNavigate()
+  const [userName , setUserName] = useState()
+  const [walletsUser, setWalletsUser] = useState()
+  const [transactionUser, setTransactionUser] = useState()
   const [x, setX] = useState(0)
-  console.log(transactionUser)
   const moveBlockLeft = () => {
     setX(x + 20)
     if (x === 0) setX(0)
@@ -30,6 +32,18 @@ const ProfileBar = () => {
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+
+    }).then((responce) => {
+      setUserName(responce.data[0].name)
+      setTransactionUser(responce.data[0].transaction)
+      setWalletsUser(responce.data[0].wallets)
+
+    })
+  }, [])
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
