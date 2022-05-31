@@ -14,6 +14,7 @@ import close from "../../../assets/image/Close.svg";
 import walletIcon from "../../../assets/image/WalletIcon.svg";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
 const PurseInfo = () => {
 
@@ -47,7 +48,6 @@ const PurseInfo = () => {
   const [cvc, setCvc] = useState('')
   const [ownerCard, setOwnerCard] = useState('')
 
-
   useEffect(() => {
     axios.get('http://localhost:5000/api/wallets', {headers:{
         Authorization: Cookies.get("TOKEN")
@@ -80,6 +80,15 @@ const PurseInfo = () => {
       wallets: newWalletstorage
     }
     console.log(updatedUserWallet)
+    console.log(currentWallet)
+    axios.patch('http://localhost:5000/api/wallets/create', {
+      wallets:[currentWallet]
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
+      }
+    },).then((responce) => {
+      console.log(responce.data)
+    })
     setIsOpen(true)
   }
   useEffect(() => {
