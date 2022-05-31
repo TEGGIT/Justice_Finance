@@ -11,13 +11,14 @@ import greenEllipse from '../../assets/image/GreenElipse.svg'
 import left from '../../assets/image/arrowProfileLeft.svg'
 import right from '../../assets/image/arrowProfileRight.svg'
 import {useState} from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const ProfileBar = () => {
-  const {isAuth: user} = useStateContext()
+  const {userName, walletsUser, transactionUser} = useStateContext()
   const navigate = useNavigate()
-
   const [x, setX] = useState(0)
-
+  console.log(transactionUser)
   const moveBlockLeft = () => {
     setX(x + 20)
     if (x === 0) setX(0)
@@ -29,17 +30,12 @@ const ProfileBar = () => {
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
-  // const transaction = currentUser[0].transaction
-
-  if (!user) return null
-
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
         <div className={classes.profile_wrapper__avatar}>
           <img src={avatar} alt='аватар'/>
-
-          <p className={classes.profile_wrapper__avatar_name}>{user.candidate.name}</p>
+          <p className={classes.profile_wrapper__avatar_name}>{userName}</p>
 
         </div>
         <div className={classes.profile_wrapper__balance}>
@@ -51,12 +47,12 @@ const ProfileBar = () => {
             </div>
           </div>
 
-          {user.candidate.wallets.length ? (
+          {walletsUser ? (
             <div className={classes.slider}>
               <div style={{transform: `translateX(${x}%)`, display: 'flex', transition: '0.5s', gap: '10px'}}>
 
 
-                {user.candidate.wallets.map((wallet) => (
+                {walletsUser.map((wallet) => (
                   <Wallet
                     pointer={{cursor: 'pointer'}}
                     key={wallet.currency}
@@ -89,7 +85,7 @@ const ProfileBar = () => {
         </div>
         <div className={classes.profile_wrapper__transactions}>
           <p>Последние транзацкции </p>
-          {/*{!transaction.length ? (*/}
+          {!transactionUser ? (
 
             <div className={classes.profile_wrapper__transactions__history}>
               <img src={transactions} alt="Транзакции"/>
@@ -98,9 +94,9 @@ const ProfileBar = () => {
 
           ) : (
             <div className={classes.profile_wrapper__transactions__history_actual}>
-              {/*{transaction.map((item) => (*/}
+              {transactionUser.map((item) => (
                 <div className={classes.profile_wrapper__transactions__history_actual_content}>
-                  {/*<p>{`-${item.giveValue}${item.give} / +${item.getValue} ${item.get}`}</p>*/}
+                  <p>{`-${item.giveValue}${item.give} / +${item.getValue} ${item.get}`}</p>
                   <img src={greenEllipse} alt='Успешно'/>
                 </div>
               )).reverse()}

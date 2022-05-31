@@ -26,19 +26,21 @@ const LogPage = () => {
 
   const navigate = useNavigate();
 
-  const {setIsAuth, isAuth} = useStateContext()
+  const {setIsAuth,onLogin } = useStateContext()
   const checkUser = () => {
+
       axios.post('http://localhost:5000/api/auth/login-page', {
         "email": email,
         "password": password
       }).then((responce) => {
-        navigate("/exchange-rates-page", {replace: true});
         setIsAuth(responce.data)
         Cookies.set("TOKEN", responce.data.token)
-        console.log(responce.data)
+        navigate("/exchange-rates-page", {replace: true});
+        onLogin()
+
       })
+
   }
-  console.log('qwe', isAuth)
   const checkEmail = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {

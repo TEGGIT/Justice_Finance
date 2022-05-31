@@ -1,14 +1,16 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../../../router/routes";
+
 import {useStateContext} from "../../../context/stateContext";
 
 const AppRouter = () => {
-  const {isAuth} = useStateContext();
-  const test = true
+
+  const {login} = useStateContext()
+
   return (
     <Routes>
-      {test
+      {login
         ? (
           <>
             {privateRoutes.map((route) =>

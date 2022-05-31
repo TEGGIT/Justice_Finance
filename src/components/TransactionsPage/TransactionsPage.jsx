@@ -7,8 +7,8 @@ import {useStateContext} from "../../context/stateContext";
 
 
 const TransactionsPage = () => {
-
-  const {isAuth: user} = useStateContext()
+  const {transactionUser} = useStateContext()
+  console.log(transactionUser)
   return (<main className={classes.main}>
     <NavBar/>
     <section className={classes.main__wrapper}>
@@ -32,20 +32,29 @@ const TransactionsPage = () => {
           Статус
         </p>
       </div>
-      {user.candidate.transaction.map((transactionItem) => (
+      {transactionUser ? (
+        <>
+        {transactionUser.map((transactionItem) => (
 
-        <TransactionStatus
-          exchangeValue={`${transactionItem.give} to ${transactionItem.get}`}
-          time={`${transactionItem.Hour}:${transactionItem.Minutes}`}
-          changeValue={`-${transactionItem.giveValue}`}
-          currency={`${transactionItem.give}`}
-          plus={`${transactionItem.getValue}`}
-          currencyPlus={`${transactionItem.get}`}
-          styles={classes.main__wrapper__rows_info_status_text}
-          status='Успешно'
-        />
+            <TransactionStatus
+              exchangeValue={`${transactionItem.give} to ${transactionItem.get}`}
+              time={`${transactionItem.Hour}:${transactionItem.Minutes}`}
+              changeValue={`-${transactionItem.giveValue}`}
+              currency={`${transactionItem.give}`}
+              plus={`${transactionItem.getValue}`}
+              currencyPlus={`${transactionItem.get}`}
+              styles={classes.main__wrapper__rows_info_status_text}
+              status='Успешно'
+            />
 
-      )).reverse()}
+          )).reverse()}
+        </>
+      ): (
+        <>
+         <h1>Loading...</h1>
+        </>
+      )}
+
 
 
     </section>

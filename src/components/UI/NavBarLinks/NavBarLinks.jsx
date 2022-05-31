@@ -14,7 +14,6 @@ const NavBarLinks = () => {
   const {onLogout} = useStateContext()
 
   const clear = () => {
-    localStorage.removeItem('LOGIN_USER')
     onLogout()
   }
   const item = [

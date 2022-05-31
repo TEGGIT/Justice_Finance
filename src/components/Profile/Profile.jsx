@@ -8,7 +8,7 @@ import {useStateContext} from "../../context/stateContext";
 
 const Profile = () => {
 
-  const {isAuth: user} = useStateContext()
+  const {userName} = useStateContext()
 
 
   const [name, setName] = useState(user.candidate.name)
