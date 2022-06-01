@@ -79,10 +79,11 @@ const PurseInfo = () => {
       ...walletsUser,
       wallets: newWalletstorage
     }
-    console.log(updatedUserWallet)
     console.log(currentWallet)
     axios.patch('http://localhost:5000/api/wallets/create', {
-      wallets:[currentWallet]
+      wallets:[
+        ...walletsUser
+  ]
     },{headers:{
         Authorization: Cookie.get("TOKEN")
       }
