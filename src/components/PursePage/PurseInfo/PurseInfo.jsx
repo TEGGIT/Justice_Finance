@@ -42,6 +42,7 @@ const PurseInfo = () => {
   const navigate = useNavigate()
   const [walletsUser, setWalletsUser] = useState('')
   const [sum, setSum] = useState('')
+  const [id, setId] = useState('')
   const currentWallet = walletsUser && walletsUser.find((wallet) => `#${wallet.currency}` === location.hash)
   const [numberCard, setNumberCard] = useState('')
   const [date, setDate] = useState('')
@@ -49,28 +50,31 @@ const PurseInfo = () => {
   const [ownerCard, setOwnerCard] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
+    axios.get('http://localhost:5000/api/wallets', {
+      headers: {
         Authorization: Cookies.get("TOKEN")
       }
     }).then((responce) => {
       setWalletsUser(responce.data[0].wallets)
+      setId(responce.data[0]._id)
+
     })
   }, [])
 
   const deleteWallet = () => {
-    const newWallet = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
-    const updUser = {
-      ...newWallet,
-    }
-    console.log(updUser)
-    axios.patch('http://localhost:5000/api/wallets/remove', {
-      wallets: [updUser]
+    const newWallets = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
+      axios.patch('http://localhost:5000/api/wallets/remove', {
+        wallets: newWallets,
+        id
+      }, {
+        headers: {Authorization: Cookie.get("TOKEN")}
+      },).then((res) => {
+        console.log('responce', res)
+      })
+    console.log('currentWallet', currentWallet)
+    console.log('walletsUser', walletsUser)
+    console.log('newWallets', newWallets)
 
-    },{headers:{
-        Authorization: Cookie.get("TOKEN")
-      }
-    },).then(() => {
-    })
     navigate("/purse-page", {replace: true});
   }
 
@@ -83,10 +87,11 @@ const PurseInfo = () => {
     })
 
     axios.patch('http://localhost:5000/api/wallets/update', {
-      wallets:[
+      wallets: [
         ...newWalletStorage
-  ]
-    },{headers:{
+      ]
+    }, {
+      headers: {
         Authorization: Cookie.get("TOKEN")
       }
     },).then(() => {

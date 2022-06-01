@@ -1,5 +1,6 @@
 const User = require('../models/Users')
 const errorHandler = require('../utils/errorHandler')
+const Users = require("../models/Users");
 
 
 module.exports.getWallets = async function (req, res) {
@@ -23,46 +24,35 @@ module.exports.getWallets = async function (req, res) {
 // }
 
 module.exports.remove = async function (req, res) {
-  try {
-    if (req.body.wallets.length){
-      const newWallets = [
-          ...req.body.wallets
-      ]
-      const wallet = await User.findOneAndUpdate(
-          {_id: req.user._id},
-          {$set: {
-              wallets: newWallets
-            }},
-          {new: true}
-      )
-      res.status(200).json(wallet)
+  await User.findOneAndUpdate(
+    {_id: req.user._id},
+    {
+      $set: {
+        wallets: req.body.wallets
+      }
     }
-    else {
-      const wallet = await User.find({_id: req.user._id})
-      res.status(200).json(wallet)
-    }
-  } catch (e) {
-    errorHandler(res, e)
-  }
+  )
+  res.status(200).json(req.body.wallets)
 }
+
+
 
 module.exports.createWallets = async function (req, res) {
   try {
     if (req.body.wallets.length){
-      const newWallets = [
-          ...req.body.wallets
-      ]
-      const wallet = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
           {_id: req.user._id},
           {$set: {
-              wallets: newWallets
+              wallets: req.body.wallets
             }},
-          {new: true}
       )
-      res.status(200).json(wallet)
+      res.status(200).json(req.body)
     }
     else {
-      const wallet = await User.find({_id: req.user._id})
+      const candidate = await Users.findOne({_id: req.user._id})
+      const wallet = {
+        wallets: candidate.wallets
+      }
       res.status(200).json(wallet)
     }
   } catch (e) {

@@ -1,7 +1,7 @@
 const errorHandler = require("../utils/errorHandler")
 const Users = require("../models/Users")
-module.exports.changeProfile = async (req, res) => {
 
+module.exports.changeProfile = async (req, res) => {
   try {
     if (req.body.name) {
       await Users.updateOne(
