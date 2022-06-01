@@ -13,6 +13,7 @@ import wallet from "../ProfileBar/WalletBar/Wallet";
 import {countryIcon} from "../../mockdata/countryIcon";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Cookie from "js-cookie";
 
 
 const CurrencyExchange = () => {
@@ -22,43 +23,69 @@ const CurrencyExchange = () => {
   const [getValue, setGetValue] = useState('')
   const [walletsUser , setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
+  const [transaction, setTransaction] = useState('')
 
   const Data = new Date();
   const Hour = Data.getHours();
   const Minutes = Data.getMinutes();
-  // const addTransaction = () => {
-  //
-  //   const refreshWalletSum = user.candidate.wallets.map(item => {
-  //     if (item.currency === give) {
-  //       return {
-  //         ...item,
-  //         sum: item.sum - giveValue
-  //       }
-  //     }
-  //     if (item.currency === get) {
-  //       return {
-  //         ...item,
-  //         sum: item.sum + +getValue
-  //       }
-  //     }
-  //     return item
-  //   })
-  //
-  //   const updateTransaction = {
-  //     ...transaction,
-  //     transaction: [...transaction.transaction, {get, Hour, Minutes, give, giveValue, getValue}],
-  //     wallets: refreshWalletSum,
-  //   }
-  //   setIsDisabled(true)
-  //   changeCurrentUser([updateTransaction])
-  //
-  // }
+  const addTransaction = () => {
+
+    const refreshWalletSum = walletsUser.map(item => {
+      if (item.currency === give) {
+        return {
+          ...item,
+          sum: item.sum - giveValue
+        }
+      }
+      if (item.currency === get) {
+        return {
+          ...item,
+          sum: item.sum + +getValue
+        }
+      }
+      return item
+    })
+
+    setIsDisabled(true)
+
+    axios.patch('http://localhost:5000/api/wallets/update', {
+      wallets:[
+        ...refreshWalletSum
+      ]
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
+      }
+    },).then((res) => {
+      console.log(res.data)
+    })
+
+    axios.patch('http://localhost:5000/api/transaction', {
+      transaction:[
+        ...transaction,
+        {
+          get,
+          Hour,
+          Minutes,
+          give,
+          giveValue,
+          getValue
+        }
+       ]
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
+      }
+    },).then((responce) => {
+      console.log(responce.data)
+    })
+  }
+
   useEffect(() => {
     axios.get('http://localhost:5000/api/wallets', {headers:{
         Authorization: Cookies.get("TOKEN")
       }
     }).then((responce) => {
       setWalletsUser(responce.data[0].wallets)
+      setTransaction(responce.data[0].transaction)
     })
   }, [])
 
@@ -144,7 +171,7 @@ const CurrencyExchange = () => {
                        hoverBackground='#363636'
                        disabled={isDisabled}
                        flexDirection='row-reverse'
-                       // onClick={addTransaction}
+                       onClick={addTransaction}
             />
 
           </div>

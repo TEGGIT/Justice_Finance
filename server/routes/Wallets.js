@@ -9,6 +9,6 @@ router.patch('/create', passport.authenticate('jwt', {session: false}), controll
 
 router.patch('/update',passport.authenticate('jwt', {session: false}), controller.updateWallets)
 
-router.delete('/remove',passport.authenticate('jwt', {session: false}), controller.remove)
+router.patch('/remove',passport.authenticate('jwt', {session: false}), controller.remove)
 
 module.exports = router

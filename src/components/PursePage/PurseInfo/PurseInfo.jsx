@@ -60,38 +60,40 @@ const PurseInfo = () => {
   const deleteWallet = () => {
     const newWallet = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
     const updUser = {
-      ...walletsUser,
-      wallets: newWallet
+      ...newWallet,
     }
     console.log(updUser)
+    axios.patch('http://localhost:5000/api/wallets/remove', {
+      wallets: [updUser]
+
+    },{headers:{
+        Authorization: Cookie.get("TOKEN")
+      }
+    },).then(() => {
+    })
     navigate("/purse-page", {replace: true});
   }
 
   const addSumWallet = () => {
 
-    const newWalletstorage = walletsUser.map((wallet) => {
+    const newWalletStorage = walletsUser.map((wallet) => {
       if (wallet.currency === currentWallet.currency)
         wallet.sum = +currentWallet.sum + +sum
       return wallet
     })
 
-    const updatedUserWallet = {
-      ...walletsUser,
-      wallets: newWalletstorage
-    }
-    console.log(currentWallet)
-    axios.patch('http://localhost:5000/api/wallets/create', {
+    axios.patch('http://localhost:5000/api/wallets/update', {
       wallets:[
-        ...walletsUser
+        ...newWalletStorage
   ]
     },{headers:{
         Authorization: Cookie.get("TOKEN")
       }
-    },).then((responce) => {
-      console.log(responce.data)
+    },).then(() => {
     })
     setIsOpen(true)
   }
+
   useEffect(() => {
     if (!sum || !numberCard || !date || !cvc || !ownerCard) {
       setIsDisabled(true)

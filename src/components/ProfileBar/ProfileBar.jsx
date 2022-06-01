@@ -66,7 +66,7 @@ const ProfileBar = () => {
               <div style={{transform: `translateX(${x}%)`, display: 'flex', transition: '0.5s', gap: '10px'}}>
 
 
-                {walletsUser.map((wallet) => (
+                {walletsUser && walletsUser.map((wallet) => (
                   <Wallet
                     pointer={{cursor: 'pointer'}}
                     key={wallet.currency}
