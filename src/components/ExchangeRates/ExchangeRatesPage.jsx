@@ -17,10 +17,11 @@ const ExchangeRatesPage = () => {
   const moveBlockLeft = () => {
     setX(x + 10)
     if (x === 0) setX(-30)
+
   }
   const moveBlockRight = () => {
     setX(x - 10)
-    if (x === -30) setX(0)
+    if (x === 10) setX(0)
   }
 
   return (
@@ -35,19 +36,15 @@ const ExchangeRatesPage = () => {
             <Input styles={classes.main_title_input} placeholder="Поиск валюты"/>
           </div>
 
-          {/*<div className={classes.main_wrapper__slider}>*/}
-          {/*  <SlideButton img={arrowButtonLeft} onClick={moveBlockLeft}/>*/}
-          {/*  <div className={classes.slider}>*/}
-          {/*    <div style={{transform: `translateX(${x}%)`, display: 'flex', gap: '16px', transition: '0.5s'}}>*/}
-          {/*      <SliderRate/>*/}
-          {/*      <SliderRate/>*/}
-          {/*      <SliderRate/>*/}
-          {/*      <SliderRate/>*/}
-          {/*      <SliderRate/>*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*  <SlideButton img={arrowButtonRight} onClick={moveBlockRight}/>*/}
-          {/*</div>*/}
+          <div className={classes.main_wrapper__slider}>
+            <SlideButton img={arrowButtonLeft} onClick={moveBlockLeft}/>
+            <div className={classes.slider}>
+              <div style={{transform: `translateX(${x}%)`, display: 'flex', gap: '16px', transition: '0.5s'}}>
+                <SliderRate/>
+              </div>
+            </div>
+            <SlideButton img={arrowButtonRight} onClick={moveBlockRight}/>
+          </div>
 
           <div className={classes.main_wrapper__chart__title}>
             <div className={classes.main_wrapper__chart__title_text}>

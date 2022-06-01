@@ -9,9 +9,8 @@ import Cookies from "js-cookie";
 import {useState} from "react";
 
 const TransactionsPage = () => {
-
-
-
+  const Data = new Date();
+  const data = Data.getDate()
   const [transactionUser, setTransactionUser] = useState()
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const TransactionsPage = () => {
       </div>
       <div className={classes.main__wrapper__columns}>
         <p className={classes.main__wrapper__columns_title_data}>
-          23 мая
+          {data}.мая
         </p>
 
         <p className={classes.main__wrapper__columns_title_give}>
