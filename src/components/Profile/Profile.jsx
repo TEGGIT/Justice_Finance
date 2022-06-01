@@ -20,7 +20,7 @@ const Profile = () => {
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-  const [isDisabledPassword, setIsDisabledPassword] = useState(true)
+  const [isDisabledPassword, setIsDisabledPassword] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
   const [isOldPassword, setIsOldPassword] = useState(true)
 
@@ -64,13 +64,13 @@ const Profile = () => {
 
   },[])
 
-  useEffect(() => {
-    if (!isOldPassword && repeatPassword && password) {
-      setIsDisabledPassword(false)
-    } else
-      setIsDisabledPassword(true)
-
-  }, [isOldPassword, repeatPassword, password])
+  // useEffect(() => {
+  //   if (!isOldPassword && repeatPassword && password) {
+  //     setIsDisabledPassword(false)
+  //   } else
+  //     setIsDisabledPassword(true)
+  //
+  // }, [isOldPassword, repeatPassword, password])
 
   useEffect(() => {
 
@@ -84,11 +84,11 @@ const Profile = () => {
 
   const changeProfile = () => {
     axios.patch('http://localhost:5000/api/profile', {
-      name:name,
-      email:email,
-      city:city,
-      birthday:birthday,
-      phoneNumber: number
+      name,
+      email,
+      city,
+      birthday,
+      phoneNumber: number,
     },{headers:{
         Authorization: Cookie.get("TOKEN")
       }
@@ -97,12 +97,10 @@ const Profile = () => {
     })
   }
   const changePassword = () => {
-    axios.patch('http://localhost:5000/api/profile', {
-      password:password,
-    },{headers:{
-        Authorization: Cookie.get("TOKEN")
-      }
-    },).then((responce) => {
+    axios.patch('http://localhost:5000/api/profile/changePassword', {
+    password: oldPassword,
+      newPassword: password
+    },{headers:{Authorization: Cookie.get("TOKEN")}},).then((responce) => {
       console.log(responce.data)
     })
   }
