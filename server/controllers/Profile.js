@@ -2,8 +2,7 @@ const errorHandler = require("../utils/errorHandler")
 const Users = require("../models/Users")
 const bcrypt = require('bcryptjs')
 const User = require("../models/Users");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
+
 
 module.exports.changeProfile = async (req, res) => {
   try {
@@ -17,7 +16,6 @@ module.exports.changeProfile = async (req, res) => {
             city: req.body.city,
             birthday: req.body.birthday,
             phoneNumber: req.body.phoneNumber,
-            password: req.body.password
           }
         })
       res.status(200).json(req.body)
@@ -26,7 +24,6 @@ module.exports.changeProfile = async (req, res) => {
       const profile = {
         name: candidate.name,
         email: candidate.email,
-        password: candidate.password
       }
       res.status(200).json(profile)
     }
