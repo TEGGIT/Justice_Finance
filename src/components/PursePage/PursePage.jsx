@@ -156,11 +156,11 @@ const PursePage = () => {
           </div>
           <div className={classes.main__wrapper__wallet_container__add__select}>
             <div className={classes.desktop_button}>
-              <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите кошелек'
+              <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='388px' name='Выберите валюту'
                       array={countryIcon}/>
             </div>
             <div className={classes.mobile_button}>
-              <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='250px' name='Выберите кошелек'
+              <Select handleChangeSelect={handleChange} selectValue={currency} minWidth='250px' name='Выберите валюту'
                       array={countryIcon}/>
             </div>
             <Input placeholder='# Номер кошелька' type='number'
