@@ -18,7 +18,8 @@ module.exports.login = async function (req, res) {
       }, keys.jwt, {expiresIn: 60 * 60})
 
       res.status(200).json({
-        token: `Bearer ${token}`
+        token: `Bearer ${token}`,
+        candidate
       })
     } else {
       // Пароли не совпали
@@ -38,7 +39,7 @@ module.exports.register = async function (req, res) {
   const candidate = await User.findOne({email: req.body.email})
 
   if (candidate) {
-    // Пользователь существует, нужнот отправить ошибку
+    // Пользователь существует, нужно отправить ошибку
     res.status(409).json({
       message: 'Такой email уже занят. Попробуйте другой'
     })
@@ -48,8 +49,9 @@ module.exports.register = async function (req, res) {
     const password = req.body.password
 
     const user = new User({
+      name: req.body.name,
       email: req.body.email,
-      password: bcrypt.hashSync(password, salt)
+      password: bcrypt.hashSync(password, salt),
     })
 
     try {

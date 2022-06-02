@@ -1,15 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import classes from './PurseInfo.module.scss'
+
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
+// import {useStateContext} from "../../../context/stateContext";
+
 import NavBar from "../../NavBar/NavBar";
 import ProfileBar from "../../ProfileBar/ProfileBar";
-import arrowBack from '../../../assets/image/Back.svg'
 import ButtonMui from "../../MUI/Button/ButtonMui";
 import Wallet from "../../ProfileBar/WalletBar/Wallet";
-import Modal from 'react-modal';
-import banner from '../../../assets/image/Banner.png'
 import Input from "../../UI/Input/Input";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {useStateContext} from "../../../context/stateContext";
+
+import Modal from 'react-modal';
+import axios from "axios";
+import Cookies from "js-cookie";
+
+import classes from './PurseInfo.module.scss'
+
+import arrowBack from '../../../assets/image/Back.svg'
+import banner from '../../../assets/image/Banner.png'
 import close from "../../../assets/image/Close.svg";
 import walletIcon from "../../../assets/image/WalletIcon.svg";
 
@@ -37,40 +44,63 @@ const PurseInfo = () => {
   const [isDisabled, setIsDisabled] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
-  const {currentUser, changeCurrentUser} = useStateContext()
+  const [walletsUser, setWalletsUser] = useState('')
   const [sum, setSum] = useState('')
-  const currentWallet = currentUser[0].wallets.find((wallet) => `#${wallet.currency}` === location.hash)
+  const [id, setId] = useState('')
+  const currentWallet = walletsUser && walletsUser.find((wallet) => `#${wallet.currency}` === location.hash)
   const [numberCard, setNumberCard] = useState('')
   const [date, setDate] = useState('')
   const [cvc, setCvc] = useState('')
   const [ownerCard, setOwnerCard] = useState('')
 
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {
+      headers: {
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+      setId(responce.data[0]._id)
+
+    })
+  }, [])
 
   const deleteWallet = () => {
-    const newWallet = currentUser[0].wallets.filter(wallet => wallet.currency !== currentWallet.currency)
-    const updUser = {
-      ...currentUser[0],
-      wallets: newWallet
-    }
-    changeCurrentUser([updUser])
+    const newWallets = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
+    axios.patch('http://localhost:5000/api/wallets/remove', {
+      wallets: newWallets,
+      id
+    }, {
+      headers: {Authorization: Cookies.get("TOKEN")}
+    },).then((res) => {
+      console.log('responce', res)
+    })
+    console.log('currentWallet', currentWallet)
+    console.log('walletsUser', walletsUser)
+    console.log('newWallets', newWallets)
+
     navigate("/purse-page", {replace: true});
   }
 
   const addSumWallet = () => {
 
-    const newWalletstorage = currentUser[0].wallets.map((wallet) => {
+    const newWalletStorage = walletsUser.map((wallet) => {
       if (wallet.currency === currentWallet.currency)
         wallet.sum = +currentWallet.sum + +sum
       return wallet
     })
 
-    const updatedUserWallet = {
-      ...currentUser[0],
-      wallets: newWalletstorage
-    }
+    axios.patch('http://localhost:5000/api/wallets/update', {
+      wallets: [
+        ...newWalletStorage
+      ]
+    }, {
+      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {
+
+    })
     setIsOpen(true)
-    changeCurrentUser([updatedUserWallet])
   }
+
   useEffect(() => {
     if (!sum || !numberCard || !date || !cvc || !ownerCard) {
       setIsDisabled(true)
@@ -92,7 +122,7 @@ const PurseInfo = () => {
 
               <span
                 className={classes.main_wrapper__title_text_number}>
-                                {`#${currentWallet.numberPurse}`}
+                                {`#${currentWallet.purseNumber}`}
                             </span>
             </h1>
           </div>
@@ -124,7 +154,7 @@ const PurseInfo = () => {
         </div>
         <div className={classes.main_wrapper__purse}>
           <Wallet countryName={currentWallet.currency} country={currentWallet.currency}
-                  count={currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
+                  count={walletsUser && currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
           <img src={banner} alt='баннер'/>
         </div>
         <div className={classes.main_wrapper__replenishment}>

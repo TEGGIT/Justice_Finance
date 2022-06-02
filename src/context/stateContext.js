@@ -1,44 +1,42 @@
-import {createContext, useCallback, useContext, useEffect} from "react";
 import {useState} from "react";
+
+import {createContext, useCallback, useContext, useEffect} from "react";
+
+import Cookies from "js-cookie";
 
 export const StateContext = createContext(null)
 
 export const StateProvider = ({children}) => {
-  const [isAuth, setIsAuth] = useState(() => JSON.parse(localStorage.getItem('AUTH')) ?? false)
-  const [currentUser, changeCurrentUser] = useState(() => JSON.parse(localStorage.getItem('LOGIN_USER')) ?? [])
-  const [userData, changeUserData] = useState(() => JSON.parse(localStorage.getItem('USERS_DATA')) ?? [])
+  const [isAuth, setIsAuth] = useState('')
+  const [userName, setUserName] = useState()
+  const [walletsUser, setWalletsUser] = useState()
+  const [transactionUser, setTransactionUser] = useState()
+  const [login, setLogin] = useState(() => Cookies.get("TOKEN"))
 
-  const onLogin = useCallback(() => {
-    setIsAuth(true)
-  }, [])
 
   const onLogout = useCallback(() => {
-    setIsAuth(false)
+    setLogin(false)
+    Cookies.remove("TOKEN")
+
   }, [])
-
-
-  useEffect(() => {
-    localStorage.setItem('AUTH', JSON.stringify(isAuth))
-  }, [isAuth])
-
-  useEffect(() => {
-    localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
-
-    const updateUserData = userData.map((user) => {
-      if (user.email === currentUser.email) {
-        return currentUser
-      } else {
-        return user
-      }
-    })
-
-    changeUserData(updateUserData)
-    localStorage.setItem('USERS_DATA', JSON.stringify(currentUser))
-  }, [currentUser])
+  const onLogin = useCallback(() => {
+    setLogin(true)
+  }, [])
 
 
   return (
-    <StateContext.Provider value={{isAuth, onLogin, onLogout, currentUser, changeCurrentUser}}>
+    <StateContext.Provider value={{
+      isAuth,
+      onLogout,
+      userName,
+      login,
+      setLogin,
+      walletsUser,
+      transactionUser,
+      setUserName,
+      setIsAuth,
+      onLogin
+    }}>
       {children}
     </StateContext.Provider>
   )

@@ -13,6 +13,7 @@ import classes from "./RegisterPage.module.scss";
 import image from "../../assets/image/IllustrationTwo.svg";
 import google from "../../assets/image/google.svg";
 import github from "../../assets/image/github.svg";
+import axios from "axios";
 
 const RegisterPage = () => {
   const [checked, setChecked] = React.useState(false);
@@ -25,7 +26,6 @@ const RegisterPage = () => {
   const [repeatPasswordError, setRepeatPasswordError] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {currentUser, changeCurrentUser} = useStateContext()
 
   const navigate = useNavigate();
 
@@ -33,16 +33,6 @@ const RegisterPage = () => {
     setChecked(event.target.checked);
   };
 
-  const newUser = {
-    name: name,
-    email: email,
-    password: password,
-    wallets: [],
-    city: '',
-    birthday: '',
-    number: '',
-    transaction: []
-  }
   const nameErrorChecker = () => {
     const nameChecker = new RegExp(`^(?=.*[а-я])(?=.*[А-Я])(?=.{${2},})`)
     if (!nameChecker.test(name)) {
@@ -51,6 +41,8 @@ const RegisterPage = () => {
       setNameError(false)
     }
   }
+
+
   const emailErrorChecker = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {
@@ -76,19 +68,16 @@ const RegisterPage = () => {
   }
 
   const registration = () => {
-    if (newUser) {
-      currentUser.push(newUser)
-      localStorage.setItem('USERS_DATA', JSON.stringify(currentUser));
-      navigate("/", {replace: true});
-    } else {
-    }
+    axios.post('http://localhost:5000/api/auth/register-page', {
+      "name": name,
+      "email": email,
+      "password": password
+    }).then((responce) => {
+      console.log(responce.data)
+    })
+    navigate("/login-page", {replace: true});
+
   }
-
-  useEffect(() => {
-    if (localStorage.getItem('USERS_DATA'))
-      changeCurrentUser(JSON.parse(localStorage.getItem("USERS_DATA")));
-  }, []);
-
 
   useEffect(() => {
     if (!name || !email || !password || !repeatPassword || repeatPasswordError || !checked) {
@@ -130,7 +119,6 @@ const RegisterPage = () => {
               />
             </div>
             <div>
-
             </div>
             <div className={classes.line_wrapper}>
               <div className={classes.line}/>

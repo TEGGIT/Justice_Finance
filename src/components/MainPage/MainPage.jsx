@@ -11,9 +11,7 @@ import starTwo from '../../assets/image/StarTwo.svg'
 import positive from '../../assets/image/Positive.png'
 
 const MainPage = () => {
-
   return (
-
     <div className={classes.background} style={{backgroundImage: `url(${background})`}}>
       <Header
           bold='Justice'

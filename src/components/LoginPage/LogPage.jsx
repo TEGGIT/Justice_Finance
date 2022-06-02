@@ -2,17 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../context/stateContext";
 
+import Cookies from "js-cookie";
+import axios from "axios";
+
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
+
 
 import classes from './LogPage.module.scss'
 
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
 import github from '../../assets/image/github.svg'
-
-
 
 const LogPage = () => {
 
@@ -25,19 +27,21 @@ const LogPage = () => {
 
   const navigate = useNavigate();
 
-  const {onLogin, currentUser} = useStateContext()
-
+  const {setIsAuth,onLogin } = useStateContext()
   const checkUser = () => {
-    const isValid = !!currentUser.find(item => email === item.email && password === item.password)
-    if (isValid) {
-      navigate("/exchange-rates-page", {replace: true});
-      localStorage.setItem('LOGIN_USER', JSON.stringify(currentUser))
-      onLogin()
-    } else {
-      alert('Такого пользователя не существует')
-    }
-  }
 
+      axios.post('http://localhost:5000/api/auth/login-page', {
+        "email": email,
+        "password": password
+      }).then((responce) => {
+        setIsAuth(responce.data)
+        Cookies.set("TOKEN", responce.data.token)
+        navigate("/exchange-rates-page", {replace: true});
+        onLogin()
+
+      })
+
+  }
   const checkEmail = () => {
     const emailChecker = /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/
     if (!emailChecker.test(email)) {

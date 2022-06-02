@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Modal from 'react-modal';
+
 import {useNavigate} from "react-router-dom";
-import {useStateContext} from "../../context/stateContext";
+// import {useStateContext} from "../../context/stateContext";
+
+import Modal from 'react-modal';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
@@ -10,9 +14,9 @@ import Wallet from "../ProfileBar/WalletBar/Wallet";
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 
-import {countryIcon} from "../../mockdata/countryIcon";
 
 import classes from './PursePage.module.scss'
+import {countryIcon} from "../../mockdata/countryIcon";
 
 import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
@@ -40,14 +44,11 @@ const PursePage = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [currency, setСurrency] = React.useState('');
-  const {currentUser, changeCurrentUser} = useStateContext()
   const [numberPurse, setNumberPurse] = useState('')
+  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const navigate = useNavigate()
 
-  const wallets = [...currentUser]
-
-  const currentWallet = wallets[0].wallets
   useEffect(() => {
     if (!numberPurse || !currency) {
       setIsDisabledBtn(true)
@@ -57,22 +58,38 @@ const PursePage = () => {
   }, [numberPurse, currency])
 
 
-  const isFindWallet = currentUser.some(user => user.wallets.length > 0 && user.wallets.some(wallet => wallet.currency === currency))
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+    })
+  }, [])
+
+  const isFindWallet = walletsUser && walletsUser.some(wallet => wallet.currency === currency)
 
   const addPurse = () => {
     if (isFindWallet) {
       setModalErrorIsOpen(true)
     } else {
       setIsOpen(true)
-      const wallets = currentUser[0]
 
-      const updateWallets = {
-        ...wallets,
-        wallets: [...wallets.wallets, {currency: currency, numberPurse: numberPurse, sum: 0}]
-      }
-
-      changeCurrentUser([updateWallets])
-
+      axios.patch('http://localhost:5000/api/wallets/create', {
+        wallets:[
+            ...walletsUser,
+          {
+          currency,
+          purseNumber:numberPurse,
+          sum: 0
+        }]
+      },{headers:{
+          Authorization: Cookies.get("TOKEN")
+        }
+      },).then((responce) => {
+        console.log(responce.data)
+      })
     }
   }
   useEffect(() => {
@@ -143,9 +160,9 @@ const PursePage = () => {
           </Modal>
         )}
 
-        {currentWallet.length ? (
+        {walletsUser ? (
           <div className={classes.main__wrapper__wallet_container__wallets}>
-            {currentWallet.map((wallet) => (
+            {walletsUser.map((wallet) => (
               <Wallet
                 pointer={{cursor: 'pointer'}}
                 key={wallet.currency}

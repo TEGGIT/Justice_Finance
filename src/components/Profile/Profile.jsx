@@ -1,27 +1,32 @@
 import React, {useEffect, useState} from 'react';
+
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
-import classes from './Profile.module.scss'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Input from "../UI/Input/Input";
-import {useStateContext} from "../../context/stateContext";
+
+import classes from './Profile.module.scss'
+
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Profile = () => {
-  const {currentUser, changeCurrentUser} = useStateContext()
-  const [name, setName] = useState(currentUser[0].name)
-  const [email, setEmail] = useState(currentUser[0].email)
-  const [city, setCity] = useState(currentUser[0].city)
-  const [birthday, setBirthday] = useState(currentUser[0].birthday)
-  const [number, setNumber] = useState(currentUser[0].number)
+
+
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+  const [city, setCity] = useState()
+  const [birthday, setBirthday] = useState()
+  const [number, setNumber] = useState()
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-  const [isDisabledPassword, setIsDisabledPassword] = useState(true)
+  const [isDisabledPassword, setIsDisabledPassword] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
   const [isOldPassword, setIsOldPassword] = useState(true)
 
   const passwordChecker = () => {
-    if (currentUser[0].password === oldPassword) {
+    if (password.password === oldPassword) {
       setIsOldPassword(false)
     } else {
       setIsOldPassword(true)
@@ -45,13 +50,28 @@ const Profile = () => {
     }
   }
 
-  useEffect(() => {
-    if (!isOldPassword && repeatPassword && password) {
-      setIsDisabledPassword(false)
-    } else
-      setIsDisabledPassword(true)
 
-  }, [isOldPassword, repeatPassword, password])
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setEmail(responce.data[0].email)
+      setName(responce.data[0].name)
+      setCity(responce.data[0].city)
+      setBirthday(responce.data[0].birthday)
+      setNumber(responce.data[0].phoneNumber)
+    })
+
+  },[])
+
+  // useEffect(() => {
+  //   if (!isOldPassword && repeatPassword && password) {
+  //     setIsDisabledPassword(false)
+  //   } else
+  //     setIsDisabledPassword(true)
+  //
+  // }, [isOldPassword, repeatPassword, password])
 
   useEffect(() => {
 
@@ -64,39 +84,31 @@ const Profile = () => {
 
 
   const changeProfile = () => {
-    const updateStorage = currentUser.map((item) => {
-      if (item.email === currentUser[0].email) {
-        const updateUser = {
-          ...item,
-          email: email,
-          name: name,
-          city: city,
-          birthday: birthday,
-          number: number
-        }
-        return updateUser
+    axios.patch('http://localhost:5000/api/profile', {
+      name,
+      email,
+      city,
+      birthday,
+      phoneNumber: number,
+    },{headers:{
+        Authorization: Cookies.get("TOKEN")
       }
+    },).then((responce) => {
+      console.log(responce.data)
     })
-    changeCurrentUser(updateStorage)
+  }
+  const changePassword = () => {
+    axios.patch('http://localhost:5000/api/profile/changePassword', {
+    password: oldPassword,
+      newPassword: password
+    },{headers:{Authorization: Cookies.get("TOKEN")}},).then((responce) => {
+      console.log(responce.data)
+    })
+    setPassword('')
+    setOldPassword('')
+    setRepeatPassword('')
   }
 
-  const changePassword = () => {
-    const updatePassword = currentUser.map((item) => {
-      if (item.email === currentUser[0].email) {
-        const updatePassword = {
-          ...item,
-          email: email,
-          name: name,
-          city: city,
-          birthday: birthday,
-          number: number,
-          password: password,
-        }
-        return updatePassword
-      }
-    })
-    changeCurrentUser(updatePassword)
-  }
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -163,7 +175,8 @@ const Profile = () => {
                        fontSize='16px'
                        disabled={isDisabledPassword}
                        fontWeight='600'
-                       onClick={changePassword}/>
+                       onClick={changePassword}
+            />
           </div>
 
         </div>

@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import classes from './СurrencyExchange.module.scss'
+
+import axios from "axios";
+import Cookies from "js-cookie";
+
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import exchange from '../../assets/image/exchange.svg'
-import {exchangeRates} from '../../mockdata/exchangeRates'
-import {useStateContext} from "../../context/stateContext";
-import wallet from "../ProfileBar/WalletBar/Wallet";
 
-import {countryIcon} from "../../mockdata/countryIcon";
+import classes from './СurrencyExchange.module.scss'
+
+import exchange from '../../assets/image/exchange.svg'
 
 
 const CurrencyExchange = () => {
@@ -18,16 +19,16 @@ const CurrencyExchange = () => {
   const [get, setGet] = React.useState('');
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
-  const {currentUser, changeCurrentUser} = useStateContext()
+  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-
+  const [transaction, setTransaction] = useState('')
+  const [exchangeRates, setExchangeRates] = useState('')
   const Data = new Date();
   const Hour = Data.getHours();
   const Minutes = Data.getMinutes();
   const addTransaction = () => {
-    const transaction = currentUser[0]
 
-    const refreshWalletSum = transaction.wallets.map(item => {
+    const refreshWalletSum = walletsUser.map(item => {
       if (item.currency === give) {
         return {
           ...item,
@@ -43,18 +44,56 @@ const CurrencyExchange = () => {
       return item
     })
 
-    const updateTransaction = {
-      ...transaction,
-      transaction: [...transaction.transaction, {get, Hour, Minutes, give, giveValue, getValue}],
-      wallets: refreshWalletSum,
-    }
     setIsDisabled(true)
-    changeCurrentUser([updateTransaction])
 
+    axios.patch('http://localhost:5000/api/wallets/update', {
+      wallets: [
+        ...refreshWalletSum
+      ]
+    }, {
+      headers: {
+        Authorization: Cookies.get("TOKEN")
+      }
+    },).then((res) => {
+      console.log(res.data)
+    })
+
+    axios.patch('http://localhost:5000/api/transaction', {
+      transaction: [
+        ...transaction,
+        {
+          get,
+          Hour,
+          Minutes,
+          give,
+          giveValue,
+          getValue
+        }
+      ]
+    }, {
+      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
   }
 
   useEffect(() => {
-    const walletGive = currentUser[0].wallets.filter(wallet => wallet.currency === give && wallet)
+    axios.get('http://localhost:5000/api/wallets', {
+      headers: {Authorization: Cookies.get("TOKEN")}}).then((responce) => {
+
+      setWalletsUser(responce.data[0].wallets)
+      setTransaction(responce.data[0].transaction)
+
+    })
+  }, [])
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/exchangeRates').then((responce) => {
+
+      setExchangeRates(responce.data[0].exchangeRates)
+
+    })
+  }, [])
+
+  useEffect(() => {
+    const walletGive = walletsUser && walletsUser.filter(wallet => wallet.currency === give && wallet)
     walletGive.length && (giveValue > walletGive[0].sum
     ||
     Boolean(!get)
@@ -64,12 +103,12 @@ const CurrencyExchange = () => {
     Boolean(!giveValue)
       ?
       setIsDisabled(true) : setIsDisabled(false))
-    exchangeRates.map((input) => {
+    exchangeRates && exchangeRates.map((input) => {
       walletGive.length
       &&
       walletGive[0].currency === input.currencyName
       &&
-      exchangeRates.map(output => {
+      exchangeRates && exchangeRates.map(output => {
         get === output.currencyName
         &&
         setGetValue(((input.rubleRatio * giveValue) / output.rubleRatio).toFixed(2))
@@ -77,6 +116,8 @@ const CurrencyExchange = () => {
     })
 
   }, [giveValue, getValue, get, give, isDisabled])
+
+
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -96,11 +137,14 @@ const CurrencyExchange = () => {
                    value={giveValue}
 
             />
-
-            <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
-                    name='Выберите кошелек'
-                    array={currentUser[0].wallets}
-            />
+            {walletsUser ? (
+              <Select handleChangeSelect={(e) => setGive(e.target.value)} selectValue={give} minWidth='21rem'
+                      name='Выберите кошелек'
+                      array={walletsUser}
+              />
+            ) : (
+              <h1>LoAdInG...</h1>
+            )}
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <Input placeholder='Получаю' type='number' styles={classes.main__wrapper__content__exchange__input}
@@ -108,10 +152,15 @@ const CurrencyExchange = () => {
                    value={getValue}
                    readOnly={true}
             />
-            <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
-                    name='Выберите валюту'
-                    array={currentUser[0].wallets}
-            />
+            {walletsUser ? (
+              <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
+                      name='Выберите валюту'
+                      array={walletsUser}
+              />
+            ) : (
+              <h1>LoAdInG...</h1>
+            )}
+
           </div>
           <div className={classes.main__wrapper__content__exchange}>
             <ButtonMui text="Обменять"
