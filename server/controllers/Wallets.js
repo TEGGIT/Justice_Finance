@@ -6,7 +6,6 @@ const Users = require("../models/Users");
 module.exports.getWallets = async function (req, res) {
 
   try {
-    console.log(req.user)
     const wallets = await User.find({_id: req.user._id})
     res.status(200).json(wallets)
   } catch (e) {

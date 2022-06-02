@@ -60,10 +60,9 @@ const PursePage = () => {
   }, [numberPurse, currency])
 
 
-
-  const isFindWallet = walletsUser && walletsUser.some(wallet => wallet.currency === currency)
-
+  console.log('walletsUser', walletsUser)
   const addPurse = () => {
+    const isFindWallet = walletsUser.find(wallet => wallet.currency === currency)
     if (isFindWallet) {
       setModalErrorIsOpen(true)
     } else {
@@ -81,10 +80,9 @@ const PursePage = () => {
           Authorization: Cookies.get("TOKEN")
         }
       },).then((responce) => {
-        console.log(responce.data)
+        setWalletsUser(responce.data.wallets)
       })
     }
-    setWalletsUser(walletsUser)
   }
   useEffect(() => {
     if (modalIsOpen) {
@@ -102,13 +100,6 @@ const PursePage = () => {
     }
   })
 
-  const handleChange = (event) => {
-    setСurrency(event.target.value);
-  };
-
-  const walletLink = (wallet) => {
-    navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
-  }
   useEffect(() => {
     axios.get('http://localhost:5000/api/wallets', {headers:{
         Authorization: Cookies.get("TOKEN")
@@ -117,7 +108,15 @@ const PursePage = () => {
       setWalletsUser(responce.data[0].wallets)
     })
 
-  },[])
+  }, [])
+  const handleChange = (event) => {
+    setСurrency(event.target.value);
+  };
+
+  const walletLink = (wallet) => {
+    navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
+  }
+
   return (
     <main className={classes.main}>
       <NavBar/>
@@ -127,42 +126,8 @@ const PursePage = () => {
             Кошельки
           </h1>
         </div>
-        {!modalErrorIsOpen ? (
-          <Modal
-            style={customStyles}
-            isOpen={modalIsOpen}
-          >
-            <img src={close} alt='закрыть' className={classes.img} onClick={() => setIsOpen(false)}/>
-            <div className={classes.modal_wrapper}>
-              <div className={classes.modal_wrapper__content}>
-                <img src={walletIcon} alt='Иконка кошелька'/>
-                <p className={classes.modal_wrapper__content_text_main}>
-                  Кошелек успешно добавлен
-                </p>
-                <p className={classes.modal_wrapper__content_text_bottom}>Теперь вы можете совершать
-                  любые
-                  операции.</p>
-              </div>
-            </div>
-          </Modal>
 
-        ) : (
-          <Modal style={customStyles}
-                 isOpen={modalErrorIsOpen}
-          >
-            <img src={close} alt='закрыть' className={classes.img}
-                 onClick={() => setModalErrorIsOpen(false)}/>
-            <div className={classes.modal_wrapper}>
-              <div className={classes.modal_wrapper__content}>
-                <p className={classes.modal_wrapper__content_text_main}>
-                  Кошелек с такой валютой уже существует
-                </p>
-              </div>
-            </div>
-          </Modal>
-        )}
-
-        {walletsUser ? (
+        {walletsUser.length > 0 ? (
           <div className={classes.main__wrapper__wallet_container__wallets}>
             {walletsUser.map((wallet) => (
               <Wallet

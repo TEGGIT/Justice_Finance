@@ -10,7 +10,7 @@ export const StateContext = createContext(null)
 export const StateProvider = ({children}) => {
   const [isAuth, setIsAuth] = useState('')
   const [userName, setUserName] = useState()
-  const [walletsUser, setWalletsUser] = useState()
+  const [walletsUser, setWalletsUser] = useState([])
   const [transactionUser, setTransactionUser] = useState()
   const [login, setLogin] = useState(() => Cookies.get("TOKEN"))
 
@@ -23,6 +23,7 @@ export const StateProvider = ({children}) => {
   const onLogin = useCallback(() => {
     setLogin(true)
   }, [])
+  console.log(walletsUser)
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/wallets', {headers:{
@@ -45,7 +46,8 @@ export const StateProvider = ({children}) => {
       transactionUser,
       setUserName,
       setIsAuth,
-      onLogin
+      onLogin,
+      setWalletsUser
     }}>
       {children}
     </StateContext.Provider>

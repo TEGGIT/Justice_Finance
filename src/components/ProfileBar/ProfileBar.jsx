@@ -20,10 +20,12 @@ const ProfileBar = () => {
 
   const navigate = useNavigate()
 
-  const {userName,setUserName, walletsUser} = useStateContext()
+  const {userName,
+    setUserName,
+    setWalletsUser,
+    walletsUser} = useStateContext()
 
   const [transactionUser, setTransactionUser] = useState()
-  const [name, setName] = useState()
   const [x, setX] = useState(0)
   const moveBlockLeft = () => {
     setX(x + 20)
@@ -37,12 +39,10 @@ const ProfileBar = () => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
   useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
+    axios.get('http://localhost:5000/api/wallets', {headers:{Authorization: Cookies.get("TOKEN")}}).then((responce) => {
 
-    }).then((responce) => {
       setUserName(responce.data[0].name)
+      setWalletsUser(responce.data[0].wallets)
 
     })
   }, [])
