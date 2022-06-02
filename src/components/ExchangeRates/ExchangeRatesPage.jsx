@@ -11,18 +11,27 @@ import classes from './ExchangeRatesPage.module.scss'
 import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
 import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import arrowUpMin from '../../assets/image/ArrowUpMin.svg'
+import {useEffect} from "react";
+import axios from "axios";
 
 const ExchangeRatesPage = () => {
   const [x, setX] = useState(0)
+  const [exchangeRates , setExchangeRates] = useState('')
   const moveBlockLeft = () => {
-    setX(x + 10)
-    if (x === 0) setX(-30)
+    // setX(x + 10)
+    // if (x === 0) setX(-30)
 
   }
   const moveBlockRight = () => {
-    setX(x - 10)
-    if (x === 10) setX(0)
+    // setX(x - 10)
+    // if (x === 10) setX(0)
   }
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/exchangeRates'
+    ).then((responce) => {
+      setExchangeRates(responce.data[0].exchangeRates)
+    })
+  }, [])
 
   return (
     <>
@@ -38,11 +47,12 @@ const ExchangeRatesPage = () => {
 
           <div className={classes.main_wrapper__slider}>
             <SlideButton img={arrowButtonLeft} onClick={moveBlockLeft}/>
-            <div className={classes.slider}>
-              <div style={{transform: `translateX(${x}%)`, display: 'flex', gap: '16px', transition: '0.5s'}}>
-                <SliderRate/>
-              </div>
-            </div>
+
+            {exchangeRates && exchangeRates.map((slide) => (
+              <SliderRate currency={slide.currencyName}
+                          rates={slide.rubleRatio}/>
+            )).splice(1, 4)}
+
             <SlideButton img={arrowButtonRight} onClick={moveBlockRight}/>
           </div>
 

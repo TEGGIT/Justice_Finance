@@ -7,23 +7,6 @@
 
 }
 
-.slider {
-  display: flex;
-  width: 700px;
-  overflow: hidden;
-
-
-}
-
-.sliderRedact {
-  display: flex;
-  z-index: -1;
-  position: relative;
-  flex-direction: row;
-  width: 700px;
-  gap: 20px;
-
-}
 
 .main {
   display: flex;
@@ -131,7 +114,6 @@
     &__rate {
       padding: 16px;
       display: flex;
-      align-items: center;
       border: 1px solid #F3F3F3;
       gap: 8px;
 
@@ -139,7 +121,6 @@
       &__positive {
         display: flex;
         align-items: center;
-        gap: 59px;
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 600;
