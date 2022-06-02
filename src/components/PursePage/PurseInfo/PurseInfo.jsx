@@ -1,20 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import classes from './PurseInfo.module.scss'
+
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
+// import {useStateContext} from "../../../context/stateContext";
+
 import NavBar from "../../NavBar/NavBar";
 import ProfileBar from "../../ProfileBar/ProfileBar";
-import arrowBack from '../../../assets/image/Back.svg'
 import ButtonMui from "../../MUI/Button/ButtonMui";
 import Wallet from "../../ProfileBar/WalletBar/Wallet";
-import Modal from 'react-modal';
-import banner from '../../../assets/image/Banner.png'
 import Input from "../../UI/Input/Input";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {useStateContext} from "../../../context/stateContext";
-import close from "../../../assets/image/Close.svg";
-import walletIcon from "../../../assets/image/WalletIcon.svg";
+
+import Modal from 'react-modal';
 import axios from "axios";
 import Cookies from "js-cookie";
-import Cookie from "js-cookie";
+
+import classes from './PurseInfo.module.scss'
+
+import arrowBack from '../../../assets/image/Back.svg'
+import banner from '../../../assets/image/Banner.png'
+import close from "../../../assets/image/Close.svg";
+import walletIcon from "../../../assets/image/WalletIcon.svg";
 
 const PurseInfo = () => {
 
@@ -63,14 +67,14 @@ const PurseInfo = () => {
 
   const deleteWallet = () => {
     const newWallets = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
-      axios.patch('http://localhost:5000/api/wallets/remove', {
-        wallets: newWallets,
-        id
-      }, {
-        headers: {Authorization: Cookie.get("TOKEN")}
-      },).then((res) => {
-        console.log('responce', res)
-      })
+    axios.patch('http://localhost:5000/api/wallets/remove', {
+      wallets: newWallets,
+      id
+    }, {
+      headers: {Authorization: Cookies.get("TOKEN")}
+    },).then((res) => {
+      console.log('responce', res)
+    })
     console.log('currentWallet', currentWallet)
     console.log('walletsUser', walletsUser)
     console.log('newWallets', newWallets)
@@ -91,10 +95,8 @@ const PurseInfo = () => {
         ...newWalletStorage
       ]
     }, {
-      headers: {
-        Authorization: Cookie.get("TOKEN")
-      }
-    },).then(() => {
+      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {
+
     })
     setIsOpen(true)
   }

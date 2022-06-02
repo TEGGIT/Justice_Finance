@@ -1,18 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+
+import {NavLink, useNavigate} from "react-router-dom";
+import ButtonMui from "../MUI/Button/ButtonMui";
+// import {useStateContext} from "../../context/stateContext";
+import Wallet from "./WalletBar/Wallet";
+import axios from "axios";
+import Cookies from "js-cookie";
+
 import classes from './ProfileBar.module.scss'
 import avatar from '../../assets/image/Avatar.svg'
 import plus from '../../assets/image/Plus.svg'
 import transactions from '../../assets/image/transaction.svg'
-import ButtonMui from "../MUI/Button/ButtonMui";
-import {NavLink, useNavigate} from "react-router-dom";
-import Wallet from "./WalletBar/Wallet";
-import {useStateContext} from "../../context/stateContext";
 import greenEllipse from '../../assets/image/GreenElipse.svg'
 import left from '../../assets/image/arrowProfileLeft.svg'
 import right from '../../assets/image/arrowProfileRight.svg'
-import {useState} from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
+
 
 const ProfileBar = () => {
 

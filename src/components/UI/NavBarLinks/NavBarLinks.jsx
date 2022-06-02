@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
+
+import {NavLink} from "react-router-dom";
+import {useStateContext} from "../../../context/stateContext";
+
+import ButtonMui from "../../MUI/Button/ButtonMui";
+
 import classes from './NavBarLinks.module.scss'
-import echangeRates from "../../../assets/image/echangeRates.svg";
+
+import exchangeRates from "../../../assets/image/echangeRates.svg";
 import userIcon from '../../../assets/image/userIcon.svg'
 import arrow from '../../../assets/image/Arrow.svg'
 import suitcase from '../../../assets/image/Suitcase.svg'
 import checklist from '../../../assets/image/Checklist.svg'
 import logOut from '../../../assets/image/LogOut.svg'
-import ButtonMui from "../../MUI/Button/ButtonMui";
-import {NavLink} from "react-router-dom";
-import {useStateContext} from "../../../context/stateContext";
+
 
 const NavBarLinks = () => {
   const {onLogout} = useStateContext()
@@ -18,7 +23,7 @@ const NavBarLinks = () => {
   }
   const item = [
     {
-      img: echangeRates,
+      img: exchangeRates,
       text: 'Курсы валют',
       pass: "/exchange-rates-page"
     },

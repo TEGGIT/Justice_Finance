@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import classes from './СurrencyExchange.module.scss'
+
+import axios from "axios";
+import Cookies from "js-cookie";
+
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import exchange from '../../assets/image/exchange.svg'
-import {useStateContext} from "../../context/stateContext";
-import wallet from "../ProfileBar/WalletBar/Wallet";
 
-import {countryIcon} from "../../mockdata/countryIcon";
-import axios from "axios";
-import Cookies from "js-cookie";
-import Cookie from "js-cookie";
+import classes from './СurrencyExchange.module.scss'
+
+import exchange from '../../assets/image/exchange.svg'
 
 
 const CurrencyExchange = () => {
@@ -20,7 +19,7 @@ const CurrencyExchange = () => {
   const [get, setGet] = React.useState('');
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
-  const [walletsUser , setWalletsUser] = useState('')
+  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
   const [transaction, setTransaction] = useState('')
   const [exchangeRates, setExchangeRates] = useState('')
@@ -48,18 +47,19 @@ const CurrencyExchange = () => {
     setIsDisabled(true)
 
     axios.patch('http://localhost:5000/api/wallets/update', {
-      wallets:[
+      wallets: [
         ...refreshWalletSum
       ]
-    },{headers:{
-        Authorization: Cookie.get("TOKEN")
+    }, {
+      headers: {
+        Authorization: Cookies.get("TOKEN")
       }
     },).then((res) => {
       console.log(res.data)
     })
 
     axios.patch('http://localhost:5000/api/transaction', {
-      transaction:[
+      transaction: [
         ...transaction,
         {
           get,
@@ -69,29 +69,26 @@ const CurrencyExchange = () => {
           giveValue,
           getValue
         }
-       ]
-    },{headers:{
-        Authorization: Cookie.get("TOKEN")
-      }
-    },).then((responce) => {
-      console.log(responce.data)
-    })
+      ]
+    }, {
+      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
   }
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
-    }).then((responce) => {
+    axios.get('http://localhost:5000/api/wallets', {
+      headers: {Authorization: Cookies.get("TOKEN")}}).then((responce) => {
+
       setWalletsUser(responce.data[0].wallets)
       setTransaction(responce.data[0].transaction)
+
     })
   }, [])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/exchangeRates'
-    ).then((responce) => {
+    axios.get('http://localhost:5000/api/exchangeRates').then((responce) => {
+
       setExchangeRates(responce.data[0].exchangeRates)
+
     })
   }, [])
 
@@ -145,7 +142,7 @@ const CurrencyExchange = () => {
                       name='Выберите кошелек'
                       array={walletsUser}
               />
-            ): (
+            ) : (
               <h1>LoAdInG...</h1>
             )}
           </div>

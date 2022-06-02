@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
+
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
-import classes from './Profile.module.scss'
 import ButtonMui from "../MUI/Button/ButtonMui";
 import Input from "../UI/Input/Input";
-import {useStateContext} from "../../context/stateContext";
-import Cookie from "js-cookie";
+
+import classes from './Profile.module.scss'
+
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -90,7 +91,7 @@ const Profile = () => {
       birthday,
       phoneNumber: number,
     },{headers:{
-        Authorization: Cookie.get("TOKEN")
+        Authorization: Cookies.get("TOKEN")
       }
     },).then((responce) => {
       console.log(responce.data)
@@ -100,9 +101,12 @@ const Profile = () => {
     axios.patch('http://localhost:5000/api/profile/changePassword', {
     password: oldPassword,
       newPassword: password
-    },{headers:{Authorization: Cookie.get("TOKEN")}},).then((responce) => {
+    },{headers:{Authorization: Cookies.get("TOKEN")}},).then((responce) => {
       console.log(responce.data)
     })
+    setPassword('')
+    setOldPassword('')
+    setRepeatPassword('')
   }
 
   return (

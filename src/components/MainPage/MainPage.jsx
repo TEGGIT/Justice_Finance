@@ -3,7 +3,6 @@ import React from 'react';
 import Header from "../Header";
 
 import classes from './MainPage.module.scss'
-import Cookies from "js-cookie";
 
 import background from '../../assets/image/background.png'
 import starOne from '../../assets/image/StarOne.svg'

@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Modal from 'react-modal';
+
 import {useNavigate} from "react-router-dom";
-import {useStateContext} from "../../context/stateContext";
+// import {useStateContext} from "../../context/stateContext";
+
+import Modal from 'react-modal';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
@@ -10,16 +14,13 @@ import Wallet from "../ProfileBar/WalletBar/Wallet";
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 
-import {countryIcon} from "../../mockdata/countryIcon";
 
 import classes from './PursePage.module.scss'
+import {countryIcon} from "../../mockdata/countryIcon";
 
 import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
-import axios from "axios";
-import Cookies from "js-cookie";
-import Cookie from "js-cookie";
 
 const customStyles = {
   overlay: {
@@ -66,6 +67,7 @@ const PursePage = () => {
       setWalletsUser(responce.data[0].wallets)
     })
   }, [])
+
   const isFindWallet = walletsUser && walletsUser.some(wallet => wallet.currency === currency)
 
   const addPurse = () => {
@@ -83,7 +85,7 @@ const PursePage = () => {
           sum: 0
         }]
       },{headers:{
-          Authorization: Cookie.get("TOKEN")
+          Authorization: Cookies.get("TOKEN")
         }
       },).then((responce) => {
         console.log(responce.data)

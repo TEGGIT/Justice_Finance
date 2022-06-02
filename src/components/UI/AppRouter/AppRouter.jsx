@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {privateRoutes, publicRoutes}from "../../../router/routes";
+import {privateRoutes, publicRoutes} from "../../../router/routes";
 
 import {useStateContext} from "../../../context/stateContext";
 

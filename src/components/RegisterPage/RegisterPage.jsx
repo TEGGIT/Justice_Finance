@@ -68,14 +68,14 @@ const RegisterPage = () => {
   }
 
   const registration = () => {
-      axios.post('http://localhost:5000/api/auth/register-page', {
-        "name": name,
-        "email": email,
-        "password": password
-      }).then((responce) => {
-        console.log(responce.data)
-      })
-      navigate("/login-page", {replace: true});
+    axios.post('http://localhost:5000/api/auth/register-page', {
+      "name": name,
+      "email": email,
+      "password": password
+    }).then((responce) => {
+      console.log(responce.data)
+    })
+    navigate("/login-page", {replace: true});
 
   }
 

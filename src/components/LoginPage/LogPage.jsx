@@ -2,18 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 import {useStateContext} from "../../context/stateContext";
 
+import Cookies from "js-cookie";
+import axios from "axios";
+
 import Input from "../UI/Input/Input";
 import CheckBox from "../MUI/CheckBox/CheckBox";
 import ButtonMui from "../MUI/Button/ButtonMui";
-import Cookies from "js-cookie";
+
+
 import classes from './LogPage.module.scss'
 
 import image from '../../assets/image/IllustrationOne.svg'
 import google from '../../assets/image/google.svg'
 import github from '../../assets/image/github.svg'
-import axios from "axios";
-
-
 
 const LogPage = () => {
 

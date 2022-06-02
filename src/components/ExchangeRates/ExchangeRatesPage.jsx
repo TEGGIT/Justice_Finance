@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import {NavLink} from "react-router-dom";
 import Charts from "./Chart/Chart";
 import SliderRate from "./SliderRate/SliderRate";
@@ -11,7 +11,6 @@ import classes from './ExchangeRatesPage.module.scss'
 import arrowButtonLeft from '../../assets/image/ArrowButtonLeft.svg'
 import arrowButtonRight from '../../assets/image/arrowButtonRight.svg'
 import arrowUpMin from '../../assets/image/ArrowUpMin.svg'
-import {useEffect} from "react";
 import axios from "axios";
 
 const ExchangeRatesPage = () => {
@@ -84,7 +83,6 @@ const ExchangeRatesPage = () => {
               <p className={classes.main_wrapper__chart_price_plus}>+0,3750 Today</p>
             </div>
           </div>
-          {/*//todo:реализовать полноценный график*/}
           <Charts/>
         </main>
         <ProfileBar/>
