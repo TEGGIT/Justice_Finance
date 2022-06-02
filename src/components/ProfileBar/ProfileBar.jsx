@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {NavLink, useNavigate} from "react-router-dom";
 import ButtonMui from "../MUI/Button/ButtonMui";
-// import {useStateContext} from "../../context/stateContext";
+import {useStateContext} from "../../context/stateContext";
 import Wallet from "./WalletBar/Wallet";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -19,7 +19,9 @@ import right from '../../assets/image/arrowProfileRight.svg'
 const ProfileBar = () => {
 
   const navigate = useNavigate()
-  const [userName , setUserName] = useState()
+
+  const {userName} = useStateContext()
+
   const [walletsUser, setWalletsUser] = useState('')
   const [transactionUser, setTransactionUser] = useState()
   const [x, setX] = useState(0)
@@ -40,12 +42,12 @@ const ProfileBar = () => {
       }
 
     }).then((responce) => {
-      setUserName(responce.data[0].name)
       setTransactionUser(responce.data[0].transaction)
       setWalletsUser(responce.data[0].wallets)
 
     })
   }, [])
+  console.log(userName)
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>

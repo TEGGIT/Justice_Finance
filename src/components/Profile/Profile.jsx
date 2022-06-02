@@ -9,9 +9,11 @@ import classes from './Profile.module.scss'
 
 import axios from "axios";
 import Cookies from "js-cookie";
+import {useStateContext} from "../../context/stateContext";
 
 const Profile = () => {
 
+  const {setUserName} = useStateContext()
 
   const [name, setName] = useState()
   const [email, setEmail] = useState()
@@ -90,12 +92,9 @@ const Profile = () => {
       city,
       birthday,
       phoneNumber: number,
-    },{headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
-    },).then((responce) => {
-      console.log(responce.data)
+    },{headers:{Authorization: Cookies.get("TOKEN")}},).then(() => {
     })
+    setUserName(name)
   }
   const changePassword = () => {
     axios.patch('http://localhost:5000/api/profile/changePassword', {

@@ -3,6 +3,7 @@ import {useState} from "react";
 import {createContext, useCallback, useContext, useEffect} from "react";
 
 import Cookies from "js-cookie";
+import axios from "axios";
 
 export const StateContext = createContext(null)
 
@@ -23,6 +24,14 @@ export const StateProvider = ({children}) => {
     setLogin(true)
   }, [])
 
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setUserName(responce.data[0].name)
+    })
+  }, [userName])
 
   return (
     <StateContext.Provider value={{

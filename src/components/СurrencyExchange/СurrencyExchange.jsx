@@ -51,12 +51,7 @@ const CurrencyExchange = () => {
         ...refreshWalletSum
       ]
     }, {
-      headers: {
-        Authorization: Cookies.get("TOKEN")
-      }
-    },).then((res) => {
-      console.log(res.data)
-    })
+      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
 
     axios.patch('http://localhost:5000/api/transaction', {
       transaction: [
@@ -70,8 +65,8 @@ const CurrencyExchange = () => {
           getValue
         }
       ]
-    }, {
-      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
+    }, {headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
+
   }
 
   useEffect(() => {
