@@ -6,7 +6,6 @@ import Input from "../UI/Input/Input";
 import Select from "../MUI/Select/Select";
 import ButtonMui from "../MUI/Button/ButtonMui";
 import exchange from '../../assets/image/exchange.svg'
-import {exchangeRates} from '../../mockdata/exchangeRates'
 import {useStateContext} from "../../context/stateContext";
 import wallet from "../ProfileBar/WalletBar/Wallet";
 
@@ -24,7 +23,7 @@ const CurrencyExchange = () => {
   const [walletsUser , setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
   const [transaction, setTransaction] = useState('')
-
+  const [exchangeRates, setExchangeRates] = useState('')
   const Data = new Date();
   const Hour = Data.getHours();
   const Minutes = Data.getMinutes();
@@ -90,6 +89,13 @@ const CurrencyExchange = () => {
   }, [])
 
   useEffect(() => {
+    axios.get('http://localhost:5000/api/exchangeRates'
+    ).then((responce) => {
+      setExchangeRates(responce.data[0].exchangeRates)
+    })
+  }, [])
+
+  useEffect(() => {
     const walletGive = walletsUser && walletsUser.filter(wallet => wallet.currency === give && wallet)
     walletGive.length && (giveValue > walletGive[0].sum
     ||
@@ -100,12 +106,12 @@ const CurrencyExchange = () => {
     Boolean(!giveValue)
       ?
       setIsDisabled(true) : setIsDisabled(false))
-    exchangeRates.map((input) => {
+    exchangeRates && exchangeRates.map((input) => {
       walletGive.length
       &&
       walletGive[0].currency === input.currencyName
       &&
-      exchangeRates.map(output => {
+      exchangeRates && exchangeRates.map(output => {
         get === output.currencyName
         &&
         setGetValue(((input.rubleRatio * giveValue) / output.rubleRatio).toFixed(2))
