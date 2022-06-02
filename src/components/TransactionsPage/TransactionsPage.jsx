@@ -1,29 +1,21 @@
 import React, {useState, useEffect} from 'react'
 
-import axios from "axios";
-import Cookies from "js-cookie";
+
 
 import NavBar from "../NavBar/NavBar";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import TransactionStatus from "./TransactionStatus/TransactionStatus";
 
 import classes from './TransactionsPage.module.scss'
+import {useStateContext} from "../../context/stateContext";
 
 
 const TransactionsPage = () => {
   const Data = new Date();
   const data = Data.getDate()
-  const [transactionUser, setTransactionUser] = useState()
+  const {transactionUser} = useStateContext()
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {
-      headers: {Authorization: Cookies.get("TOKEN")}
-    }).then((responce) => {
 
-      setTransactionUser(responce.data[0].transaction)
-
-    })
-  }, [])
 
   return (
     <main className={classes.main}>

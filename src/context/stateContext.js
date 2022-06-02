@@ -3,7 +3,6 @@ import {useState} from "react";
 import {createContext, useCallback, useContext, useEffect} from "react";
 
 import Cookies from "js-cookie";
-import axios from "axios";
 
 export const StateContext = createContext(null)
 
@@ -11,7 +10,7 @@ export const StateProvider = ({children}) => {
   const [isAuth, setIsAuth] = useState('')
   const [userName, setUserName] = useState()
   const [walletsUser, setWalletsUser] = useState([])
-  const [transactionUser, setTransactionUser] = useState()
+  const [transactionUser, setTransactionUser] = useState([])
   const [login, setLogin] = useState(() => Cookies.get("TOKEN"))
 
 
@@ -25,15 +24,7 @@ export const StateProvider = ({children}) => {
   }, [])
   console.log(walletsUser)
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
-    }).then((responce) => {
-      setUserName(responce.data[0].name)
-      setWalletsUser(responce.data[0].wallets)
-    })
-  }, [])
+
 
   return (
     <StateContext.Provider value={{
@@ -47,7 +38,8 @@ export const StateProvider = ({children}) => {
       setUserName,
       setIsAuth,
       onLogin,
-      setWalletsUser
+      setWalletsUser,
+      setTransactionUser
     }}>
       {children}
     </StateContext.Provider>

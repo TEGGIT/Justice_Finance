@@ -23,9 +23,11 @@ const ProfileBar = () => {
   const {userName,
     setUserName,
     setWalletsUser,
-    walletsUser} = useStateContext()
+    walletsUser,
+    transactionUser,
+    setTransactionUser
+  } = useStateContext()
 
-  const [transactionUser, setTransactionUser] = useState()
   const [x, setX] = useState(0)
   const moveBlockLeft = () => {
     setX(x + 20)
@@ -43,6 +45,7 @@ const ProfileBar = () => {
 
       setUserName(responce.data[0].name)
       setWalletsUser(responce.data[0].wallets)
+      setTransactionUser(responce.data[0].transaction)
 
     })
   }, [])

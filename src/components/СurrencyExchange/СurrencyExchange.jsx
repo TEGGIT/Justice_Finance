@@ -12,6 +12,7 @@ import ButtonMui from "../MUI/Button/ButtonMui";
 import classes from './СurrencyExchange.module.scss'
 
 import exchange from '../../assets/image/exchange.svg'
+import {useStateContext} from "../../context/stateContext";
 
 
 const CurrencyExchange = () => {
@@ -19,10 +20,10 @@ const CurrencyExchange = () => {
   const [get, setGet] = React.useState('');
   const [giveValue, setGiveValue] = useState('')
   const [getValue, setGetValue] = useState('')
-  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabled, setIsDisabled] = useState(true)
-  const [transaction, setTransaction] = useState('')
   const [exchangeRates, setExchangeRates] = useState('')
+  const {setWalletsUser, walletsUser, setTransactionUser, transactionUser} = useStateContext()
+
   const Data = new Date();
   const Hour = Data.getHours();
   const Minutes = Data.getMinutes();
@@ -51,11 +52,13 @@ const CurrencyExchange = () => {
         ...refreshWalletSum
       ]
     }, {
-      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
+      headers: {Authorization: Cookies.get("TOKEN")}},).then((res) => {
+      setWalletsUser(res.data.wallets)
+    })
 
     axios.patch('http://localhost:5000/api/transaction', {
       transaction: [
-        ...transaction,
+        ...transactionUser,
         {
           get,
           Hour,
@@ -65,19 +68,13 @@ const CurrencyExchange = () => {
           getValue
         }
       ]
-    }, {headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {})
-
+    }, {headers: {Authorization: Cookies.get("TOKEN")}},).then((res) => {
+      setTransactionUser(res.data.transaction)
+    })
+    setGiveValue('')
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {
-      headers: {Authorization: Cookies.get("TOKEN")}}).then((responce) => {
 
-      setWalletsUser(responce.data[0].wallets)
-      setTransaction(responce.data[0].transaction)
-
-    })
-  }, [])
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/exchangeRates').then((responce) => {
