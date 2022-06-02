@@ -6,8 +6,8 @@ const errorHandler = require('../utils/errorHandler')
 
 module.exports.exchangeRates = async function (req, res) {
   try {
-    const currentExchangeRates = await exchangeRates.findById(req.user.id)
-    console.log(currentExchangeRates)
+
+    const currentExchangeRates = await exchangeRates.find({})
 
     res.status(200).json(currentExchangeRates)
   } catch (e) {
