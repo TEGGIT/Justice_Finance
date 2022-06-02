@@ -31,8 +31,8 @@ const LogPage = () => {
   const checkUser = () => {
 
       axios.post('http://localhost:5000/api/auth/login-page', {
-        "email": email,
-        "password": password
+        email,
+        password,
       }).then((responce) => {
         setIsAuth(responce.data)
         Cookies.set("TOKEN", responce.data.token)

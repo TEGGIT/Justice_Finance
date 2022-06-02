@@ -20,10 +20,10 @@ const ProfileBar = () => {
 
   const navigate = useNavigate()
 
-  const {userName} = useStateContext()
+  const {userName,setUserName, walletsUser} = useStateContext()
 
-  const [walletsUser, setWalletsUser] = useState('')
   const [transactionUser, setTransactionUser] = useState()
+  const [name, setName] = useState()
   const [x, setX] = useState(0)
   const moveBlockLeft = () => {
     setX(x + 20)
@@ -42,12 +42,11 @@ const ProfileBar = () => {
       }
 
     }).then((responce) => {
-      setTransactionUser(responce.data[0].transaction)
-      setWalletsUser(responce.data[0].wallets)
+      setUserName(responce.data[0].name)
 
     })
   }, [])
-  console.log(userName)
+
   return (
     <div className={classes.profile}>
       <div className={classes.profile_wrapper}>
@@ -65,7 +64,7 @@ const ProfileBar = () => {
             </div>
           </div>
 
-          {walletsUser ? (
+          {walletsUser && walletsUser.length ? (
             <div className={classes.slider}>
               <div style={{transform: `translateX(${x}%)`, display: 'flex', transition: '0.5s', gap: '10px'}}>
 

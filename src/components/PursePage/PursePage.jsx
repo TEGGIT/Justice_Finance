@@ -21,6 +21,7 @@ import {countryIcon} from "../../mockdata/countryIcon";
 import wallet from '../../assets/image/wallet.svg'
 import walletIcon from '../../assets/image/WalletIcon.svg'
 import close from '../../assets/image/Close.svg'
+import {useStateContext} from "../../context/stateContext";
 
 const customStyles = {
   overlay: {
@@ -45,9 +46,10 @@ const PursePage = () => {
   const [modalErrorIsOpen, setModalErrorIsOpen] = React.useState(false)
   const [currency, setСurrency] = React.useState('');
   const [numberPurse, setNumberPurse] = useState('')
-  const [walletsUser, setWalletsUser] = useState('')
   const [isDisabledBtn, setIsDisabledBtn] = useState(true)
   const navigate = useNavigate()
+  const {setWalletsUser, walletsUser} = useStateContext()
+
 
   useEffect(() => {
     if (!numberPurse || !currency) {
@@ -58,15 +60,6 @@ const PursePage = () => {
   }, [numberPurse, currency])
 
 
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {headers:{
-        Authorization: Cookies.get("TOKEN")
-      }
-    }).then((responce) => {
-      setWalletsUser(responce.data[0].wallets)
-    })
-  }, [])
 
   const isFindWallet = walletsUser && walletsUser.some(wallet => wallet.currency === currency)
 
@@ -91,6 +84,7 @@ const PursePage = () => {
         console.log(responce.data)
       })
     }
+    setWalletsUser(walletsUser)
   }
   useEffect(() => {
     if (modalIsOpen) {
@@ -115,7 +109,15 @@ const PursePage = () => {
   const walletLink = (wallet) => {
     navigate(`/purse-info-page/#${wallet.currency}`, {replace: true});
   }
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/wallets', {headers:{
+        Authorization: Cookies.get("TOKEN")
+      }
+    }).then((responce) => {
+      setWalletsUser(responce.data[0].wallets)
+    })
 
+  },[])
   return (
     <main className={classes.main}>
       <NavBar/>

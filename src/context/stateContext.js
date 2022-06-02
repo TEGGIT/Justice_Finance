@@ -30,8 +30,9 @@ export const StateProvider = ({children}) => {
       }
     }).then((responce) => {
       setUserName(responce.data[0].name)
+      setWalletsUser(responce.data[0].wallets)
     })
-  }, [userName])
+  }, [])
 
   return (
     <StateContext.Provider value={{
