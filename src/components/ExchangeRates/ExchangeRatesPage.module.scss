@@ -109,6 +109,7 @@
     display: flex;
     padding-top: 48px;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 
     &__rate {
@@ -130,7 +131,6 @@
 
 
         &_plus {
-          width: 100%;
           font-family: 'Inter', sans-serif;
           font-style: normal;
           font-weight: 500;

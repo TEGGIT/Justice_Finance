@@ -16,7 +16,7 @@ const SliderRate = (props) => {
           <p className={classes.main_wrapper__slider__rate__country_percent}>0,13%</p>
         </div>
         <div className={classes.main_wrapper__slider__rate__positive}>
-          <p >{rates}</p>
+          <p style={{width:"100px"}} >{rates}</p>
           <p className={classes.main_wrapper__slider__rate__positive_plus}>+0,2380</p>
         </div>
       </div>
