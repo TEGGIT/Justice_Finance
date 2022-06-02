@@ -10,6 +10,7 @@ import classes from './Profile.module.scss'
 import axios from "axios";
 import Cookies from "js-cookie";
 import {useStateContext} from "../../context/stateContext";
+import CustomizedSnackbars from "../MUI/Snackbar/Snackbar";
 
 const Profile = () => {
 
@@ -26,6 +27,7 @@ const Profile = () => {
   const [isDisabledPassword, setIsDisabledPassword] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
   const [isOldPassword, setIsOldPassword] = useState(true)
+  const [isSnackBar, setIsSnackBar] = useState(false)
 
   const passwordChecker = () => {
     if (password.password === oldPassword) {
@@ -74,15 +76,14 @@ const Profile = () => {
   //     setIsDisabledPassword(true)
   //
   // }, [isOldPassword, repeatPassword, password])
-
   useEffect(() => {
 
-    if (!name || !email || !city || !birthday || !number) {
+    if (!name || !email ) {
       setIsDisabled(true)
     } else {
       setIsDisabled(false)
     }
-  }, [name, email, city, birthday, number])
+  }, [name, email])
 
 
   const changeProfile = () => {
@@ -94,9 +95,12 @@ const Profile = () => {
       phoneNumber: number,
     },{headers:{Authorization: Cookies.get("TOKEN")}},).then(() => {
     })
+    setIsSnackBar(true)
+
     setUserName(name)
   }
   const changePassword = () => {
+
     axios.patch('http://localhost:5000/api/profile/changePassword', {
     password: oldPassword,
       newPassword: password
@@ -121,6 +125,10 @@ const Profile = () => {
                        hoverBackground='#363636' fontWeight='600' disabled={isDisabled} onClick={changeProfile}/>
           </div>
         </div>
+        {isSnackBar && (
+          <CustomizedSnackbars snack={true}/>
+          )}
+
         <div className={classes.main_wrapper__content}>
           <div className={classes.main_wrapper__content__title__info}>
             <p>Информация о вашей учетной записи</p>

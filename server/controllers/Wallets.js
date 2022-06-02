@@ -34,8 +34,6 @@ module.exports.remove = async function (req, res) {
   res.status(200).json(req.body.wallets)
 }
 
-
-
 module.exports.createWallets = async function (req, res) {
   try {
     if (req.body.wallets.length){

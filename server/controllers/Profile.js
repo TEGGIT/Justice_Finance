@@ -49,8 +49,7 @@ module.exports.changePassword = async (req, res) => {
             })
         res.status(201).json(newPassword)
       }else{
-        console.log(123)
-
+        res.status(404).json(false)
       }
     }
 

@@ -1,6 +1,4 @@
-import {useState} from "react";
-
-import {createContext, useCallback, useContext} from "react";
+import {useState, createContext, useCallback, useContext} from "react";
 
 import Cookies from "js-cookie";
 
@@ -13,7 +11,6 @@ export const StateProvider = ({children}) => {
   const [transactionUser, setTransactionUser] = useState([])
   const [login, setLogin] = useState(() => Cookies.get("TOKEN"))
 
-
   const onLogout = useCallback(() => {
     setLogin(false)
     Cookies.remove("TOKEN")
@@ -22,9 +19,6 @@ export const StateProvider = ({children}) => {
   const onLogin = useCallback(() => {
     setLogin(true)
   }, [])
-  console.log(walletsUser)
-
-
 
   return (
     <StateContext.Provider value={{
