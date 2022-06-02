@@ -146,7 +146,7 @@ const CurrencyExchange = () => {
             />
             {walletsUser ? (
               <Select handleChangeSelect={(e) => setGet(e.target.value)} selectValue={get} minWidth='21rem'
-                      name='Выберите валюту'
+                      name='Выберите кошелек'
                       array={walletsUser}
               />
             ) : (

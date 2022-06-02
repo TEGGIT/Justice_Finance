@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {createContext, useCallback, useContext, useEffect} from "react";
+import {createContext, useCallback, useContext} from "react";
 
 import Cookies from "js-cookie";
 

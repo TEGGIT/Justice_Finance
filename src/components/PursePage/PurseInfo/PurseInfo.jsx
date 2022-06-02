@@ -19,6 +19,7 @@ import arrowBack from '../../../assets/image/Back.svg'
 import banner from '../../../assets/image/Banner.png'
 import close from "../../../assets/image/Close.svg";
 import walletIcon from "../../../assets/image/WalletIcon.svg";
+import {useStateContext} from "../../../context/stateContext";
 
 const PurseInfo = () => {
 
@@ -44,26 +45,16 @@ const PurseInfo = () => {
   const [isDisabled, setIsDisabled] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
-  const [walletsUser, setWalletsUser] = useState('')
   const [sum, setSum] = useState('')
   const [id, setId] = useState('')
-  const currentWallet = walletsUser && walletsUser.find((wallet) => `#${wallet.currency}` === location.hash)
   const [numberCard, setNumberCard] = useState('')
   const [date, setDate] = useState('')
   const [cvc, setCvc] = useState('')
   const [ownerCard, setOwnerCard] = useState('')
+  const {setWalletsUser, walletsUser} = useStateContext()
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/wallets', {
-      headers: {
-        Authorization: Cookies.get("TOKEN")
-      }
-    }).then((responce) => {
-      setWalletsUser(responce.data[0].wallets)
-      setId(responce.data[0]._id)
 
-    })
-  }, [])
+  const currentWallet =  walletsUser.find((wallet) => `#${wallet.currency}` === location.hash)
 
   const deleteWallet = () => {
     const newWallets = walletsUser && walletsUser.filter(wallet => wallet.currency !== currentWallet.currency)
@@ -95,7 +86,8 @@ const PurseInfo = () => {
         ...newWalletStorage
       ]
     }, {
-      headers: {Authorization: Cookies.get("TOKEN")}},).then(() => {
+      headers: {Authorization: Cookies.get("TOKEN")}},).then((res) => {
+      setWalletsUser(res.data.wallets)
 
     })
     setIsOpen(true)
@@ -118,11 +110,11 @@ const PurseInfo = () => {
               <img src={arrowBack} alt='Назад'/>
             </NavLink>
             <h1 className={classes.main_wrapper__title_text}>
-              {currentWallet.currency}
+              {currentWallet && currentWallet.currency}
 
               <span
                 className={classes.main_wrapper__title_text_number}>
-                                {`#${currentWallet.purseNumber}`}
+                                {`#${currentWallet && currentWallet.purseNumber}`}
                             </span>
             </h1>
           </div>
@@ -153,8 +145,8 @@ const PurseInfo = () => {
           />
         </div>
         <div className={classes.main_wrapper__purse}>
-          <Wallet countryName={currentWallet.currency} country={currentWallet.currency}
-                  count={walletsUser && currentWallet.sum.toFixed(2)} countryCounter={currentWallet.currency}/>
+          <Wallet countryName={currentWallet && currentWallet.currency} country={currentWallet && currentWallet.currency}
+                  count={currentWallet && currentWallet.sum.toFixed(2)} countryCounter={currentWallet && currentWallet.currency}/>
           <img src={banner} alt='баннер'/>
         </div>
         <div className={classes.main_wrapper__replenishment}>
